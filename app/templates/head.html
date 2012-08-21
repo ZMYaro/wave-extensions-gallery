@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="description" content="An index of wave gadgets, robots, and other extensions for use with Google Wave, Wave-In-A-Box, Walkaround, Rizzoma, Co-Meeting, and other wave systems." />
+		<title>{% if title %}{{ title }} - {% endif %}Wave Extension Gallery</title>
+		<link rel="stylesheet" type="text/css" href="/static/styles/ui.css" />
+		{% if stylesheet %}
+			<link rel="stylesheet" type="text/css" href="/static/styles/{{ stylesheet }}.css" />
+		{% endif %}
+	</head>
+	<body>
+		<header id="header">
+			<nav>
+				<a href="/"><h1>Wave Extensions Gallery</h1></a>
+				<a href="/gallery/gadgets">Gadgets</a>
+				<a href="/gallery/robots">Robots</a>
+				<div class="divider"></div>
+				<a href="/about">About</a>
+			</nav>
+		</header>
