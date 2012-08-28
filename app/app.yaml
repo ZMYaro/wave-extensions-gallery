@@ -7,9 +7,11 @@ handlers:
 - url: /static
   static_dir: static
 
-- url: /gallery
+- url: /gallery(/.*)?
   script: gallery.py
+
+- url: /dev(/.*)?
+  script: dev.py
 
 - url: /.*
   script: main.py
-
