@@ -164,6 +164,10 @@ footer a:active {
 	color:#444444;
 }
 
+#main {
+	padding:0px 8px;
+}
+
 @media (max-width:1000px) {
 	header#header nav h1 {
 		font-size:24px;
@@ -172,6 +176,9 @@ footer a:active {
 	header#header nav a {
 		margin:0px;
 		padding:13px 8px;
+	}
+	#main {
+		padding:0px 4px;
 	}
 }
 @media (max-width:600px) {
@@ -185,5 +192,8 @@ footer a:active {
 	}
 	header#header nav a {
 		padding-top:7px;
+	}
+	#main {
+		padding:0px 2px;
 	}
 }
