@@ -65,6 +65,42 @@ button:disabled, select:not([size]):disabled {
 	     opacity:0.6;
 }
 
+input[type="text"], input[type="search"], input[type="password"], textarea {
+	padding:2px 10px;
+	
+	border-style:solid;
+	border-width:1px;
+	border-right-color:#C3C3C3;
+	border-bottom-color:#C3C3C3;
+	border-left-color:#A7A7A7;
+	border-top-color:#A7A7A7;
+	-webkit-border-radius:12px;
+	   -moz-border-radius:12px;
+	        border-radius:12px;
+	
+	-webkit-box-shadow:inset 2px 3px 2px 0px rgba(0,0,0,0.1), 1px 1px 0px 0px white;
+	   -moz-box-shadow:inset 2px 3px 2px 0px rgba(0,0,0,0.1), 1px 1px 0px 0px white;
+	        box-shadow:inset 2px 3px 2px 0px rgba(0,0,0,0.1), 1px 1px 0px 0px white;
+	
+	background-color:white;
+	color:black;
+}
+textarea {
+	-webkit-border-radius:8px;
+	   -moz-border-radius:8px;
+	        border-radius:8px;
+	padding:4px 6px;
+}
+input[type="text"]:focus, input[type="search"]:focus, input[type="password"]:focus, textarea:focus {
+	padding:1px 9px;
+	border-width:2px;
+	border-color:green;
+	outline-style:none;
+	outline-color:transparent;
+}
+textarea:focus {
+	padding:3px 4px;
+}
 
 header#header {
 	display:block;
@@ -166,6 +202,26 @@ footer a:active {
 
 #main {
 	padding:0px 8px;
+}
+
+.formtable {
+	display:block;
+	width:100%;
+	max-width:600px;
+}
+.formtable td {
+	/*vertical-align:top;*/
+}
+.formtable td:first-child {
+	text-align:right;
+	width:1%;
+}
+.formtable textarea {
+	width:100%;
+}
+.formtable input[type="text"] {
+	width:100%;
+	max-width:400px;
 }
 
 @media (max-width:1000px) {
