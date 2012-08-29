@@ -21,8 +21,11 @@ class DevDash(webapp.RequestHandler):
 		if user:
 			path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 			self.response.out.write(template.render(path, {'title':'Developer Dashboard'}))
+			
+			extlist = Extension.gql('WHERE developer = :1',user).fetch(None)
 			path = os.path.join(os.path.dirname(__file__), 'templates/devdash.html')
-			self.response.out.write(template.render(path, {'extlist':[]}))
+			self.response.out.write(template.render(path, {'extlist':extlist}))
+			
 			path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 			self.response.out.write(template.render(path, {}))
 		else:

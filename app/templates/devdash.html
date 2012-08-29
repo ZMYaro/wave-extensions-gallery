@@ -6,17 +6,20 @@
 	<tr>
 		<th>Title</th>
 		<th>ID</th>
+		<th></th>
 	</tr>
 	{% for ext in extlist %}
-		<a href="/dev/edit/{{ ext.extID }}">
-			<tr>
-				<td>{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</td>
-				<td>{{ ext.extID }}</td>
-			</tr>
-		</a>
+		<tr>
+			<td>{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</td>
+			<td>{{ ext.extID }}</td>
+			<td>
+				<a href="/dev/edit/{{ ext.extID }}" style="text-decoration:none;"><button>Edit</button></a>
+				<button disabled="disabled">Delete</button>
+			</td>
+		</tr>
 	{% empty %}
 		<tr>
-			<td colspan="2" style="text-align:center;">
+			<td colspan="3" style="text-align:center;">
 				You have no extensions.  <a href="/dev/new">Click here</a> to add one.
 			</td>
 		</tr>
