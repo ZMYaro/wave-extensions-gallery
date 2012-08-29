@@ -6,7 +6,7 @@ This app is meant to be an index of and (in the case of gadgets) storage* for wa
 
 --------
 
-##Dependencies for running locally
+###Dependencies for running locally
 
 * Download and install git from http://git-scm.com/download (or your package manager)
 * Clone the repository: `git clone git@github.com:zmyaro/wave-extensions-gallery.git`
@@ -15,7 +15,7 @@ This app is meant to be an index of and (in the case of gadgets) storage* for wa
 
 --------
 
-##Running the app locally (Linux)
+###Running the app locally (Linux)
 
 * Open a terminal
 * `cd path/to/wave-extensions-gallery`
