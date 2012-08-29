@@ -5,12 +5,14 @@
 <table cellpadding="4">
 	<tr>
 		<th>Title</th>
+		<th>Type</th>
 		<th>ID</th>
 		<th></th>
 	</tr>
 	{% for ext in extlist %}
 		<tr>
 			<td>{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</td>
+			<td>{% if ext.type %}{{ ext.type }}{% endif %}</td>
 			<td>{{ ext.extID }}</td>
 			<td>
 				<a href="/dev/edit/{{ ext.extID }}" style="text-decoration:none;"><button>Edit</button></a>
