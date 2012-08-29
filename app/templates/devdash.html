@@ -1,0 +1,26 @@
+<h1>Developer Dashboard</h1>
+<a href="/dev/new" style="text-decoration:none;"><button>New extension</button></a>
+<br />
+<br />
+<table cellpadding="4">
+	<tr>
+		<th>Title</th>
+		<th>ID</th>
+	</tr>
+	{% for ext in extlist %}
+		<a href="/dev/edit/{{ ext.extID }}">
+			<tr>
+				<td>{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</td>
+				<td>{{ ext.extID }}</td>
+			</tr>
+		</a>
+	{% empty %}
+		<tr>
+			<td colspan="2" style="text-align:center;">
+				You have no extensions.  <a href="/dev/new">Click here</a> to add one.
+			</td>
+		</tr>
+	{% endfor %}
+</table>
+<br />
+<a href="/dev/new" style="text-decoration:none;"><button>New extension</button></a>

@@ -6,11 +6,14 @@ import hashlib
 import os
 
 from google.appengine.api import users
+from google.appengine.dist import use_library
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
 from datastore import Extension
+
+use_library('django', '1.2')
 
 class DevDash(webapp.RequestHandler):
 	def get(self):
@@ -18,7 +21,8 @@ class DevDash(webapp.RequestHandler):
 		if user:
 			path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 			self.response.out.write(template.render(path, {'title':'Developer Dashboard'}))
-			self.response.out.write('[Developer Dashboard]')
+			path = os.path.join(os.path.dirname(__file__), 'templates/devdash.html')
+			self.response.out.write(template.render(path, {'extlist':[]}))
 			path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 			self.response.out.write(template.render(path, {}))
 		else:
@@ -54,12 +58,12 @@ class EditExt(webapp.RequestHandler):
 			ext = Extension.gql('WHERE extID = :1', extID).get()
 			if ext:
 				if ext.developer == user:
-					# TODO: replace this with loading the editing template
-					self.response.out.write('[Editing ' + extID + ']')
+					path = os.path.join(os.path.dirname(__file__), 'templates/edit.html')
+					self.response.out.write(template.render(path, {'ext':ext}))
 				else:
 					self.response.out.write('<h1>Error</h1>')
 					self.response.out.write('<p>You do not have permission to edit this extension.</p>')
-				self.response.out.write('<p><a href=\"/dev\">Click here</a> to return to your developer dashboard.</p>')
+					self.response.out.write('<p><a href=\"/dev\">Click here</a> to return to your developer dashboard.</p>')
 			else:
 				self.response.out.write('<h1>Error</h1>')
 				self.response.out.write('<p>Extension ' + extID + ' could not be found.</p>')
@@ -69,7 +73,21 @@ class EditExt(webapp.RequestHandler):
 			self.response.out.write(template.render(path, {}))
 		else:
 			self.redirect(users.create_login_url(self.request.uri))
-
+	def post(self,extID):
+		user = users.get_current_user()
+		if user:
+			ext = Extension.gql('WHERE extID = :1', extID).get()
+			if ext and ext.developer == user:
+				if self.request.get('title'):
+					ext.title = self.request.get('title')
+				if self.request.get('type'):
+					ext.type = self.request.get('type')
+				if self.request.get('description'):
+					ext.description = self.request.get('description')
+				ext.put()
+				self.redirect('/dev')
+				return
+		self.redirect('/dev/edit/' + extID)
 
 class OtherPage(webapp.RequestHandler):
 	def get(self,page):
@@ -82,8 +100,8 @@ class OtherPage(webapp.RequestHandler):
 		self.response.set_status(404);
 
 
-site = webapp.WSGIApplication([('/dev/new', NewExt),
-                               ('/dev/edit/(\w*)', EditExt),
+site = webapp.WSGIApplication([('/dev/new/?', NewExt),
+                               ('/dev/edit/(\w{16})/?', EditExt),
                                ('/dev/?', DevDash),
                                ('/(.*)', OtherPage)],
                               debug=True)
