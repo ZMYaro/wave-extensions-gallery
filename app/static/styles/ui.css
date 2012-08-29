@@ -63,6 +63,7 @@ button:enabled:active, select:not([size]):enabled:active {
 button:disabled, select:not([size]):disabled {
 	-moz-opacity:0.6;
 	     opacity:0.6;
+	cursor:default;
 }
 
 input[type="text"], input[type="search"], input[type="password"], textarea {
