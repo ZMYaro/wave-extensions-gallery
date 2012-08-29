@@ -13,11 +13,11 @@
 			<td></td>
 			<td>
 				<label for="type-gadget">
-					<input type="radio" name="type" value="gadget" id="type-gadget"{% if ext.type and ext.type == "gadget" %} checked="checked"{% endif %} />
+					<input type="radio" name="type" value="gadget" id="type-gadget"{% if ext.type != "robot" %} checked="checked"{% endif %} />
 					Gadget
 				</label>
 				<label for="type-robot">
-					<input type="radio" name="type" value="robot" id="type-robot"{% if ext.type and ext.type == "robot" %} checked="checked"{% endif %} />
+					<input type="radio" name="type" value="robot" id="type-robot"{% if ext.type == "robot" %} checked="checked"{% endif %} />
 					Robot
 				</label>
 			</td>

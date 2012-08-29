@@ -85,6 +85,8 @@ class EditExt(webapp.RequestHandler):
 					ext.title = self.request.get('title')
 				if self.request.get('type'):
 					ext.type = self.request.get('type')
+				else: # default to gadget if no type is sent
+					ext.type = 'gadget'
 				if self.request.get('description'):
 					ext.description = self.request.get('description')
 				ext.put()
