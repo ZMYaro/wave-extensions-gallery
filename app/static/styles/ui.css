@@ -99,7 +99,7 @@ input[type="text"]:focus, input[type="search"]:focus, input[type="password"]:foc
 	outline-color:transparent;
 }
 textarea:focus {
-	padding:3px 4px;
+	padding:3px 5px;
 }
 
 header#header {
