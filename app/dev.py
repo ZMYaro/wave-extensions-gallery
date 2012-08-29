@@ -22,7 +22,7 @@ class DevDash(webapp.RequestHandler):
 			path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 			self.response.out.write(template.render(path, {'title':'Developer Dashboard'}))
 			
-			extlist = Extension.gql('WHERE developer = :1',user).fetch(None)
+			extlist = Extension.gql('WHERE developer = :1 ORDER BY title ASC', user).fetch(None)
 			path = os.path.join(os.path.dirname(__file__), 'templates/devdash.html')
 			self.response.out.write(template.render(path, {'extlist':extlist}))
 			
