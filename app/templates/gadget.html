@@ -1,0 +1,19 @@
+<section id="leftSide">
+	<img src="{% if ext.iconURL %}{{ ext.iconURL }}{% else %}/static/images/gadget_icon_placeholder.png{% endif %}" alt="icon" class="extIcon" />
+	<br />
+	<!-- star -->
+	<hr />
+	<!-- +1 button -->
+	<!-- Like button -->
+	<!-- Twitter button -->
+	<hr />
+	Category: <a href="/gallery/category/{{ ext.category }}">{{ ext.category }}</a>
+	<br />
+	Version {{ ext.version }}
+	<br />
+</section>
+<section id="middle">
+	<h2>{{ ext.title }}</h2>
+	<small>By {{ devname }}</small>
+	<p id="description">{{ ext.description }}</p>
+</section>

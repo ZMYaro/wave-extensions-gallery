@@ -1,15 +1,22 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 import cgi
 import os
 
-from google.appengine.ext import db
+from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
+
+from datastore import Extension
+from datastore import User
 
 class MainPage(webapp.RequestHandler):
 	def get(self):
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 		self.response.out.write(template.render(path, {}))
+		self.response.out.write('[Extensions main page]')
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
 
@@ -17,6 +24,10 @@ class GadgetsPage(webapp.RequestHandler):
 	def get(self):
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 		self.response.out.write(template.render(path, {}))
+		
+		#extlist = Extension.gql('WHERE type = :1', 'gadget').fetch(None)
+		self.response.out.write('[Featured Gadgets]')
+		
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
 
@@ -24,18 +35,23 @@ class RobotsPage(webapp.RequestHandler):
 	def get(self):
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 		self.response.out.write(template.render(path, {}))
+		self.response.out.write('[Featured Robots]')
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
 
 class InfoPage(webapp.RequestHandler):
-	def get(self):
+	def get(self,extID):
+		ext = Extension.gql('WHERE extID = :1',extID).get()
+		
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
-		self.response.out.write(template.render(path, {}))
+		self.response.out.write(template.render(path, {'title':ext.title,'stylesheet':'gallery'}))
+		path = os.path.join(os.path.dirname(__file__), 'templates/' + ext.type + '.html')
+		self.response.out.write(template.render(path, {'ext':ext,'devname':ext.developer.nickname()}))
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
 
 class OtherPage(webapp.RequestHandler):
-	def get(self, page):
+	def get(self,page):
 		if page == 'extension':
 			self.redirect('/gallery')
 		else:
@@ -50,7 +66,8 @@ class OtherPage(webapp.RequestHandler):
 site = webapp.WSGIApplication([('/gallery', MainPage),
                                ('/gallery/gadgets', GadgetsPage),
                                ('/gallery/robots', RobotsPage),
-                               ('/gallery/info/(.*)', InfoPage),
+                               ('/gallery/info/(\w*)', InfoPage),
+                               
                                ('/(.*)', OtherPage)],
                               debug=True)
 

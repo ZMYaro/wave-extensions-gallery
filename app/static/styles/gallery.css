@@ -1,0 +1,31 @@
+#leftSide {
+	float:left;
+	width:160px;
+}
+#leftSide .extIcon {
+	display:block;
+	width:128px;
+	height:128px;
+	margin:auto;
+}
+
+#middle {
+	-webkit-box-sizing:border-box;
+	   -moz-box-sizing:border-box;
+	        box-sizing:border-box;
+	width:100%;
+	max-width:640px;
+	padding-left:176px;
+}
+#middle h2 {
+	margin:0px;
+}
+
+@media (max-width:600px) {
+	#leftSide {
+		margin-left:-4px;
+	}
+	#middle {
+		padding-left:168px;
+	}
+}
