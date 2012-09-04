@@ -9,6 +9,7 @@ class Extension(db.Model):
 	developer = db.UserProperty()
 	title = db.StringProperty()
 	description = db.TextProperty()
+	icon = db.BlobProperty()
 	gadgetURL = db.StringProperty()
 
 class User(db.Model):
