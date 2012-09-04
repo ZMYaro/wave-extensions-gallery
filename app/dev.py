@@ -63,8 +63,11 @@ class EditExt(webapp.RequestHandler):
 			ext = Extension.gql('WHERE extID = :1', extID).get()
 			if ext:
 				if ext.developer == user:
+					templateArgs = {'ext':ext}
+					if self.request.get('msg'):
+						templateArgs['msg'] = self.request.get('msg')
 					path = os.path.join(os.path.dirname(__file__), 'templates/edit.html')
-					self.response.out.write(template.render(path, {'ext':ext}))
+					self.response.out.write(template.render(path, templateArgs))
 				else:
 					self.response.out.write('<h1>Error</h1>')
 					self.response.out.write('<p>You do not have permission to edit this extension.</p>')
