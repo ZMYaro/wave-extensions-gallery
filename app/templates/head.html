@@ -9,6 +9,11 @@
 		{% if stylesheet %}
 			<link rel="stylesheet" type="text/css" href="/static/styles/{{ stylesheet }}.css" />
 		{% endif %}
+		<script type="text/javascript">
+			function hideMessage() {
+				document.getElementById("message").style.display = "none";
+			}
+		</script>
 	</head>
 	<body>
 		<header id="header">
@@ -21,4 +26,10 @@
 			</nav>
 			<div></div>
 		</header>
+		{% if message %}
+			<div id="message">
+				<button class="closeButton" onclick="hideMessage();">&times;</button>
+				{{ message|safe }}
+			</div>
+		{% endif %}
 		<div id="main">
