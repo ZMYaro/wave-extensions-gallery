@@ -57,17 +57,21 @@ class EditExt(webapp.RequestHandler):
 	def get(self,extID):
 		user = users.get_current_user()
 		if user:
+			templateArgs = {'title':'Edit Extension'}
+			if self.request.get('msg'):
+				if self.request.get('msg') == 'success':
+					templateArgs['message'] = 'Your extension has been successfully updated.'
+				elif self.request.get('msg') == 'icontype':
+					templateArgs['message'] = 'The icon you uploaded was not a PNG.  Your extension\'s other properties have been successfully updated.'
+				templateArgs['message'] += '  <a href=\"/dev\">Click here</a> to return to the developer dashboard.</a>'
 			path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
-			self.response.out.write(template.render(path, {'title':'Edit Extension'}))
+			self.response.out.write(template.render(path, templateArgs))
 			
 			ext = Extension.gql('WHERE extID = :1', extID).get()
 			if ext:
 				if ext.developer == user:
-					templateArgs = {'ext':ext}
-					if self.request.get('msg'):
-						templateArgs['msg'] = self.request.get('msg')
 					path = os.path.join(os.path.dirname(__file__), 'templates/edit.html')
-					self.response.out.write(template.render(path, templateArgs))
+					self.response.out.write(template.render(path, {'ext':ext}))
 				else:
 					self.response.out.write('<h1>Error</h1>')
 					self.response.out.write('<p>You do not have permission to edit this extension.</p>')
