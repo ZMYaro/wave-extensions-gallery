@@ -50,6 +50,15 @@ class InfoPage(webapp.RequestHandler):
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
 
+class IconFetcher(webapp.RequestHandler):
+	def get(self,extID):
+		ext = Extension.gql('WHERE extID = :1',extID).get()
+		if ext.icon:
+			self.response.headers['Content-Type'] = 'image/png'
+			self.response.out.write(ext.icon)
+		else:
+			self.error(404)
+
 class OtherPage(webapp.RequestHandler):
 	def get(self,page):
 		if page == 'extension':
@@ -66,8 +75,8 @@ class OtherPage(webapp.RequestHandler):
 site = webapp.WSGIApplication([('/gallery', MainPage),
                                ('/gallery/gadgets', GadgetsPage),
                                ('/gallery/robots', RobotsPage),
-                               ('/gallery/info/(\w*)', InfoPage),
-                               
+                               ('/gallery/info/(\w{16})/?', InfoPage),
+                               ('/gallery/icon/(\w{16})\.png', IconFetcher),
                                ('/(.*)', OtherPage)],
                               debug=True)
 
