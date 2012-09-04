@@ -5,8 +5,10 @@ import cgi
 import hashlib
 import os
 
+from google.appengine.api import images
 from google.appengine.api import users
 from google.appengine.dist import use_library
+from google.appengine.ext import db
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
@@ -79,18 +81,35 @@ class EditExt(webapp.RequestHandler):
 	def post(self,extID):
 		user = users.get_current_user()
 		if user:
+			error = None
 			ext = Extension.gql('WHERE extID = :1', extID).get()
 			if ext and ext.developer == user:
 				if self.request.get('title'):
 					ext.title = self.request.get('title')
+				
 				if self.request.get('type'):
 					ext.type = self.request.get('type')
 				else: # default to gadget if no type is sent
 					ext.type = 'gadget'
+				
 				if self.request.get('description'):
 					ext.description = self.request.get('description')
+				
+				if self.request.get('icon'):
+					iconFile = self.request.get('icon')
+					icon = images.Image(image_data = iconFile)
+					if icon.format != images.PNG:
+						error = 'icontype'
+					else:
+						iconFile = images.resize(iconFile, 128, 128)
+						ext.icon = db.Blob(iconFile)
+				
 				ext.put()
-				self.redirect('/dev')
+				
+				if error == None:
+					self.redirect('/dev/edit/' + extID + '?msg=success')
+				else:
+					self.redirect('/dev/edit/' + extID + '?msg=' + error)
 				return
 		self.redirect('/dev/edit/' + extID)
 
