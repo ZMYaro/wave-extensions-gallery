@@ -45,7 +45,7 @@ class InfoPage(webapp.RequestHandler):
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 		self.response.out.write(template.render(path, {'title':ext.title,'stylesheet':'gallery'}))
-		path = os.path.join(os.path.dirname(__file__), 'templates/' + ext.type + '.html')
+		path = os.path.join(os.path.dirname(__file__), 'templates/info.html')
 		self.response.out.write(template.render(path, {'ext':ext,'devname':ext.developer.nickname()}))
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
