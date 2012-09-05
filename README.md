@@ -1,8 +1,8 @@
 #Wave Extensions Gallery
 
-This app is meant to be an index of and (in the case of gadgets) storage* for wave extensions.  Users can sign in and favorite extensions.  Developers can add their extensions to the gallery.  Wave clients can pull gadgets and gadget data from the gallery.  Having a central source for extensions eliminates the need for wave clients to keep their own lists of
+This app is meant to be an index of and (in the case of gadgets) storage for wave extensions.  Users can sign in and favorite extensions.  Developers can add their extensions to the gallery.  Wave clients can pull gadgets and gadget data from the gallery.  Having a central source for extensions eliminates the need for wave clients to keep their own lists of gadgets.
 
-*storage not yet implemented
+(Note: This has not all been implemented, but it will be.)
 
 --------
 
