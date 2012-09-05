@@ -4,12 +4,15 @@
 	<!-- star -->
 	<hr />
 	<!-- +1 button -->
+	<div class="g-plusone" data-size="medium"></div>
+	<br />
 	<!-- Like button -->
-	<!-- Twitter button -->
+	<div class="fb-like" data-send="false" data-layout="button_count" data-width="160" data-show-faces="false"></div>
+	<br />
+	<!-- Tweet button -->
+	<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
 	<hr />
 	Category: <a href="/gallery/category/{{ ext.category }}">{{ ext.category }}</a>
-	<br />
-	Version {{ ext.version }}
 	<br />
 </section>
 <section id="middle">
@@ -17,3 +20,31 @@
 	<small>By {{ devname }}</small>
 	<p id="description">{{ ext.description }}</p>
 </section>
+
+
+<script type="text/javascript">
+	// G+
+	(function() {
+		var po = document.createElement("script");
+		po.type = "text/javascript";
+		po.async = true;
+		po.src = "https://apis.google.com/js/plusone.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(po, s);
+	})();
+	
+	var loadScript = function(d, s, id, src) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s);
+		js.type = "text/javascript"
+		js.id = id;
+		js.src = src;
+		fjs.parentNode.insertBefore(js, fjs);
+	}
+	// FB
+	loadScript(document, "script", "facebook-jssdk", "//connect.facebook.net/en_US/all.js#xfbml=1");
+	// Twitter
+	loadScript(document, "script", "twitter-wjs", "//platform.twitter.com/widgets.js");
+	delete loadScript;
+</script>
