@@ -45,7 +45,7 @@
          id="feFlood3825"
          result="result10"
          in="result6"
-         flood-opacity="0.65000000000000002"
+         flood-opacity="0.59999999999999998"
          flood-color="rgb(0,0,0)" />
       <feBlend
          id="feBlend3827"
@@ -68,7 +68,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.9195959"
-     inkscape:cx="-8.3119626"
+     inkscape:cx="-7.4280791"
      inkscape:cy="18.417574"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -86,7 +86,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
