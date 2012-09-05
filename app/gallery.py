@@ -43,10 +43,17 @@ class InfoPage(webapp.RequestHandler):
 	def get(self,extID):
 		ext = Extension.gql('WHERE extID = :1',extID).get()
 		
-		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
-		self.response.out.write(template.render(path, {'title':ext.title,'stylesheet':'gallery'}))
-		path = os.path.join(os.path.dirname(__file__), 'templates/info.html')
-		self.response.out.write(template.render(path, {'ext':ext,'devname':ext.developer.nickname()}))
+		if not ext:
+			path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
+			self.response.out.write(template.render(path, {'title':'Extension Not Found'}))
+			path = os.path.join(os.path.dirname(__file__), 'templates/ext404.html')
+			self.response.out.write(template.render(path, {}))
+			self.response.set_status(404);
+		else:
+			path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
+			self.response.out.write(template.render(path, {'title':ext.title,'stylesheet':'gallery'}))
+			path = os.path.join(os.path.dirname(__file__), 'templates/info.html')
+			self.response.out.write(template.render(path, {'ext':ext,'devname':ext.developer.nickname()}))
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
 
@@ -61,7 +68,7 @@ class IconFetcher(webapp.RequestHandler):
 
 class OtherPage(webapp.RequestHandler):
 	def get(self,page):
-		if page == 'extension':
+		if page == 'info':
 			self.redirect('/gallery')
 		else:
 			path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
