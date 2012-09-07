@@ -15,7 +15,7 @@
    version="1.1"
    inkscape:version="0.48.1 r9760"
    sodipodi:docname="star_selected.svg"
-   inkscape:export-filename="/home/gamerz/workspace/wave/wave-extensions-gallery/sketches/star_selected.png"
+   inkscape:export-filename="/home/gamerz/workspace/wave/wave-extensions-gallery/graphics_sources/star_selected.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -28,7 +28,7 @@
        color-interpolation-filters="sRGB">
       <feGaussianBlur
          id="feGaussianBlur3819"
-         stdDeviation="6.5"
+         stdDeviation="5"
          result="result8" />
       <feOffset
          id="feOffset3821"
@@ -45,7 +45,7 @@
          id="feFlood3825"
          result="result10"
          in="result6"
-         flood-opacity="0.65000000000000002"
+         flood-opacity="0.5"
          flood-color="rgb(0,0,0)" />
       <feBlend
          id="feBlend3827"
@@ -68,7 +68,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="7.9195959"
-     inkscape:cx="-9.1958461"
+     inkscape:cx="-18.413488"
      inkscape:cy="18.417574"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
