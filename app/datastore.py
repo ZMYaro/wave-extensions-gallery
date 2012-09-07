@@ -14,4 +14,4 @@ class Extension(db.Model):
 
 class User(db.Model):
 	user = db.UserProperty()
-	extensions = db.StringListProperty()
+	starred = db.StringListProperty()

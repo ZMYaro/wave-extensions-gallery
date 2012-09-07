@@ -50,10 +50,23 @@ class InfoPage(webapp.RequestHandler):
 			self.response.out.write(template.render(path, {}))
 			self.response.set_status(404);
 		else:
+			templateVars = {
+				'ext':ext,
+				'devname':ext.developer.nickname(),
+				'starred':False
+			}
+			
+			user = users.get_current_user()
+			if user:
+				userEntry = User.gql('WHERE user = :1',user).get()
+				if userEntry:
+					if extID in userEntry.starred:
+						templateVars['starred'] = True
+			
 			path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 			self.response.out.write(template.render(path, {'title':ext.title,'stylesheet':'gallery'}))
 			path = os.path.join(os.path.dirname(__file__), 'templates/info.html')
-			self.response.out.write(template.render(path, {'ext':ext,'devname':ext.developer.nickname()}))
+			self.response.out.write(template.render(path, templateVars))
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
 

@@ -1,7 +1,16 @@
 <section id="leftSide">
 	<img src="{% if ext.icon %}/gallery/icon/{{ ext.extID }}.png{% else %}/static/images/gadget_icon_placeholder.png{% endif %}" alt="icon" class="extIcon" />
 	<br />
-	<!-- star -->
+	<table>
+		<tr>
+			<td>
+				<a href="/account/{% if starred %}un{% endif %}star/{{ ext.extID }}" class="star{% if starred %} checked{% endif %}"></a>
+			</td>
+			<td>
+				Add this extension to your favorites for easy access
+			</td>
+		</tr>
+	</table>
 	<hr />
 	<!-- +1 button -->
 	<div class="g-plusone" data-size="medium"></div>
