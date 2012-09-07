@@ -17,8 +17,9 @@
 			<td>{% if ext.type %}{{ ext.type }}{% endif %}</td>
 			<td>{{ ext.extID }}</td>
 			<td>
-				<a href="/dev/edit/{{ ext.extID }}" style="text-decoration:none;"><button>Edit</button></a>
+				<a href="/dev/edit/{{ ext.extID }}" class="button">Edit</a>
 				<button disabled="disabled">Delete</button>
+				<a href="/gallery/info/{{ ext.extID }}" class="button">View in gallery
 			</td>
 		</tr>
 	{% empty %}
