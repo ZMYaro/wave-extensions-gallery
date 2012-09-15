@@ -12,7 +12,7 @@
 	</tr>
 	{% for ext in extlist %}
 		<tr>
-			<td>{% if ext.icon %}<img src="/gallery/icon/{{ ext.extID}}.png" style="width:24px;height:24px;" />{% endif %}</td>
+			<td>{% if ext.icon %}<img src="/gallery/icon/{{ ext.extID }}.png" style="width:24px;height:24px;" />{% endif %}</td>
 			<td>{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</td>
 			<td>{% if ext.type %}{{ ext.type }}{% endif %}</td>
 			<td>{{ ext.extID }}</td>
