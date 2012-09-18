@@ -35,10 +35,7 @@ button, select:not([size]), .button {
 	text-decoration:none;
 	font-size:9pt;
 	text-align:center;
-	padding-left:6px;
-	padding-right:6px;
-	padding-top:3px;
-	padding-bottom:3px;
+	padding:3px 6px;
 	
 	-webkit-user-select:none;
 	 -khtml-user-select:none;
