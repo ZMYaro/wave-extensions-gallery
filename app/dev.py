@@ -166,6 +166,9 @@ class QuickAdder(webapp.RequestHandler):
 			]
 			for ext in exts:
 				extEntity = Extension()
+				extEntity.extID = hashlib.md5(os.urandom(128)).hexdigest()[:16]
+				while Extension.gql('WHERE extID = :1', extEntity.extID).count(limit=2) > 0:
+					extEntity.extID = hashlib.md5(os.urandom(128)).hexdigest()[:16]
 				extEntity.developer = user
 				for prop in ext:
 					setattr(extEntity, prop, ext[prop])
