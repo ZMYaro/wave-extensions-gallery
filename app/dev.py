@@ -130,10 +130,54 @@ class OtherPage(webapp.RequestHandler):
 		self.response.out.write(template.render(path, {}))
 		self.response.set_status(404);
 
+# quickly adds some extensions to the gallery
+class QuickAdder(webapp.RequestHandler):
+	def get(self):
+		user = users.get_current_user()
+		if user:
+			if user.email() != 'zmyaro@gmail.com':
+				self.response.out.write('Not allowed.')
+				return
+			exts = [
+				{
+					'title':'Time Zone Gadget (Beta)',
+					'type':'gadget',
+					'description':'Displays a set date and time in each user\'s own time zone.  Useful for planning an event involving people from different time zones.',
+					'gadgetURL':'http://mysite.verizon.net/zmyaro/projects/wave/gadgets/time_zone.xml'
+				},
+				{
+					'title':'Yes/No/Mini Gadget',
+					'type':'gadget',
+					'description':'A miniature version of Google\'s Yes/No/Maybe Gadget.  Like the Yes/No/Maybe gadget, just click one of the buttons to vote.',
+					'gadgetURL':'http://mysite.verizon.net/zmyaro/projects/wave/gadgets/ynmini.xml'
+				},
+				{
+					'title':'Googley Like Button',
+					'type':'gadget',
+					'description':'A like button designed to look like those in Google Reader and Google Buzz.',
+					'gadgetURL':'http://mysite.verizon.net/zmyaro/projects/wave/gadgets/like.xml'
+				},
+				{
+					'title':'Petition Gadget (Beta)',
+					'type':'gadget',
+					'description':'A gadget that allows you to do petitions in Wave. Some advantages of this are that people can see the petition text being written in real-time and a signer\'s name and picture can be retrieved from the his/her wave profile, so the he/she does not have to enter it manually.',
+					'gadgetURL':'http://mysite.verizon.net/zmyaro/projects/wave/gadgets/petition.xml'
+				}
+			]
+			for ext in exts:
+				extEntity = Extension()
+				extEntity.developer = user
+				for prop in ext:
+					setattr(extEntity, prop, ext[prop])
+				extEntity.put()
+			self.response.out.write('Four extensions have been added to the gallery.')
+		else:
+			self.redirect(users.create_login_url(self.request.uri))
 
 site = webapp.WSGIApplication([('/dev/new/?', NewExt),
                                ('/dev/edit/(\w{16})/?', EditExt),
                                ('/dev/?', DevDash),
+                               ('/dev/quickadd', QuickAdder),
                                ('/(.*)', OtherPage)],
                               debug=True)
 
