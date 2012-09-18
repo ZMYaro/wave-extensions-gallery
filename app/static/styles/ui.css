@@ -45,7 +45,7 @@ button, select:not([size]), .button {
 	   -moz-user-select:none;
 	        user-select:none;
 	
-	display:inline;
+	display:inline-block;
 	
 	cursor:pointer;
 }
