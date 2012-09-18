@@ -46,7 +46,7 @@ button, select:not([size]), .button {
 	
 	cursor:pointer;
 }
-button:enabled:active, select:not([size]):enabled:active, .button:active {
+button:enabled:active, select:not([size]):enabled:active, .button:active, button.active, .button.active {
 	background-color:#C3C3C3;
 	background-image:-webkit-gradient(linear, left top, left bottom, from(#AAAAAA), to(#E5E5E5));
 	background-image:-webkit-linear-gradient(top, #AAAAAA, #E5E5E5);
