@@ -29,3 +29,49 @@
 		padding-left:168px;
 	}
 }
+
+#main hr {
+	border-style:solid none none;
+	border-color:#C0C0C0;
+}
+
+.rating {
+	height:8px;
+	width:90%;
+	margin:1em auto;
+	
+	background-color:white;
+	-webkit-border-radius:3px;
+	   -moz-border-radius:3px;
+	        border-radius:3px;
+}
+.rating .likes, .rating .dislikes {
+	height:100%;
+	-webkit-box-shadow:0px 0px 1px 1px white;
+	   -moz-box-shadow:0px 0px 1px 1px white;
+	        box-shadow:0px 0px 1px 1px white;
+}
+.rating .dislikes {
+	float:left;
+	background-color:#E80000;
+	   -webkit-border-top-left-radius:3px;
+	-webkit-border-bottom-left-radius:3px;
+	       -moz-border-radius-topleft:3px;
+	    -moz-border-radius-bottomleft:3px;
+	           border-top-left-radius:3px;
+	        border-bottom-left-radius:3px;
+}
+.rating .likes {
+	float:right;
+	background-color:#00A000;
+	   -webkit-border-top-right-radius:3px;
+	-webkit-border-bottom-right-radius:3px;
+	       -moz-border-radius-topright:3px;
+	    -moz-border-radius-bottomright:3px;
+	           border-top-right-radius:3px;
+	        border-bottom-right-radius:3px;
+}
+.ratingCount {
+	font-size:smaller;
+	margin-top:-1em;
+}

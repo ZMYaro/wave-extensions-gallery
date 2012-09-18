@@ -9,8 +9,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
-from datastore import Extension
-from datastore import User
+from datastore import Extension,Rating,User
 
 class MainPage(webapp.RequestHandler):
 	def get(self):
@@ -53,8 +52,16 @@ class InfoPage(webapp.RequestHandler):
 			templateVars = {
 				'ext':ext,
 				'devname':ext.developer.nickname(),
+				'upvotePercent':0,
+				'downvotePercent':0,
+				'ratingCount':0,
+				'userRating':0,
 				'starred':False
 			}
+			
+			templateVars['ratingCount'] = Rating.gql('WHERE extID = :1 AND value != :2',extID,0).count(limit=None)
+			templateVars['upvotePercent'] = Rating.gql('WHERE extID = :1 AND value = :2',extID,1).count(limit=None) * 1.0 / templateVars['ratingCount'] * 100
+			templateVars['downvotePercent'] = 100 - templateVars['upvotePercent']
 			
 			user = users.get_current_user()
 			if user:
@@ -62,6 +69,9 @@ class InfoPage(webapp.RequestHandler):
 				if userEntry:
 					if extID in userEntry.starred:
 						templateVars['starred'] = True
+				userRating = Rating.gql('WHERE user = :1 AND extID = :2',user,extID).get()
+				if userRating:
+					templateVars['userRating'] = userRating.value
 			
 			path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 			self.response.out.write(template.render(path, {'title':ext.title,'stylesheet':'gallery'}))
@@ -78,6 +88,29 @@ class IconFetcher(webapp.RequestHandler):
 			self.response.out.write(ext.icon)
 		else:
 			self.error(404)
+
+class RatingHandler(webapp.RequestHandler):
+	def get(self,value,extID):
+		user = users.get_current_user()
+		if not user:
+			self.redirect(users.create_login_url(self.request.uri))
+		else:
+			if Extension.gql('WHERE extID = :1',extID).count(limit=1) == 0:
+				self.error(404)
+			else:
+				rating = Rating.gql('WHERE voter = :1 AND extID = :2',user,extID).get()
+				if not rating:
+					rating = Rating()
+					rating.voter = user
+					rating.extID = extID
+				if value == 'up':
+					rating.value = 1
+				elif value == 'down':
+					rating.value = -1
+				else:
+					rating.value = 0
+				rating.put()
+				self.redirect('/gallery/info/' + extID)
 
 class OtherPage(webapp.RequestHandler):
 	def get(self,page):
@@ -97,6 +130,7 @@ site = webapp.WSGIApplication([('/gallery', MainPage),
                                ('/gallery/robots', RobotsPage),
                                ('/gallery/info/(\w{16})/?', InfoPage),
                                ('/gallery/icon/(\w{16})\.png', IconFetcher),
+                               ('/gallery/(up|down|null)vote/(\w{16})/?', RatingHandler),
                                ('/(.*)', OtherPage)],
                               debug=True)
 

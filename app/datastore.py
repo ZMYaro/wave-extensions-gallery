@@ -4,13 +4,19 @@
 from google.appengine.ext import db
 
 class Extension(db.Model):
-	extID = db.StringProperty()
-	type = db.StringProperty()
+	extID = db.StringProperty() # 
+	type = db.StringProperty() # gadget || robot
 	developer = db.UserProperty()
 	title = db.StringProperty()
 	description = db.TextProperty()
 	icon = db.BlobProperty()
-	gadgetURL = db.StringProperty()
+	gadgetURL = db.LinkProperty()
+	robotAddress = db.EmailProperty()
+
+class Rating(db.Model):
+	value = db.IntegerProperty() # -1 || 1
+	extID = db.StringProperty()
+	voter = db.UserProperty() # the user who submitted this rating
 
 class User(db.Model):
 	user = db.UserProperty()
