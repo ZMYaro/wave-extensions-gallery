@@ -44,7 +44,7 @@ class NewExt(webapp.RequestHandler):
 			# Give the Extension a random unique ID (I decided on 16 hexadecimal
 			# characters, but other suggestions are welcome)
 			newExt.extID = hashlib.md5(os.urandom(128)).hexdigest()[:16]
-			while Extension.gql('WHERE extID = :1', newExt.extID).count(limit=2) > 0:
+			while Extension.gql('WHERE extID = :1', newExt.extID).count(limit=1) > 0:
 				newExt.extID = hashlib.md5(os.urandom(128)).hexdigest()[:16]
 			newExt.put()
 		
