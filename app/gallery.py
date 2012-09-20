@@ -60,8 +60,9 @@ class InfoPage(webapp.RequestHandler):
 			}
 			
 			templateVars['ratingCount'] = Rating.gql('WHERE extID = :1 AND value != :2',extID,0).count(limit=None)
-			templateVars['upvotePercent'] = Rating.gql('WHERE extID = :1 AND value = :2',extID,1).count(limit=None) * 1.0 / templateVars['ratingCount'] * 100
-			templateVars['downvotePercent'] = 100 - templateVars['upvotePercent']
+			if templateVars['ratingCount'] > 0: # prevent dividing by zero; the percents already default to zero
+				templateVars['upvotePercent'] = Rating.gql('WHERE extID = :1 AND value = :2',extID,1).count(limit=None) * 1.0 / templateVars['ratingCount'] * 100
+				templateVars['downvotePercent'] = 100 - templateVars['upvotePercent']
 			
 			user = users.get_current_user()
 			if user:
