@@ -1,0 +1,18 @@
+<h1>List Of All Extensions (temporary)</h1>
+<section id="middle">
+	<table>
+	{% for ext in extlist %}
+		<tr>
+			<td><img src="{% if ext.icon %}/gallery/icon/{{ ext.extID}}.png{% else %}/static/images/gadget_icon_placeholder.png{% endif %}" style="width:64px;height:64px;" /></td>
+			<td><a href="/gallery/info/{{ ext.extID }}"><h3>{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</h3></a></td>
+			<td>{% if ext.type %}{{ ext.type }}{% endif %}</td>
+			<td>
+				<div class="rating">
+					<div class="dislikes"{% if ext.downvotePercent %}style="width:{{ ext.downvotePercent }}%;"{% endif %}></div>
+					<div class="likes"{% if ext.upvotePercent %}style="width:{{ ext.upvotePercent }}%;"{% endif %}></div>
+				</div>
+			</td>
+		</tr>
+	{% endfor %}
+	</table>
+</section>

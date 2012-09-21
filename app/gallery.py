@@ -14,8 +14,19 @@ from datastore import Extension,Rating,User
 class MainPage(webapp.RequestHandler):
 	def get(self):
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
-		self.response.out.write(template.render(path, {}))
-		self.response.out.write('[Extensions main page]')
+		self.response.out.write(template.render(path, {'stylesheet':'gallery'}))
+		
+		extlist = Extension.gql('').fetch(limit=None)
+		
+		for ext in extlist:
+			ext.ratingCount = Rating.gql('WHERE extID = :1 AND value != :2',ext.extID,0).count(limit=None)
+			if ext.ratingCount > 0: # prevent dividing by zero; the percents already default to zero
+				ext.upvotePercent = Rating.gql('WHERE extID = :1 AND value = :2',ext.extID,1).count(limit=None) * 1.0 / ext.ratingCount * 100
+				ext.downvotePercent = 100 - ext.upvotePercent
+		
+		path = os.path.join(os.path.dirname(__file__), 'templates/gallerylist.html')
+		self.response.out.write(template.render(path, {'extlist':extlist}))
+		
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
 
