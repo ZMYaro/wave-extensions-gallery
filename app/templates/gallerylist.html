@@ -1,4 +1,4 @@
-<h1>List Of All Extensions (temporary)</h1>
+<h1>List Of Extensions (temporary)</h1>
 <section id="middle">
 	<table>
 	{% for ext in extlist %}
@@ -13,6 +13,8 @@
 				</div>
 			</td>
 		</tr>
+	{% empty %}
+		No results :(
 	{% endfor %}
 	</table>
 </section>
