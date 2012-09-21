@@ -14,11 +14,14 @@
 	   -moz-box-sizing:border-box;
 	        box-sizing:border-box;
 	width:100%;
-	max-width:640px;
+	max-width:720px;
 	padding-left:176px;
 }
 #middle h2 {
 	margin:0px;
+}
+#middle table {
+	width:100%;
 }
 
 @media (max-width:600px) {
@@ -37,7 +40,8 @@
 
 .rating {
 	height:8px;
-	width:90%;
+	/*width:90%;*/
+	width:144px;
 	margin:1em auto;
 	
 	background-color:white;
