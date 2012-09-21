@@ -11,6 +11,16 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 
 from datastore import Extension,Rating,User
 
+def getRatingInfo(extID):
+	ratingCount = Rating.gql('WHERE extID = :1 AND value != :2',extID,0).count(limit=None)
+	if ratingCount > 0: # prevent dividing by zero; the percents already default to zero
+		upvotePercent = Rating.gql('WHERE extID = :1 AND value = :2',extID,1).count(limit=None) * 1.0 / ratingCount * 100
+		downvotePercent = 100 - upvotePercent
+	else:
+		upvotePercent = 0
+		downvotePercent = 0
+	return ratingCount,upvotePercent,downvotePercent
+
 class MainPage(webapp.RequestHandler):
 	def get(self):
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
@@ -19,10 +29,7 @@ class MainPage(webapp.RequestHandler):
 		extlist = Extension.gql('').fetch(limit=None)
 		
 		for ext in extlist:
-			ext.ratingCount = Rating.gql('WHERE extID = :1 AND value != :2',ext.extID,0).count(limit=None)
-			if ext.ratingCount > 0: # prevent dividing by zero; the percents already default to zero
-				ext.upvotePercent = Rating.gql('WHERE extID = :1 AND value = :2',ext.extID,1).count(limit=None) * 1.0 / ext.ratingCount * 100
-				ext.downvotePercent = 100 - ext.upvotePercent
+			ext.ratingCount,ext.upvotePercent,ext.downvotePercent = getRatingInfo(ext.extID)
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/gallerylist.html')
 		self.response.out.write(template.render(path, {'extlist':extlist}))
@@ -70,10 +77,7 @@ class InfoPage(webapp.RequestHandler):
 				'starred':False
 			}
 			
-			templateVars['ratingCount'] = Rating.gql('WHERE extID = :1 AND value != :2',extID,0).count(limit=None)
-			if templateVars['ratingCount'] > 0: # prevent dividing by zero; the percents already default to zero
-				templateVars['upvotePercent'] = Rating.gql('WHERE extID = :1 AND value = :2',extID,1).count(limit=None) * 1.0 / templateVars['ratingCount'] * 100
-				templateVars['downvotePercent'] = 100 - templateVars['upvotePercent']
+			templateVars['ratingCount'],templateVars['upvotePercent'],templateVars['downvotePercent'] = getRatingInfo(extID)
 			
 			user = users.get_current_user()
 			if user:
