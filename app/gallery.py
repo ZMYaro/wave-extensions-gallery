@@ -27,7 +27,6 @@ class MainPage(webapp.RequestHandler):
 		self.response.out.write(template.render(path, {'stylesheet':'gallery'}))
 		
 		extlist = Extension.gql('').fetch(limit=None)
-		
 		for ext in extlist:
 			ext.ratingCount,ext.upvotePercent,ext.downvotePercent = getRatingInfo(ext.extID)
 		
@@ -40,10 +39,13 @@ class MainPage(webapp.RequestHandler):
 class GadgetsPage(webapp.RequestHandler):
 	def get(self):
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
-		self.response.out.write(template.render(path, {}))
+		self.response.out.write(template.render(path, {'stylesheet':'gallery'}))
 		
-		#extlist = Extension.gql('WHERE type = :1', 'gadget').fetch(None)
-		self.response.out.write('[Featured Gadgets]')
+		extlist = Extension.gql('WHERE type = :1','gadget').fetch(limit=None)
+		for ext in extlist:
+			ext.ratingCount,ext.upvotePercent,ext.downvotePercent = getRatingInfo(ext.extID)
+		path = os.path.join(os.path.dirname(__file__), 'templates/gallerylist.html')
+		self.response.out.write(template.render(path, {'extlist':extlist}))
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
@@ -51,8 +53,14 @@ class GadgetsPage(webapp.RequestHandler):
 class RobotsPage(webapp.RequestHandler):
 	def get(self):
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
-		self.response.out.write(template.render(path, {}))
-		self.response.out.write('[Featured Robots]')
+		self.response.out.write(template.render(path, {'stylesheet':'gallery'}))
+		
+		extlist = Extension.gql('WHERE type = :1','robot').fetch(limit=None)
+		for ext in extlist:
+			ext.ratingCount,ext.upvotePercent,ext.downvotePercent = getRatingInfo(ext.extID)
+		path = os.path.join(os.path.dirname(__file__), 'templates/gallerylist.html')
+		self.response.out.write(template.render(path, {'extlist':extlist}))
+		
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
 
