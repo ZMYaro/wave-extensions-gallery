@@ -1,6 +1,6 @@
 application: wave-extensions-gallery
 version: 1
-runtime: python
+runtime: python27
 api_version: 1
 
 handlers:
@@ -10,8 +10,14 @@ handlers:
 - url: /account(/.*)?
   script: accounts.py
 
+- url: /api(/.*)?
+  script: api.py
+
 - url: /dev(/.*)?
   script: dev.py
+
+- url: /docs(/.*)?
+  script: docs.py
 
 - url: /gallery(/.*)?
   script: gallery.py
