@@ -237,6 +237,10 @@ footer a:active {
 #main {
 	padding:0px 8px;
 }
+#main hr {
+	border-style:solid none none;
+	border-color:#C0C0C0;
+}
 
 .formtable {
 	display:block;
@@ -285,6 +289,34 @@ footer a:active {
 	}
 	#main {
 		padding:0px 2px;
+	}
+}
+
+#leftSide {
+	float:left;
+	width:160px;
+}
+#middle {
+	-webkit-box-sizing:border-box;
+	   -moz-box-sizing:border-box;
+	        box-sizing:border-box;
+	width:100%;
+	max-width:720px;
+	padding-left:176px;
+}
+#middle h2 {
+	margin:0px;
+}
+#middle table {
+	width:100%;
+}
+
+@media (max-width:600px) {
+	#leftSide {
+		margin-left:-4px;
+	}
+	#middle {
+		padding-left:168px;
 	}
 }
 
