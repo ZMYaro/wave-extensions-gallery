@@ -5,15 +5,12 @@ import cgi
 import os
 
 from google.appengine.api import users
-from google.appengine.dist import use_library
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
 from datastore import Extension
 from datastore import User
-
-use_library('django', '1.2')
 
 class AccountPage(webapp.RequestHandler):
 	def get(self):
