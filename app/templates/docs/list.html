@@ -1,0 +1,18 @@
+<section id="middle">
+	<h1>Gallery list API</h1>
+	<p>The gallery list API allows for the fetching of lists of extensions.  It is a temporary addition until the search API is completed.</p>
+	<p>Send a request to the following URL:</p>
+	<p><code>GET {{ baseURL }}/api/v0/list.json?<i>parameters</i></code></p>
+	<table border="1">
+		<tr>
+			<th>Parameter</th>
+			<th>Description</th>
+		</tr>
+		<tr>
+			<td><code>type</code></td>
+			<td>The type of extension to list (&ldquo;gadget&rdquo; or &ldquo;robot&rdquo;).  Leaving this blank will return all extension types.</td>
+		</tr>
+	</table>
+	<hr />
+	<p>The response will contain an <i>Array</i> of <i>Objects</i>, each of which has the same properties as a result from the <a href="/docs/info">extension info API</a>.</p>
+</section>

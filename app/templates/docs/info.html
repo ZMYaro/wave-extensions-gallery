@@ -1,0 +1,67 @@
+<section id="middle">
+	<h1>Extension information API</h1>
+	<p>The extension information API allows for the fetching of extension information (who'd've guessed?).</p>
+	<p>To get an extension's information, send a request to the following URL:</p>
+	<p><code>GET {{ baseURL }}/api/v0/info.json?<i>parameters</i></code></p>
+	<table border="1">
+		<tr>
+			<th>Parameter</th>
+			<th>Description</th>
+		</tr>
+		<tr>
+			<td><code>id</code></td>
+			<td>(REQUIRED) The ID of the extension whose information you are requesting</td>
+		</tr>
+	</table>
+	<hr />
+	<p>The response will contain the following properties:</p>
+	<table border="1">
+		<tr>
+			<th>Property</th>
+			<th>Description<th>
+		</tr>
+		<tr>
+			<td><code><i>String</i> id</code></td>
+			<td>The ID of the extension</td>
+		</tr>
+		<tr>
+			<td><code><i>String</i> type</code></td>
+			<td>The type of extension (&ldquo;gadget&rdquo; or &ldquo;robot&rdquo;)</td>
+		</tr>
+		<tr>
+			<td><code><i>Object</i> developer</code></td>
+			<td>
+				<table border="1">
+					<tr>
+						<td><code><i>String</i> email</code></td>
+						<td>The developer's e-mail address</td>
+					</tr>
+					<tr>
+						<td><code><i>String</i> nickname</code></td>
+						<td>The developer's display name</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td><code><i>String</i> title</code></td>
+			<td>The extension's name</td>
+		</tr>
+		<tr>
+			<td><code><i>String</i> description</code></td>
+			<td>The extension's description</td>
+		</tr>
+		<tr>
+			<td><code><i>String</i> iconURL</code></td>
+			<td>The URL of the extension's icon in the gallery</td>
+		</tr>
+		<tr>
+			<td><code><i>String</i> gadgetURL</code></td>
+			<td>The URL of the gadget XML file (if the extension is not a gadget, this is <code>null</code>)</td>
+		</tr>
+		<tr>
+			<td><code><i>String</i> robotAddress</code></td>
+			<td>The wave address of the robot (if the extension is not a robot, this is <code>null</code>)</td>
+		</tr>
+	</table>
+</section>
