@@ -1,12 +1,14 @@
 @charset "UTF-8";
 
 body {
-	background-color:#F1F2F4; /* hsl(210,11%,95%) */
+	/*background-color:#F1F2F4; /* hsl(210,11%,95%) */
+	background-color:#FCFCFC;
 	color:black;
 	font-family:Arial, Helvetica, Roboto, sans-serif;
 	font-size:14px;
 	
-	margin-top:78px;
+	margin:0px;
+	margin-top:68px;
 }
 
 button, select:not([size]), .button {
@@ -102,4 +104,16 @@ input[type="text"]:focus, input[type="search"]:focus, input[type="password"]:foc
 }
 textarea:focus {
 	padding:3px 5px;
+}
+hr {
+	border-style:solid none none;
+	border-color:#E5E5E5;
+}
+#main hr, #leftSide hr {
+	border-color:#C0C0C0;
+}
+
+section h1 {
+	font-size:2em;
+	margin:0em;
 }
