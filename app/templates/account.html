@@ -1,25 +1,27 @@
-<h1 style="margin:0em;">Account - {{ usernickname }}</h1>
-{{ useremail }} - <a href="{{ signouturl }}">Sign out</a>
-<br />
-<br />
-<h3>Your Starred Extensions</h3>
-<table cellpadding="4">
-	<tr>
-		<th><!-- Icon --></th>
-		<th>Title</th>
-		<th>Type</th>
-	</tr>
-	{% for ext in extlist %}
+<section id="main">
+	<h1 style="margin:0em;">Account - {{ usernickname }}</h1>
+	{{ useremail }} - <a href="{{ signouturl }}">Sign out</a>
+	<br />
+	<br />
+	<h3>Your Starred Extensions</h3>
+	<table cellpadding="4">
 		<tr>
-			<td>{% if ext.icon %}<a href="/gallery/info/{{ ext.extID }}"><img src="/gallery/icon/{{ ext.extID}}.png" style="width:24px;height:24px;" /></a>{% endif %}</td>
-			<td><a href="/gallery/info/{{ ext.extID }}">{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</a></td>
-			<td>{% if ext.type %}{{ ext.type }}{% endif %}</td>
+			<th><!-- Icon --></th>
+			<th>Title</th>
+			<th>Type</th>
 		</tr>
-	{% empty %}
-		<tr>
-			<td colspan="3" style="text-align:center;">
-				You have not starred any extensions.  <a href="/gallery">Click here</a> to browse the gallery.
-			</td>
-		</tr>
-	{% endfor %}
-</table>
+		{% for ext in extlist %}
+			<tr>
+				<td>{% if ext.icon %}<a href="/gallery/info/{{ ext.extID }}"><img src="/gallery/icon/{{ ext.extID}}.png" style="width:24px;height:24px;" /></a>{% endif %}</td>
+				<td><a href="/gallery/info/{{ ext.extID }}">{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</a></td>
+				<td>{% if ext.type %}{{ ext.type }}{% endif %}</td>
+			</tr>
+		{% empty %}
+			<tr>
+				<td colspan="3" style="text-align:center;">
+					You have not starred any extensions.  <a href="/gallery">Click here</a> to browse the gallery.
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+</section>

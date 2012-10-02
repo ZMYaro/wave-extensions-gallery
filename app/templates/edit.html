@@ -1,56 +1,58 @@
-<h1>Edit Extension</h1>
-<form method="post" enctype="multipart/form-data">
-	<table class="formtable">
-		<tr>
-			<td>
-				<label for="title">Title:</label>
-			</td>
-			<td>
-				<input type="text" maxlength="500" name="title" id="title" {% if ext.title %}value="{{ ext.title }}"{% endif %} />
-			</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>
-				<label for="type-gadget">
-					<input type="radio" name="type" value="gadget" id="type-gadget"{% if ext.type != "robot" %} checked="checked"{% endif %} />
-					Gadget
-				</label>
-				<label for="type-robot">
-					<input type="radio" name="type" value="robot" id="type-robot"{% if ext.type == "robot" %} checked="checked"{% endif %} />
-					Robot
-				</label>
-			</td>
-		</tr>
-		<tr style="vertical-align:top;">
-			<td style="padding-top:4px;">
-				<label for="description">
-					Description:
-					<br />
-					<small>What does this extension do?  Why should people use it?</small>
-				</label>
-			</td>
-			<td>
-				<textarea name="description" id="description" style="height:10em;">{% if ext.description %}{{ ext.description }}{% endif %}</textarea>
-			</td>
-		</tr>
-		<tr style="vertical-align:top;">
-			<td style="padding-top:6px;">
-				<label for="icon">
-					Icon:
-					<br />
-					<small>128&times;128 PNG</small>
-				</label>
-			</td>
-			<td>
-				<input type="file" name="icon" id="icon" accept="image/png" />
-				{% if ext.icon %}<br /><img src="/gallery/icon/{{ ext.extID }}.png" />{% endif %}
-			</td>
-		<tr>
-			<td></td>
-			<td>
-				<a href="/dev" class="button" title="Discard your changes and return to your developer dashboard">Discard Changes</a>
-				<button type="submit">Save Changes</button>
-			</td>
-	</table>
-</form>
+<section id="main">
+	<h1>Edit Extension</h1>
+	<form method="post" enctype="multipart/form-data">
+		<table class="formtable">
+			<tr>
+				<td>
+					<label for="title">Title:</label>
+				</td>
+				<td>
+					<input type="text" maxlength="500" name="title" id="title" {% if ext.title %}value="{{ ext.title }}"{% endif %} />
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<label for="type-gadget">
+						<input type="radio" name="type" value="gadget" id="type-gadget"{% if ext.type != "robot" %} checked="checked"{% endif %} />
+						Gadget
+					</label>
+					<label for="type-robot">
+						<input type="radio" name="type" value="robot" id="type-robot"{% if ext.type == "robot" %} checked="checked"{% endif %} />
+						Robot
+					</label>
+				</td>
+			</tr>
+			<tr style="vertical-align:top;">
+				<td style="padding-top:4px;">
+					<label for="description">
+						Description:
+						<br />
+						<small>What does this extension do?  Why should people use it?</small>
+					</label>
+				</td>
+				<td>
+					<textarea name="description" id="description" style="height:10em;">{% if ext.description %}{{ ext.description }}{% endif %}</textarea>
+				</td>
+			</tr>
+			<tr style="vertical-align:top;">
+				<td style="padding-top:6px;">
+					<label for="icon">
+						Icon:
+						<br />
+						<small>128&times;128 PNG</small>
+					</label>
+				</td>
+				<td>
+					<input type="file" name="icon" id="icon" accept="image/png" />
+					{% if ext.icon %}<br /><img src="/gallery/icon/{{ ext.extID }}.png" />{% endif %}
+				</td>
+			<tr>
+				<td></td>
+				<td>
+					<a href="/dev" class="button" title="Discard your changes and return to your developer dashboard">Discard Changes</a>
+					<button type="submit">Save Changes</button>
+				</td>
+		</table>
+	</form>
+</section>
