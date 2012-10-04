@@ -242,38 +242,3 @@ footer a:active {
 		font-size:16px;
 	}
 }
-
-.star {
-	background-color:transparent;
-	background-image:url("/static/images/star.png");
-	background-position:0px 0px;
-	border:0px none transparent;
-	display:inline-block;
-	width:24px;
-	height:24px;
-	cursor:pointer;
-}
-.star:hover {
-	background-position:-24px 0px;
-}
-.star:active {
-	background-position:-48px 0px;
-}
-.star.checked {
-	background-position:0px -24px;
-}
-.star.checked:hover {
-	background-position:-24px -24px;
-}
-.star.checked:active {
-	background-position:-48px -24px;
-}
-.star.error {
-	background-position:0px -48px;
-}
-.star.error:hover {
-	background-position:-24px -48px;
-}
-.star.error:active {
-	background-position:-48px -48px;
-}
