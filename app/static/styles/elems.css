@@ -1,14 +1,23 @@
 @charset "UTF-8";
 
+html {
+	height:100%;
+}
 body {
+	min-height:100%;
+	position:relative;
+	-webkit-box-sizing:border-box;
+	   -moz-box-sizing:border-box;
+	        box-sizing:border-box;
+	margin:0px;
+	padding-top:68px;
+	padding-bottom:48px;
+	
 	/*background-color:#F1F2F4; /* hsl(210,11%,95%) */
-	background-color:#FCFCFC;
+	background-color:#FAFBFC;
 	color:black;
 	font-family:Arial, Helvetica, Roboto, sans-serif;
 	font-size:14px;
-	
-	margin:0px;
-	margin-top:68px;
 }
 
 button, select:not([size]), .button {
