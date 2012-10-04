@@ -18,6 +18,22 @@ body {
 	color:black;
 	font-family:Arial, Helvetica, Roboto, sans-serif;
 	font-size:14px;
+	
+	-webkit-transition-property:padding;
+	   -moz-transition-property:padding;
+	    -ms-transition-property:padding;
+	     -o-transition-property:padding;
+	        transition-property:padding;
+	-webkit-transition-duration:0.2s;
+	   -moz-transition-duration:0.2s;
+	    -ms-transition-duration:0.2s;
+	     -o-transition-duration:0.2s;
+	        transition-duration:0.2s;
+	-webkit-transition-timing-function:linear;
+	   -moz-transition-timing-function:linear;
+	    -ms-transition-timing-function:linear;
+	     -o-transition-timing-function:linear;
+	        transition-timing-function:linear;
 }
 
 button, select:not([size]), .button {

@@ -10,7 +10,7 @@ aside[data-side="left"] {
 	margin-right:8px;
 }
 
-@media (max-width:1000px) {
+@media (max-width:900px) {
 	aside, aside[data-side] {
 		float:none;
 		margin:auto;
