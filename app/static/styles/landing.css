@@ -6,6 +6,7 @@ ul.grid {
 }
 ul.grid li {
 	display:inline-block;
+	overflow:hidden;
 	width:47%;
 	height:96px;
 	padding:16px;
@@ -29,7 +30,7 @@ ul.grid li.big {
 }
 
 ul.grid li h1, ul.grid li h2, ul.grid li h3 {
-	margin:0em;
+	margin:0.5em 0em;
 }
 
 @media (max-width:600px) {
