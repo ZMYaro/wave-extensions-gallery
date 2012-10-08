@@ -16,7 +16,7 @@ body {
 	/*background-color:#F1F2F4; /* hsl(210,11%,95%) */
 	background-color:#FAFBFC;
 	color:black;
-	font-family:Arial, Helvetica, Roboto, sans-serif;
+	font-family:Arial, Helvetica, sans-serif;
 	font-size:14px;
 	
 	-webkit-transition-property:padding;
