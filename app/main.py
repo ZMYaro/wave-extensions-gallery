@@ -11,8 +11,8 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 class MainPage(webapp.RequestHandler):
 	def get(self, page):
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
-		self.response.out.write(template.render(path, {}))
-		path = os.path.join(os.path.dirname(__file__), 'templates/index.html')
+		self.response.out.write(template.render(path, {'stylesheet':'landing'}))
+		path = os.path.join(os.path.dirname(__file__), 'templates/landing.html')
 		self.response.out.write(template.render(path, {}))
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
