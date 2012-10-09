@@ -11,7 +11,7 @@ body {
 	        box-sizing:border-box;
 	margin:0px;
 	padding-top:68px;
-	padding-bottom:48px;
+	padding-bottom:72px;
 	
 	/*background-color:#F1F2F4; /* hsl(210,11%,95%) */
 	background-color:#FAFBFC;
@@ -36,7 +36,14 @@ body {
 	        transition-timing-function:linear;
 }
 
-button, select:not([size]), .button {
+a, a:visited {
+	color:#003EA8;
+}
+a:active {
+	color:#CC0000;
+}
+
+button, select:not([size]), .button, .button:visited {
 	background-color:#EDEDED;
 	background-image:-webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#DDDDDD));
 	background-image:-webkit-linear-gradient(top, #FFFFFF, #DDDDDD);
@@ -131,6 +138,7 @@ input[type="text"]:focus, input[type="search"]:focus, input[type="password"]:foc
 textarea:focus {
 	padding:3px 5px;
 }
+
 hr {
 	border-style:solid none none;
 	border-color:#E5E5E5;
