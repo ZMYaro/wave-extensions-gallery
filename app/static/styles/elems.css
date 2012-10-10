@@ -43,7 +43,7 @@ a:active {
 	color:#CC0000;
 }
 
-button, select:not([size]), .button, .button:visited {
+button, select:not([size]), .button {
 	background-color:#EDEDED;
 	background-image:-webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#DDDDDD));
 	background-image:-webkit-linear-gradient(top, #FFFFFF, #DDDDDD);
@@ -65,7 +65,7 @@ button, select:not([size]), .button, .button:visited {
 	   -moz-box-shadow:1px 1px 0px 0px white, inset 1px 1px 0px 0px white;
 	        box-shadow:1px 1px 0px 0px white, inset 1px 1px 0px 0px white;
 	
-	color:black;
+	color:black !important;
 	text-decoration:none;
 	font-family:Arial, Helvetica, sans-serif;
 	font-size:9pt;
