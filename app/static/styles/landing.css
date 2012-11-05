@@ -28,11 +28,20 @@ ul.grid li {
 ul.grid li.big {
 	min-height:256px;
 }
+ul.grid li:not(.big) {
+	white-space:nowrap;
+	white-space:ellipsis;
+}
 
 ul.grid li h1, ul.grid li h2, ul.grid li h3 {
 	margin:0.5em 0em;
 }
 
+@media (min-width:601px) and (max-width:900px) {
+	ul.grid li img {
+		display:none;
+	}
+}
 @media (max-width:600px) {
 	ul.grid li {
 		display:block;
