@@ -12,14 +12,21 @@ class DocPage(webapp.RequestHandler):
 	def get(self,page):
 		if not page or page == '':
 			page = 'index'
+		elif page == 'sidebar':
+			page = '404'
 		else:
 			page = page[1:] # remove the initial slash
+		
+		docPath = 'templates/docs/' + page + '.html'
+		
+		if not os.path.exists(os.path.join(os.path.dirname(__file__), docPath)):
+			docPath = 'templates/docs/404.html'
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 		self.response.out.write(template.render(path, {'title':'Documentation'}))
 		path = os.path.join(os.path.dirname(__file__), 'templates/docs/sidebar.html')
 		self.response.out.write(template.render(path, {}))
-		path = os.path.join(os.path.dirname(__file__), 'templates/docs/' + page + '.html')
+		path = os.path.join(os.path.dirname(__file__), docPath)
 		self.response.out.write(template.render(path, {'baseURL':self.request.host_url}))
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
@@ -34,7 +41,7 @@ class OtherPage(webapp.RequestHandler):
 		self.response.out.write(template.render(path, {}))
 		self.response.set_status(404);
 
-site = webapp.WSGIApplication([('/docs(/\w+)?', DocPage),
+site = webapp.WSGIApplication([('/docs(/.*)?', DocPage),
                                ('/.*', OtherPage)],
                               debug=True)
 
