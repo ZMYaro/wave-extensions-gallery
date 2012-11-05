@@ -11,7 +11,7 @@ body {
 	        box-sizing:border-box;
 	margin:0px;
 	padding-top:68px;
-	padding-bottom:72px;
+	padding-bottom:104px;
 	
 	/*background-color:#F1F2F4; /* hsl(210,11%,95%) */
 	background-color:#FAFBFC;
@@ -103,6 +103,9 @@ button:disabled, select:not([size]):disabled, .button:disabled {
 }
 
 input[type="text"], input[type="search"], input[type="password"], textarea {
+	-webkit-appearance:none;
+	   -moz-appearance:none;
+	
 	padding:2px 10px;
 	
 	border-style:solid;
