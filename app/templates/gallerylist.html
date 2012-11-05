@@ -3,7 +3,7 @@
 	<table>
 	{% for ext in extlist %}
 		<tr>
-			<td><img src="{% if ext.icon %}/gallery/icon/{{ ext.extID}}.png{% else %}/static/images/gadget_icon_128x128.png{% endif %}" style="width:64px;height:64px;" /></td>
+			<td><a href="/gallery/info/{{ ext.extID }}"><img src="{% if ext.icon %}/gallery/icon/{{ ext.extID}}.png{% else %}/static/images/gadget_icon_128x128.png{% endif %}" style="width:64px;height:64px;" /></a></td>
 			<td><a href="/gallery/info/{{ ext.extID }}"><h3>{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</h3></a></td>
 			<td>{% if ext.type %}{{ ext.type }}{% endif %}</td>
 			<td>
