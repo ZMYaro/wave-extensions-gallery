@@ -4,12 +4,15 @@
 import cgi
 import os
 
+from google.appengine.api import search
 from google.appengine.api import users
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
 from datastore import Extension,Rating,User
+
+galleryIndex = search.Index(name='galleryindex')
 
 def getRatingInfo(extID):
 	ratingCount = Rating.gql('WHERE extID = :1 AND value != :2',extID,0).count(limit=None)
@@ -60,6 +63,32 @@ class RobotsPage(webapp.RequestHandler):
 			ext.ratingCount,ext.upvotePercent,ext.downvotePercent = getRatingInfo(ext.extID)
 		path = os.path.join(os.path.dirname(__file__), 'templates/gallerylist.html')
 		self.response.out.write(template.render(path, {'extlist':extlist}))
+		
+		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
+		self.response.out.write(template.render(path, {}))
+
+class SearchHandler(webapp.RequestHandler):
+	def get(self):
+		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
+		self.response.out.write(template.render(path, {'stylesheet':'gallery'}))
+		
+		# Get the query
+		query = self.request.get('q')
+		# Search for the query
+		results = galleryIndex.search(query)
+		# Create a list for the returned extensions
+		extlist = []
+		# Loop over the scored documents
+		for result in results.results:
+			# Do a datastore lookup for each extension ID
+			ext = Extension.gql('WHERE extID = :1', result._doc_id).get()
+			# If the  extension is found, fetch its rating info. and add it to the list
+			if ext:
+				ext.ratingCount,ext.upvotePercent,ext.downvotePercent = getRatingInfo(ext.extID)
+				extlist.append(ext)
+		
+		path = os.path.join(os.path.dirname(__file__), 'templates/gallerylist.html')
+		self.response.out.write(template.render(path, {'query':query,'extlist':extlist}))
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
@@ -136,6 +165,47 @@ class RatingHandler(webapp.RequestHandler):
 				rating.put()
 				self.redirect('/gallery/info/' + extID)
 
+class IndexRebuilder(webapp.RequestHandler):
+	def get(self):
+		user = users.get_current_user()
+		if user:
+			self.response.headers['Content-Type'] = 'text/plain'
+			if users.is_current_user_admin():
+				# Clear the existing index
+				while True:
+					# Get a list of documents populating only the doc_id field and extract the ids.
+					docIDs = [doc.doc_id for doc in galleryIndex.list_documents(ids_only=True)]
+					if not docIDs:
+						break
+					# Remove the documents for the given ids from the Index.
+					galleryIndex.remove(docIDs)
+				
+				extlist = Extension.gql('').fetch(limit=None)
+				ratinglist = Rating.gql('').fetch(limit=None)
+				for ext in extlist:
+					rating = getRatingInfo(ext.extID)[1]
+					doc = search.Document(
+						doc_id=ext.extID,
+						fields=[
+							search.TextField(name='title', value=ext.title),
+							search.TextField(name='description', value=ext.description),
+							search.AtomField(name='type', value=ext.type),
+							search.NumberField(name='rating', value=rating)
+						]
+					)
+					self.response.out.write('Created document for ' + ext.title + ' (' + ext.extID + ')\n')
+					try:
+						galleryIndex.add(doc)
+						self.response.out.write('Successfully added document to index\n')
+					except search.Error:
+						self.response.out.write('Failed to add document to index\n')
+				self.response.out.write('Done!')
+			else:
+				self.response.out.write('Access denied')
+				self.response.set_status(401)
+		else:
+			self.redirect(users.create_login_url(self.request.uri))
+
 class OtherPage(webapp.RequestHandler):
 	def get(self,page):
 		if page == 'info':
@@ -152,9 +222,11 @@ class OtherPage(webapp.RequestHandler):
 site = webapp.WSGIApplication([('/gallery', MainPage),
                                ('/gallery/gadgets', GadgetsPage),
                                ('/gallery/robots', RobotsPage),
+                               ('/gallery/search', SearchHandler),
                                ('/gallery/info/(\w{16})/?', InfoPage),
                                ('/gallery/icon/(\w{16})\.png', IconFetcher),
                                ('/gallery/(up|down|null)vote/(\w{16})/?', RatingHandler),
+                               ('/gallery/rebuildindex', IndexRebuilder),
                                ('/(.*)', OtherPage)],
                               debug=True)
 

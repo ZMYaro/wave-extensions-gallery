@@ -29,6 +29,18 @@
 	        border-bottom-right-radius:3px;
 }
 
+.searchButton {
+	-webkit-box-sizing:border-box;
+	   -moz-box-sizing:border-box;
+	        box-sizing:border-box;
+	
+	margin-left:-31px;
+	padding:0px;
+	-webkit-border-radius:0 12px 12px 0;
+	   -moz-border-radius:0 12px 12px 0;
+	        border-radius:0 12px 12px 0;
+}
+
 
 .star {
 	background-color:transparent;

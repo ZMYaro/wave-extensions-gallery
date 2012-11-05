@@ -49,11 +49,11 @@ header#header {
 	        transition-timing-function:linear;
 }
 header#header * {
-	-webkit-transition-property:font-size,padding,margin;
-	   -moz-transition-property:font-size,padding,margin;
-	    -ms-transition-property:font-size,padding,margin;
-	     -o-transition-property:font-size,padding,margin;
-	        transition-property:font-size,padding,margin;
+	-webkit-transition-property:font-size,margin;
+	   -moz-transition-property:font-size,margin;
+	    -ms-transition-property:font-size,margin;
+	     -o-transition-property:font-size,margin;
+	        transition-property:font-size,margin;
 	-webkit-transition-duration:0.2s;
 	   -moz-transition-duration:0.2s;
 	    -ms-transition-duration:0.2s;
@@ -77,6 +77,9 @@ header#header nav h1 {
 	font-weight:normal;
 	margin-right:8px;
 	margin-top:-2px;
+}
+header#header nav form {
+	display:inline-block;
 }
 
 #message {
@@ -204,6 +207,19 @@ footer a:active {
 		padding:4px 6px;
 		font-size:13px;
 	}
+	header#header nav input[type="search"] {
+		margin-top:1px;
+		padding:3px 28px 3px 8px;
+		font-size:13px;
+		border-radius:16px;
+	}
+	header#header nav input[type="search"]:focus {
+		padding:2px 27px 2px 7px;
+	}
+	header#header nav .searchButton {
+		padding:1px;
+		margin-top:1px;
+	}
 	#main {
 		padding:4px 8px;
 	}
@@ -225,6 +241,15 @@ footer a:active {
 		font-size:16px;
 		margin-top:2px;
 	}
+	header#header nav input[type="search"], header#header nav .searchButton {
+		margin-top:1px;
+	}
+	header#header nav input[type="search"] {
+		padding-right:28px;
+	}
+	header#header nav input[type="search"]:focus {
+		padding-right:27px;
+	}
 	#main {
 		padding:2px 4px;
 	}
@@ -240,5 +265,19 @@ footer a:active {
 	header#header nav a.button {
 		padding:6px 10px;
 		font-size:16px;
+	}
+	header#header nav input[type="search"] {
+		padding:6px 28px 6px 10px;
+		font-size:14px;
+		border-radius:16px;
+	}
+	header#header nav input[type="search"]:focus {
+		padding:5px 27px 5px 9px;
+	}
+	header#header nav .searchButton {
+		padding:4px;
+		-webkit-border-radius:0 16px 16px 0;
+		   -moz-border-radius:0 16px 16px 0;
+		        border-radius:0 16px 16px 0;
 	}
 }

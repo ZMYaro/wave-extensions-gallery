@@ -1,5 +1,5 @@
-<h1>List Of Extensions (temporary)</h1>
 <section id="middle">
+	<h1>{% if query %}Results for &ldquo;{{ query }}&rdquo;{% else %}List Of Extensions{% endif %}</h1>
 	<table>
 	{% for ext in extlist %}
 		<tr>

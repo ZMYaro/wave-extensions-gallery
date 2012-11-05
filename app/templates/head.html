@@ -26,8 +26,11 @@
 				<div class="buttonGroup">
 					<a href="/gallery/gadgets" class="button">Gadgets</a><a href="/gallery/robots" class="button">Robots</a>
 				</div>
-				&nbsp;
 				<a href="/about" class="button">About</a>
+				<form action="/gallery/search" method="GET">
+					<input type="search" placeholder="Search the gallery" name="q" />
+					<button type="submit" class="searchButton"><img src="/static/images/search.png" /></button>
+				</form>
 			</nav>
 		</header>
 		{% if message %}
