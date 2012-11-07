@@ -10,17 +10,28 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 
 class DocPage(webapp.RequestHandler):
 	def get(self,page):
-		if not page or page == '':
-			page = 'index'
+		# Remove trailing slashes, if they exist
+		if page[-1] == '/':
+			self.redirect(self.request.uri[:-1])
+			return
+		
+		if not page:
+			page = ''
 		elif page == 'sidebar':
-			page = '404'
+			page = '404' # sidebar.html exists, but is not a doc
 		else:
-			page = page[1:] # remove the initial slash
+			page = page[1:] # Remove the initial slash
+
 		
 		docPath = 'templates/docs/' + page + '.html'
 		
 		if not os.path.exists(os.path.join(os.path.dirname(__file__), docPath)):
-			docPath = 'templates/docs/404.html'
+			# Perhaps the “page” was a directory?
+			# Check for an index.html
+			docPath = docPath[:-5] + '/index.html'
+			if not os.path.exists(os.path.join(os.path.dirname(__file__), docPath)):
+				# Still not found?  404.
+				docPath = 'templates/docs/404.html'
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 		self.response.out.write(template.render(path, {'title':'Documentation'}))
