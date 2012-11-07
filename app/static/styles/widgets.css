@@ -1,14 +1,19 @@
 /* ---- aside ---- */
 aside {
 	display:block;
+	text-align:center;
+}
+aside[data-side="right"] {
 	float:right;
 	margin-left:8px;
 	margin-right:0px;
+	text-align:left;
 }
 aside[data-side="left"] {
 	float:left;
 	margin-left:0px;
 	margin-right:8px;
+	text-align:left;
 }
 
 @media (max-width:900px) {
