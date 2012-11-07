@@ -11,7 +11,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 class DocPage(webapp.RequestHandler):
 	def get(self,page):
 		# Remove trailing slashes, if they exist
-		if page[-1] == '/':
+		if self.request.uri[-1] == '/':
 			self.redirect(self.request.uri[:-1])
 			return
 		
