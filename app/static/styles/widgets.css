@@ -1,3 +1,28 @@
+/* ---- aside ---- */
+aside {
+	display:block;
+	float:right;
+	margin-left:8px;
+	margin-right:0px;
+}
+aside[data-side="left"] {
+	float:left;
+	margin-left:0px;
+	margin-right:8px;
+}
+
+@media (max-width:900px) {
+	aside, aside[data-side] {
+		float:none;
+		margin:auto;
+		text-align:center;
+	}
+	aside, aside > iframe, aside > img {
+		max-width:100%;
+	}
+}
+
+/* ---- button groups ---- */
 .buttonGroup {
 	white-space:nowrap;
 	display:inline-block;
@@ -29,6 +54,7 @@
 	        border-bottom-right-radius:3px;
 }
 
+/* ---- search buttons ---- */
 .searchButton {
 	-webkit-box-sizing:border-box;
 	   -moz-box-sizing:border-box;
@@ -41,7 +67,7 @@
 	        border-radius:0 12px 12px 0;
 }
 
-
+/* ---- star buttons ---- */
 .star {
 	background-color:transparent;
 	background-image:url("/static/images/star.png");
