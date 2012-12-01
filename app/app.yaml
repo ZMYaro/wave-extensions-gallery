@@ -4,6 +4,9 @@ runtime: python27
 api_version: 1
 threadsafe: false
 
+builtins:
+- remote_api: on
+
 handlers:
 - url: /static
   static_dir: static
