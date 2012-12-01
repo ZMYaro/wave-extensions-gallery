@@ -37,7 +37,7 @@
 </section>
 <section id="middle">
 	<h2>{{ ext.title }}</h2>
-	<small>By {{ devname }}</small>
+	{% if devname %}<small>By {{ devname }}</small>{% endif %}
 	<p id="description">{{ ext.description }}</p>
 </section>
 

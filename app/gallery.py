@@ -135,13 +135,15 @@ class InfoPage(webapp.RequestHandler):
 		else:
 			templateVars = {
 				'ext':ext,
-				'devname':ext.developer.nickname(),
 				'upvotePercent':0,
 				'downvotePercent':0,
 				'ratingCount':0,
 				'userRating':0,
 				'starred':False
 			}
+			
+			if ext.developer:
+				templateVars['devname'] = ext.developer.nickname()
 			
 			templateVars['ratingCount'],templateVars['upvotePercent'],templateVars['downvotePercent'] = getRatingInfo(extID)
 			
