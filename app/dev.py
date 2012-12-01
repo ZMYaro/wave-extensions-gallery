@@ -66,7 +66,7 @@ class EditExt(webapp.RequestHandler):
 			
 			ext = Extension.gql('WHERE extID = :1', extID).get()
 			if ext:
-				if ext.developer == user:
+				if ext.developer == user or users.is_current_user_admin():
 					path = os.path.join(os.path.dirname(__file__), 'templates/edit.html')
 					self.response.out.write(template.render(path, {'ext':ext}))
 				else:
@@ -87,7 +87,7 @@ class EditExt(webapp.RequestHandler):
 		if user:
 			error = None
 			ext = Extension.gql('WHERE extID = :1', extID).get()
-			if ext and ext.developer == user:
+			if ext and ext.developer == user or users.is_current_user_admin():
 				if self.request.get('title'):
 					ext.title = self.request.get('title')
 				else:
