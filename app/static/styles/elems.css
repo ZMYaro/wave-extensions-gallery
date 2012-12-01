@@ -66,6 +66,7 @@ button, select:not([size]), .button {
 	        box-shadow:1px 1px 0px 0px white, inset 1px 1px 0px 0px white;
 	
 	color:black !important;
+	text-shadow:1px 1px 0px white;
 	text-decoration:none;
 	font-family:Arial, Helvetica, sans-serif;
 	font-size:9pt;
