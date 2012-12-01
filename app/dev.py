@@ -90,6 +90,8 @@ class EditExt(webapp.RequestHandler):
 			if ext and ext.developer == user:
 				if self.request.get('title'):
 					ext.title = self.request.get('title')
+				else:
+					ext.title = ''
 				
 				if self.request.get('type'):
 					ext.type = self.request.get('type')
@@ -98,9 +100,13 @@ class EditExt(webapp.RequestHandler):
 				
 				if self.request.get('description'):
 					ext.description = self.request.get('description')
+				else:
+					ext.description = ''
 				
 				if self.request.get('category'):
 					ext.category = self.request.get('category')
+				else:
+					ext.category = 'other'
 				
 				if self.request.get('icon'):
 					iconFile = self.request.get('icon')
