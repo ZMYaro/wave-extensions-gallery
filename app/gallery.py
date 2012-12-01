@@ -87,6 +87,8 @@ class SearchHandler(webapp.RequestHandler):
 				ext.ratingCount,ext.upvotePercent,ext.downvotePercent = getRatingInfo(ext.extID)
 				extlist.append(ext)
 		
+		query = u'Results for \u201c' + query + u'\u201d'
+		
 		path = os.path.join(os.path.dirname(__file__), 'templates/gallerylist.html')
 		self.response.out.write(template.render(path, {'query':query,'extlist':extlist}))
 		
