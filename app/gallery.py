@@ -67,6 +67,33 @@ class RobotsPage(webapp.RequestHandler):
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
 
+class CategoryPage(webapp.RequestHandler):
+	def get(self, category):
+		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
+		self.response.out.write(template.render(path, {'stylesheet':'gallery'}))
+		
+		# Search for extensions in the category
+		results = galleryIndex.search('category:' + category)
+		
+		# Create a list for the returned extensions
+		extlist = []
+		# Loop over the scored documents
+		for result in results.results:
+			# Do a datastore lookup for each extension ID
+			ext = Extension.gql('WHERE extID = :1', result._doc_id).get()
+			# If the  extension is found, fetch its rating info. and add it to the list
+			if ext:
+				ext.ratingCount,ext.upvotePercent,ext.downvotePercent = getRatingInfo(ext.extID)
+				extlist.append(ext)
+		
+		category = category[0].upper() + category[1:].lower()
+		
+		path = os.path.join(os.path.dirname(__file__), 'templates/gallerylist.html')
+		self.response.out.write(template.render(path, {'query':category,'extlist':extlist}))
+		
+		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
+		self.response.out.write(template.render(path, {}))
+
 class SearchHandler(webapp.RequestHandler):
 	def get(self):
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
@@ -225,6 +252,7 @@ class OtherPage(webapp.RequestHandler):
 site = webapp.WSGIApplication([('/gallery', MainPage),
                                ('/gallery/gadgets', GadgetsPage),
                                ('/gallery/robots', RobotsPage),
+                               ('/gallery/category/(\w+)', CategoryPage),
                                ('/gallery/search', SearchHandler),
                                ('/gallery/info/(\w{16})/?', InfoPage),
                                ('/gallery/icon/(\w{16})\.png', IconFetcher),
