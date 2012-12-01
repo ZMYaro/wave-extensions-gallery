@@ -190,6 +190,7 @@ class IndexRebuilder(webapp.RequestHandler):
 							search.TextField(name='title', value=ext.title),
 							search.TextField(name='description', value=ext.description),
 							search.AtomField(name='type', value=ext.type),
+							search.AtomField(name='category', value=ext.category),
 							search.NumberField(name='rating', value=rating)
 						]
 					)

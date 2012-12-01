@@ -47,12 +47,37 @@
 					<input type="file" name="icon" id="icon" accept="image/png" />
 					{% if ext.icon %}<br /><img src="/gallery/icon/{{ ext.extID }}.png" />{% endif %}
 				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="category">Category:</label>
+				</td>
+				<td>
+					<select name="category" id="category">
+						<option value="other"       {% if ext.category == 'other' %}        selected{% endif %}>Other</option>
+						<option value="game"        {% if ext.category == 'game' %}         selected{% endif %}>Game</option>
+						<option value="image"       {% if ext.category == 'image' %}        selected{% endif %}>Image</option>
+						<option value="map"         {% if ext.category == 'map' %}          selected{% endif %}>Map</option>
+						<option value="music"       {% if ext.category == 'music' %}        selected{% endif %}>Music</option>
+						<option value="productivity"{% if ext.category == 'productivity' %} selected{% endif %}>Productivity</option>
+						<option value="search"      {% if ext.category == 'search' %}       selected{% endif %}>Search</option>
+						<option value="team"        {% if ext.category == 'team' %}         selected{% endif %}>Team</option>
+						<option value="time"        {% if ext.category == 'time' %}         selected{% endif %}>Time</option>
+						<option value="travel"      {% if ext.category == 'travel' %}       selected{% endif %}>Travel</option>
+						<option value="utility"     {% if ext.category == 'utility' %}      selected{% endif %}>Utility</option>
+						<option value="video"       {% if ext.category == 'video' %}        selected{% endif %}>Video</option>
+						<option value="voice"       {% if ext.category == 'voice' %}        selected{% endif %}>Voice</option>
+						<option value="voting"      {% if ext.category == 'voting' %}       selected{% endif %}>Voting</option>
+					</select>
+				</td>
+			</tr>
 			<tr>
 				<td></td>
 				<td>
 					<a href="/dev" class="button" title="Discard your changes and return to your developer dashboard">Discard Changes</a>
 					<button type="submit">Save Changes</button>
 				</td>
+			</tr>
 		</table>
 	</form>
 </section>

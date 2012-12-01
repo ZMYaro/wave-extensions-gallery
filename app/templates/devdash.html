@@ -8,6 +8,7 @@
 			<th><!-- Icon --></th>
 			<th>Title</th>
 			<th>Type</th>
+			<th>Category</th>
 			<th>ID</th>
 			<th></th>
 		</tr>
@@ -16,6 +17,7 @@
 				<td>{% if ext.icon %}<img src="/gallery/icon/{{ ext.extID }}.png" style="width:24px;height:24px;" />{% endif %}</td>
 				<td>{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</td>
 				<td>{% if ext.type %}{{ ext.type }}{% endif %}</td>
+				<td>{% if ext.category %}{{ ext.category }}{% else %}other{% endif %}</td>
 				<td>{{ ext.extID }}</td>
 				<td>
 					<a href="/dev/edit/{{ ext.extID }}" class="button">Edit</a>

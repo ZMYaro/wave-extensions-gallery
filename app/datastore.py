@@ -9,6 +9,7 @@ class Extension(db.Model):
 	developer = db.UserProperty()
 	title = db.StringProperty()
 	description = db.TextProperty()
+	category = db.StringProperty()
 	icon = db.BlobProperty()
 	gadgetURL = db.LinkProperty()
 	robotAddress = db.EmailProperty()

@@ -99,6 +99,9 @@ class EditExt(webapp.RequestHandler):
 				if self.request.get('description'):
 					ext.description = self.request.get('description')
 				
+				if self.request.get('category'):
+					ext.category = self.request.get('category')
+				
 				if self.request.get('icon'):
 					iconFile = self.request.get('icon')
 					icon = images.Image(image_data = iconFile)
