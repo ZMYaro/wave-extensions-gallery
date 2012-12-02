@@ -4,6 +4,7 @@
 import cgi
 import hashlib
 import os
+import re
 
 from google.appengine.api import images
 from google.appengine.api import users
@@ -57,10 +58,14 @@ class EditExt(webapp.RequestHandler):
 			templateArgs = {'title':'Edit Extension'}
 			if self.request.get('msg'):
 				if self.request.get('msg') == 'success':
-					templateArgs['message'] = 'Your extension has been successfully updated.'
+					templateArgs['message'] = 'Your extension has been successfully updated. <a href=\"/gallery/info/' + extID + '\">Click here</a> to see your extension in the gallery.'
 				elif self.request.get('msg') == 'icontype':
 					templateArgs['message'] = 'The icon you uploaded was not a PNG.  Your extension\'s other properties have been successfully updated.'
-				templateArgs['message'] += '  <a href=\"/dev\">Click here</a> to return to the developer dashboard.</a>'
+				elif self.request.get('msg') == 'badurl':
+					templateArgs['message'] = 'The gadget URL you entered was improperly formatted and therefore not saved.  Your extension\'s other properties have been successfully updated.'
+				elif self.request.get('msg') == 'badaddress':
+					templateArgs['message'] = 'The address you entered was improperly formatted and therefore not saved.  Your extension\'s other properties have been successfully updated.'
+				templateArgs['message'] += '<br /><a href=\"/dev\">Click here</a> to return to the developer dashboard.</a>'
 			path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 			self.response.out.write(template.render(path, templateArgs))
 			
@@ -97,6 +102,24 @@ class EditExt(webapp.RequestHandler):
 					ext.type = self.request.get('type')
 				else: # default to gadget if no type is sent
 					ext.type = 'gadget'
+				
+				if ext.type == 'gadget':
+					if self.request.get('gadgetURL'):
+						url = self.request.get('gadgetURL')
+						if not re.match('^https?:\/\/', url):
+							url = 'http://' + url
+						if not re.match('^https?:\/\/.+\..+', url):
+							error = 'badurl'
+						ext.gadgetURL = url
+				elif ext.type == 'robot':
+					if self.request.get('robotAddress'):
+						address = self.request.get('robotAddress')
+						if not re.match('.+@.+\..+', address):
+							error = 'badaddress'
+						else:
+							ext.robotAddress = self.request.get('robotAddress')
+					else:
+						ext.robotAddress = ''
 				
 				if self.request.get('description'):
 					ext.description = self.request.get('description')
