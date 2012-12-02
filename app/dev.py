@@ -111,15 +111,18 @@ class EditExt(webapp.RequestHandler):
 						if not re.match('^https?:\/\/.+\..+', url):
 							error = 'badurl'
 						ext.gadgetURL = url
-				elif ext.type == 'robot':
+				else:
+					ext.gadgetURL = None
+				
+				if ext.type == 'robot':
 					if self.request.get('robotAddress'):
 						address = self.request.get('robotAddress')
 						if not re.match('.+@.+\..+', address):
 							error = 'badaddress'
 						else:
 							ext.robotAddress = self.request.get('robotAddress')
-					else:
-						ext.robotAddress = ''
+				else:
+					ext.robotAddress = None
 				
 				if self.request.get('description'):
 					ext.description = self.request.get('description')
