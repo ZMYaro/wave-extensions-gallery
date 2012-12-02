@@ -36,7 +36,7 @@
 					<label for="gadgetURL">Gadget URL:</label>
 				</td>
 				<td>
-					<input type="text" name="gadgetURL" id="gadgetURL" value="{{ ext.gadgetURL }}" placeholder="http://domain.ext/path/to/gadget.xml" />
+					<input type="text" name="gadgetURL" id="gadgetURL"{% if ext.gadgetURL %} value="{{ ext.gadgetURL }}"{% endif %} placeholder="http://domain.ext/path/to/gadget.xml" />
 				</td>
 			</tr>
 			<tr id="robotInput"{% if ext.type != 'robot' %} style="display: none;"{% endif %}>
@@ -44,7 +44,7 @@
 					<label for="robotAddress">Robot Address:</label>
 				</td>
 				<td>
-					<input type="text" name="robotAddress" id="robotAddress" value="{{ ext.robotAddress }}" placeholder="address@domain.ext" />
+					<input type="text" name="robotAddress" id="robotAddress"{% if ext.robotAddress %} value="{{ ext.robotAddress }}"{% endif %} placeholder="address@domain.ext" />
 				</td>
 			</tr>
 			<tr style="vertical-align:top;">
