@@ -39,6 +39,13 @@
 	<h2>{{ ext.title }}</h2>
 	{% if devname %}<small>By {{ devname }}</small>{% endif %}
 	<p id="description">{{ ext.description }}</p>
+	{% if ext.gadgetURL %}
+	<p>
+		Gadget URL: {{ ext.gadgetURL }}
+		<br >
+		<a href="/docs/help/addgadget?gadgetURL={{ ext.gadgetURL }}" target="_blank">What should I do with this?</a>
+	</p>
+	{% endif %}
 </section>
 
 
