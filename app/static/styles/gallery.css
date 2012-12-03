@@ -5,6 +5,10 @@
 	margin:auto;
 }
 
+#description {
+	white-space:pre-wrap;
+}
+
 .rating {
 	height:8px;
 	/*width:90%;*/
