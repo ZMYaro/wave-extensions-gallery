@@ -65,7 +65,7 @@ class EditExt(webapp.RequestHandler):
 					templateArgs['message'] = 'The gadget URL you entered was improperly formatted and therefore not saved.  Your extension\'s other properties have been successfully updated.'
 				elif self.request.get('msg') == 'badaddress':
 					templateArgs['message'] = 'The address you entered was improperly formatted and therefore not saved.  Your extension\'s other properties have been successfully updated.'
-				templateArgs['message'] += '<br /><a href=\"/dev\">Click here</a> to return to the developer dashboard.</a>'
+				templateArgs['message'] += '<br /><a href=\"/dev\">Click here</a> to return to your developer dashboard.</a>'
 			path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 			self.response.out.write(template.render(path, templateArgs))
 			
