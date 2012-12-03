@@ -30,22 +30,26 @@
 .rating .dislikes {
 	float:left;
 	background-color:#E80000;
-	   -webkit-border-top-left-radius:3px;
-	-webkit-border-bottom-left-radius:3px;
-	       -moz-border-radius-topleft:3px;
-	    -moz-border-radius-bottomleft:3px;
-	           border-top-left-radius:3px;
-	        border-bottom-left-radius:3px;
+	-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#E81008', endColorstr='#A01008', GradientType=0)";
+	    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E81008', endColorstr='#A01008', GradientType=0);
+	background-image:-webkit-gradient(linear, left top, left bottom, from(#E81008), to(#A01008));
+	background-image:-webkit-linear-gradient(#E81008, #A01008);
+	background-image:   -moz-linear-gradient(#E81008, #A01008);
+	background-image:    -ms-linear-gradient(#E81008, #A01008);
+	background-image:     -o-linear-gradient(#E81008, #A01008);
+	background-image:        linear-gradient(#E81008, #A01008);
 }
 .rating .likes {
 	float:right;
 	background-color:#00A000;
-	   -webkit-border-top-right-radius:3px;
-	-webkit-border-bottom-right-radius:3px;
-	       -moz-border-radius-topright:3px;
-	    -moz-border-radius-bottomright:3px;
-	           border-top-right-radius:3px;
-	        border-bottom-right-radius:3px;
+	-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#00B000', endColorstr='#008000', GradientType=0)";
+	    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00B000', endColorstr='#008000', GradientType=0);
+	background-image:-webkit-gradient(linear, left top, left bottom, from(#00B000), to(#008000));
+	background-image:-webkit-linear-gradient(#00B000,#008000);
+	background-image:   -moz-linear-gradient(#00B000,#008000);
+	background-image:    -ms-linear-gradient(#00B000,#008000);
+	background-image:     -o-linear-gradient(#00B000,#008000);
+	background-image:        linear-gradient(#00B000,#008000);
 }
 .ratingCount {
 	font-size:smaller;
