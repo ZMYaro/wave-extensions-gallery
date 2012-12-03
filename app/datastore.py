@@ -17,7 +17,6 @@ class Extension(db.Model):
 class Rating(db.Model):
 	value = db.IntegerProperty() # -1 || 1
 	extID = db.StringProperty()
-	voter = db.UserProperty() # the user who submitted this rating
 	user = db.UserProperty() # the user who submitted this rating
 
 class User(db.Model):
