@@ -182,10 +182,10 @@ class RatingHandler(webapp.RequestHandler):
 			if Extension.gql('WHERE extID = :1',extID).count(limit=1) == 0:
 				self.error(404)
 			else:
-				rating = Rating.gql('WHERE voter = :1 AND extID = :2',user,extID).get()
+				rating = Rating.gql('WHERE user = :1 AND extID = :2',user,extID).get()
 				if not rating:
 					rating = Rating()
-					rating.voter = user
+					rating.user = user
 					rating.extID = extID
 				if value == 'up':
 					rating.value = 1
@@ -251,6 +251,19 @@ class OtherPage(webapp.RequestHandler):
 			self.response.out.write(template.render(path, {}))
 			self.response.set_status(404);
 
+class RatingMigrator(webapp.RequestHandler):
+	def get(self):
+		self.response.headers['Content-Type'] = 'text/plain'
+		ratings = Rating.gql('').fetch(limit=None)
+		for rating in ratings:
+			if rating.user == None and rating.voter != None:
+				rating.user = rating.voter
+				rating.voter = None
+				rating.put()
+				self.response.out.write('Migrated ' + rating.user.email() + '\'s rating of extension ' + rating.extID + '\n')
+		self.response.out.write('Done migrating ratings.')
+		
+
 site = webapp.WSGIApplication([('/gallery', MainPage),
                                ('/gallery/gadgets', GadgetsPage),
                                ('/gallery/robots', RobotsPage),
@@ -260,6 +273,7 @@ site = webapp.WSGIApplication([('/gallery', MainPage),
                                ('/gallery/icon/(\w{16})\.png', IconFetcher),
                                ('/gallery/(up|down|null)vote/(\w{16})/?', RatingHandler),
                                ('/gallery/rebuildindex', IndexRebuilder),
+                               ('/gallery/migrateratings', RatingMigrator),
                                ('/(.*)', OtherPage)],
                               debug=True)
 
