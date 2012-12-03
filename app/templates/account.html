@@ -9,12 +9,17 @@
 			<th><!-- Icon --></th>
 			<th>Title</th>
 			<th>Type</th>
+			<th>URL/Address</th>
 		</tr>
 		{% for ext in extlist %}
 			<tr>
 				<td>{% if ext.icon %}<a href="/gallery/info/{{ ext.extID }}"><img src="/gallery/icon/{{ ext.extID}}.png" style="width:24px;height:24px;" /></a>{% endif %}</td>
 				<td><a href="/gallery/info/{{ ext.extID }}">{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</a></td>
 				<td>{% if ext.type %}{{ ext.type }}{% endif %}</td>
+				<td>
+					{% if ext.type == 'gadget' %}{{ ext.gadgetURL }}{% endif %}
+					{% if ext.type == 'robot' %}{{ ext.robotAddress }}{% endif %}
+				</td>
 			</tr>
 		{% empty %}
 			<tr>
@@ -24,4 +29,6 @@
 			</tr>
 		{% endfor %}
 	</table>
+	<h3>Geek stuff</h3>
+	<a href="/dev">Go to your developer dashboard</a>
 </section>
