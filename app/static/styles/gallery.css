@@ -9,6 +9,12 @@
 	white-space:pre-wrap;
 }
 
+.ratingButton {
+	padding:3px;
+	font-size:32px;
+	font-weight:bold;
+}
+
 .rating {
 	height:8px;
 	/*width:90%;*/
