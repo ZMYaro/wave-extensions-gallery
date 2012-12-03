@@ -42,6 +42,9 @@ a, a:visited {
 a:active {
 	color:#CC0000;
 }
+a img {
+	border:0 none transparent;
+}
 
 button, select:not([size]), .button {
 	background-color:#EDEDED;
