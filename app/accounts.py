@@ -61,7 +61,8 @@ class StarAdder(webapp.RequestHandler):
 				userEntry = User()
 				userEntry.user = user
 				userEntry.starred = []
-			userEntry.starred.append(extID)
+			if extID not in userEntry.starred:
+				userEntry.starred.append(extID)
 			userEntry.put()
 			self.redirect('/gallery/info/' + extID)
 		else:
