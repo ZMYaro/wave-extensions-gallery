@@ -186,7 +186,7 @@ footer a:active {
 .formtable textarea {
 	width:100%;
 }
-.formtable input[type="text"] {
+.formtable input[type="text"], .formtable input[type="email"], .formtable input[type="url"] {
 	width:100%;
 	max-width:400px;
 }
