@@ -31,6 +31,11 @@ class RobotsTxt(webapp.RequestHandler):
 		self.response.headers['Content-Type'] = 'text/plain'
 		self.response.out.write('User-agent: *\nDisallow: /')
 
+class GooglePlusRedirect(webapp.RequestHandler):
+	def get(self):
+		self.response.set_status(301)
+		self.redirect('http://plus.google.com/111054500428067493902')
+
 class OtherPage(webapp.RequestHandler):
 	def get(self, page):
 		if page[:6] == 'robots':
@@ -49,6 +54,7 @@ class OtherPage(webapp.RequestHandler):
 site = webapp.WSGIApplication([('/(index\.html)?', MainPage),
                                ('/about', AboutPage),
                                ('/robots.txt', RobotsTxt),
+                               ('/\+/?', GooglePlusRedirect),
                                ('/(.*)', OtherPage)],
                               debug=True)
 
