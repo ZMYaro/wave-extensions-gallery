@@ -214,7 +214,17 @@ class IndexRebuilder(webapp.RequestHandler):
 				extlist = Extension.gql('').fetch(limit=None)
 				ratinglist = Rating.gql('').fetch(limit=None)
 				for ext in extlist:
+					if ext.title == None:
+						ext.title = ''
+					if ext.description == None:
+						ext.description = ''
+					if ext.type == None:
+						ext.type = 'gadget'
+					if ext.category == None:
+						ext.category = 'other'
+					
 					rating = getRatingInfo(ext.extID)[1]
+					
 					doc = search.Document(
 						doc_id=ext.extID,
 						fields=[
