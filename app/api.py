@@ -24,18 +24,21 @@ def getRatingInfo(extID):
 
 def extToDict(ext,baseURL=''):
 	ext = {
-		'id':ext.extID,
-		'type':ext.type,
-		'developer':{
+		'id': ext.extID,
+		'type': ext.type,
+		'developer': ({
 			'email':ext.developer.email(),
-			'nickname':ext.developer.nickname(),
+			'nickname':ext.developer.nickname()
 			#'user_id':ext.developer.user_id()
-		},
-		'title':ext.title,
-		'description':ext.description,
-		'iconURL':baseURL + '/gallery/icon/' + ext.extID + '.png',
-		'gadgetURL':ext.gadgetURL,
-		'robotAddress':ext.robotAddress
+		} if ext.developer != None else {      # Do not attempt to get
+			'email': None,                     # developer properties
+			'nickname': None                   # if developer is None.
+		}),
+		'title': ext.title,
+		'description': ext.description,
+		'iconURL': baseURL + '/gallery/icon/' + ext.extID + '.png',
+		'gadgetURL': ext.gadgetURL,
+		'robotAddress': ext.robotAddress
 	}
 	return ext
 
@@ -51,17 +54,26 @@ class ListHandler(webapp.RequestHandler):
 				#	self.response.out.write('{\"error\":\"Parameter \\\"type\\\" must be \\\"gadget\\\" or \\\"robot\\\"\"}')
 				#	self.response.set_status(404)
 				#	return
-				extlist = Extension.gql('WHERE type = :1',self.request.get('type')).fetch(limit=None)
+				extList = Extension.gql('WHERE type = :1',self.request.get('type')).fetch(limit=None)
 			else:
-				extlist = Extension.gql('').fetch(limit=None)
-			for i in range(len(extlist)):
-				# change the extension to a dictionary, which can then be converted to JSON
-				extlist[i] = extToDict(extlist[i],self.request.host_url)
-				# add rating information to each Extension object
-				extlist[i]['ratingCount'],extlist[i]['upvotePercent'],extlist[i]['downvotePercent'] = getRatingInfo(extlist[i]['id'])
+				extList = Extension.gql('').fetch(limit=None)
 			
-			# convert the dictionary to JSON
-			self.response.out.write(json.dumps(extlist))
+			extDictList = []
+			for i in range(len(extList)):
+				# Skip extensions without IDs (this case should never happen)
+				if extList[i].extID == None:
+					continue
+				# Change the extension to a dictionary, which can then be converted to JSON
+				extList[i] = extToDict(extList[i],self.request.host_url)
+				# Add rating information to each Extension object
+				extList[i]['ratingCount'],extList[i]['upvotePercent'],extList[i]['downvotePercent'] = getRatingInfo(extList[i]['id'])
+				# Add the dictionary to the dictionary list
+				# (I used a separate list here to avoid confusions that could
+				# occur when removing invalid items from the original list.)
+				extDictList.append(extList[i])
+			
+			# Convert the dictionaries to JSON
+			self.response.out.write(json.dumps(extDictList))
 		else:
 			self.response.headers['Content-Type'] = 'text/plain'
 			self.response.out.write('Error 404')
