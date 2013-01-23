@@ -47,6 +47,9 @@ header#header {
 	    -ms-transition-timing-function:linear;
 	     -o-transition-timing-function:linear;
 	        transition-timing-function:linear;
+	
+	/* Keep the header on top of other fixed elements */
+	z-index: 2;
 }
 header#header * {
 	-webkit-transition-property:font-size,margin;
@@ -144,16 +147,37 @@ footer a:active {
 	   -moz-box-sizing:border-box;
 	        box-sizing:border-box;
 	
-	float:left;
+	/*float:left;*/
+	position: fixed;
+	left: 0;
+	top: 68px;
 	width:168px;
-	min-height:100%;
-	padding:8px;
+	bottom: 0;
+	padding: 8px;
+	padding-bottom: 104px;
+	overflow: auto;
 	
 	background-color:#E4F0FD;
 	-webkit-box-shadow:inset 0px 0px 0px 1px white;
 	   -moz-box-shadow:inset 0px 0px 0px 1px white;
 	        box-shadow:inset 0px 0px 0px 1px white;
 	border-right:1px solid #93ABC3;
+	
+	-webkit-transition-property: top;
+	   -moz-transition-property: top;
+	    -ms-transition-property: top;
+	     -o-transition-property: top;
+	        transition-property: top;
+	-webkit-transition-duration: 0.2s;
+	   -moz-transition-duration: 0.2s;
+	    -ms-transition-duration: 0.2s;
+	     -o-transition-duration: 0.2s;
+	        transition-duration: 0.2s;
+	-webkit-transition-timing-function: linear;
+	   -moz-transition-timing-function: linear;
+	    -ms-transition-timing-function: linear;
+	     -o-transition-timing-function: linear;
+	        transition-timing-function: linear;
 }
 #middle {
 	-webkit-box-sizing:border-box;
@@ -223,6 +247,9 @@ footer a:active {
 	#main {
 		padding:4px 8px;
 	}
+	#leftSide {
+		top: 48px;
+	}
 	#middle {
 		padding-top:8px;
 		padding-left:176px;
@@ -255,6 +282,7 @@ footer a:active {
 	}
 	#leftSide {
 		/*margin-left:-4px;*/
+		top: 32px;
 	}
 	#middle {
 		padding-top:4px;
