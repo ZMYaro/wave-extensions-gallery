@@ -12,7 +12,7 @@
 		</tr>
 	</table>
 	<hr />
-	<div style="text-align:center;">
+	<div style="text-align: center;">
 		<a href="/gallery/downvote/{{ ext.extID }}" class="button ratingButton{% if userRating == -1 %} active{% endif %}" style="color: #A01008 !important;">&#8722;1</a>
 		<a href="/gallery/nullvote/{{ ext.extID }}" class="button ratingButton{% if userRating == 0 %} active{% endif %}">&#177;0</a>
 		<a href="/gallery/upvote/{{ ext.extID }}"   class="button ratingButton{% if userRating == 1 %} active{% endif %}" style="color: #008000 !important;">+1</a>
@@ -23,17 +23,27 @@
 		<div class="ratingCount">{% if ratingCount %}{{ ratingCount }}{% else %}0{% endif %} rating{% if ratingCount != 1 %}s{% endif %}</div>
 	</div>
 	<hr />
-	<!-- +1 button -->
-	<div class="g-plusone" data-size="medium"></div>
-	<br />
-	<!-- Like button -->
-	<div class="fb-like" data-send="false" data-layout="button_count" data-width="160" data-show-faces="false"></div>
-	<br />
-	<!-- Tweet button -->
-	<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+	<div style="margin-left: 32px;">
+		<!-- +1 button -->
+		<div class="g-plusone" data-size="medium"></div>
+		<br />
+		<!-- Like button -->
+		<div class="fb-like" data-send="false" data-layout="button_count" data-width="160" data-show-faces="false"></div>
+		<br />
+		<!-- Tweet button -->
+		<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+	</div>
 	<hr />
-	Category: <a href="/gallery/category/{{ ext.category }}">{{ ext.category }}</a>
-	<br />
+	<div style="text-align: center;">
+		Category: <a href="/gallery/category/{{ ext.category }}">{{ ext.category }}</a>
+	</div>
+	{% if userIsDev %}
+		<div style="text-align: center;">
+			<hr />
+			<!-- Edit button (shown if the extension is owned by the user) -->
+			<a href="/dev/edit/{{ ext.extID }}" class="button" style="margin: auto;">Edit extension</a>
+		</div>
+	{% endif %}
 </section>
 <section id="middle">
 	<h2>{{ ext.title }}</h2>

@@ -139,7 +139,8 @@ class InfoPage(webapp.RequestHandler):
 				'downvotePercent':0,
 				'ratingCount':0,
 				'userRating':0,
-				'starred':False
+				'starred':False,
+				'userIsDev':False
 			}
 			
 			if ext.developer:
@@ -156,6 +157,9 @@ class InfoPage(webapp.RequestHandler):
 				userRating = Rating.gql('WHERE user = :1 AND extID = :2',user,extID).get()
 				if userRating:
 					templateVars['userRating'] = userRating.value
+				
+				if user == ext.developer:
+					templateVars['userIsDev'] = True
 			
 			path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 			self.response.out.write(template.render(path, {'title':ext.title,'stylesheet':'gallery'}))
