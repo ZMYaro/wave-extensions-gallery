@@ -96,11 +96,14 @@ header#header nav form {
 	-webkit-box-shadow:2px 2px 6px 2px rgba(0,0,0,0.4);
 	   -moz-box-shadow:2px 2px 6px 2px rgba(0,0,0,0.4);
 	        box-shadow:2px 2px 6px 2px rgba(0,0,0,0.4);
+	text-align: center;
 	vertical-align:middle;
 	width:640px;
-	margin:-16px auto;
+	margin:-16px auto -27px;
 	padding:6px 6px 5px;
 	position:relative;
+	
+	z-index: 3;
 }
 #message .closeButton {
 	float:right;
