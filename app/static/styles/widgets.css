@@ -65,7 +65,7 @@ aside[data-side="left"] {
 	   -moz-box-sizing:border-box;
 	        box-sizing:border-box;
 	
-	margin-left:-31px;
+	/*margin-left:-31px;*/
 	padding:0px;
 	-webkit-border-radius:0 12px 12px 0;
 	   -moz-border-radius:0 12px 12px 0;

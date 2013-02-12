@@ -84,6 +84,18 @@ header#header nav h1 {
 header#header nav form {
 	display:inline-block;
 }
+header#header nav input[type="search"] {
+	   -webkit-border-top-right-radius: 0;
+		   -moz-border-radius-topright: 0;
+		       border-top-right-radius: 0;
+	-webkit-border-bottom-right-radius: 0;
+		-moz-border-radius-bottomright: 0;
+		    border-bottom-right-radius: 0;
+}
+header#header nav .searchButton {
+	margin-left: -2px;
+	border-left-width: 0;
+}
 
 #message {
 	background-color:#FEFDD5;
@@ -238,7 +250,12 @@ footer a:active {
 		margin-top:1px;
 		padding:3px 28px 3px 8px;
 		font-size:13px;
-		border-radius:16px;
+		   -webkit-border-top-left-radius: 16px;
+		       -moz-border-radius-topleft: 16px;
+		           border-top-left-radius: 16px;
+		-webkit-border-bottom-left-radius: 16px;
+		    -moz-border-radius-bottomleft: 16px;
+		        border-bottom-left-radius: 16px;
 	}
 	header#header nav input[type="search"]:focus {
 		padding:2px 27px 2px 7px;
@@ -300,7 +317,12 @@ footer a:active {
 	header#header nav input[type="search"] {
 		padding:6px 28px 6px 10px;
 		font-size:14px;
-		border-radius:16px;
+		   -webkit-border-top-left-radius: 16px;
+		       -moz-border-radius-topleft: 16px;
+		           border-top-left-radius: 16px;
+		-webkit-border-bottom-left-radius: 16px;
+		    -moz-border-radius-bottomleft: 16px;
+		        border-bottom-left-radius: 16px;
 	}
 	header#header nav input[type="search"]:focus {
 		padding:5px 27px 5px 9px;
