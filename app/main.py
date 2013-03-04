@@ -20,7 +20,7 @@ class MainPage(webapp.RequestHandler):
 class AboutPage(webapp.RequestHandler):
 	def get(self):
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
-		self.response.out.write(template.render(path, {'title':'About','stylesheet':'about'}))
+		self.response.out.write(template.render(path, {'title':'About'}))
 		path = os.path.join(os.path.dirname(__file__), 'templates/about.html')
 		self.response.out.write(template.render(path, {}))
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
