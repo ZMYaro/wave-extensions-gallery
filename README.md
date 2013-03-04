@@ -53,3 +53,14 @@ This app is meant to be an index of and (in the case of gadgets) storage for wav
 5. On Windows, replace the file path in step 3 of “Running the app” with wherever you unzipped the files
 
 **Note that using Git makes it much easier to keep your copy of the files up-to-date
+
+--------
+
+### Credits
+
+* The WEG uses a [Python](http://python.org) backend running on [Google App Engine](https://developers.google.com/appengine).
+* Created, coded, and maintained by [Zachary “Gamer_Z.” Yaro](http://zmyaro.com).
+* Modified [open-source wave logo](http://www.waveprotocol.org/logo) created by [Jérémy Naegel](https://plus.google.com/110860203879684078598).
+* Portions of the site are modifications based on work created and [shared by Google](http://code.google.com/policies.html) and used according to terms described in the [Creative Commons 3.0 Attribution License](http://creativecommons.org/licenses/by/3.0).
+* [Python Markdown implementation](https://pypi.python.org/pypi/Markdown) created by Waylan Limberg.
+* GitHub-Flavored Markdown Python implementation by [Christian Oudard](https://gist.github.com/christian-oudard/457617), [mvasilkov](https://gist.github.com/mvasilkov/710689), and [Matt Westcott](https://gist.github.com/gasman/856894).
