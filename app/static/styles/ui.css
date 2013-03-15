@@ -170,7 +170,8 @@ footer a:active {
 	bottom: 0;
 	padding: 8px;
 	padding-bottom: 104px;
-	overflow: auto;
+	/*overflow: auto;*/
+	overflow: hidden; /* Scrolling disabled because the scrollbar was causing display issues. */
 	
 	background-color:#E4F0FD;
 	-webkit-box-shadow:inset 0px 0px 0px 1px white;
