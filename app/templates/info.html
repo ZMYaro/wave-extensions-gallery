@@ -13,9 +13,9 @@
 	</table>
 	<hr />
 	<div style="text-align: center;">
-		<a href="/gallery/downvote/{{ ext.extID }}" class="button ratingButton{% if userRating == -1 %} active{% endif %}" title="Downvote" style="color: #A01008 !important;">&#8722;1</a>
-		<a href="/gallery/nullvote/{{ ext.extID }}" class="button ratingButton{% if userRating == 0 %} active{% endif %}" title="No vote">&#177;0</a>
-		<a href="/gallery/upvote/{{ ext.extID }}"   class="button ratingButton{% if userRating == 1 %} active{% endif %}" title="Upvote" style="color: #008000 !important;">+1</a>
+		<a href="/gallery/downvote/{{ ext.extID }}" class="button ratingButton{% if userRating == -1 %} active{% endif %}" title="Downvote" style="color: #A01008 !important;"><img src="/static/images/downvote.png" alt="&#8722;1" /></a>
+		<a href="/gallery/nullvote/{{ ext.extID }}" class="button ratingButton{% if userRating == 0 %} active{% endif %}" title="No vote"><img src="/static/images/nullvote.png" alt="&#177;0" /></a>
+		<a href="/gallery/upvote/{{ ext.extID }}"   class="button ratingButton{% if userRating == 1 %} active{% endif %}" title="Upvote" style="color: #008000 !important;"><img src="/static/images/upvote.png" alt="+1" /></a>
 		<div class="rating">
 			<div class="dislikes"{% if downvotePercent %}style="width:{{ downvotePercent }}%;"{% endif %}></div>
 			<div class="likes"{% if upvotePercent %}style="width:{{ upvotePercent }}%;"{% endif %}></div>

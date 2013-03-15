@@ -10,9 +10,12 @@
 }
 
 .ratingButton {
-	padding:3px;
-	font-size:32px;
+	padding: 3px;
+	/*font-size: 32px;*/
 	font-weight:bold;
+}
+.ratingButton img {
+	margin-bottom: -3px;
 }
 
 .rating {
