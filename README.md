@@ -5,7 +5,19 @@ This app is meant to be an index of and (in the case of gadgets) storage for wav
 (Note: This has not all been implemented, but it will be.)
 
 --------
+###External libraries
 
+These allow extension descriptions to be rendered properly.  This assumes you have already cloned 
+
+####Python Markdown
+1. Download Waylan Limberg's Python Markdown implementation from https://pypi.python.org/pypi/Markdown
+2. Put the “markdown” folder from the .zip or .tar.gz in wave-extensions-gallery/app
+
+####GitHub-Flavored Markdown
+1. Download https://gist.github.com/smutch/1454175
+2. Put the “gfm.py” file in wave-extensions-gallery/app.
+
+--------
 ###Running the app locally (Linux)
 
 ####Getting dependencies
@@ -15,6 +27,7 @@ This app is meant to be an index of and (in the case of gadgets) storage for wav
 
 ####Getting the files
 1. In a terminal, clone the repository: `git clone git@github.com:zmyaro/wave-extensions-gallery.git`
+2. Follow the steps in the section above to get the necessary external libraries
 
 ####Running the app
 1. `cd path/to/wave-extensions-gallery`
@@ -22,7 +35,6 @@ This app is meant to be an index of and (in the case of gadgets) storage for wav
 3. The app should now be running locally, accessible at localhost:8080
 
 --------
-
 ###Running the app locally (Windows, with GitHub)
 
 ####Getting dependencies
@@ -34,6 +46,7 @@ This app is meant to be an index of and (in the case of gadgets) storage for wav
 1. Open GitHub for Windows and sign in with your GitHub account
 2. Go to http://github.com/zmyaro/wave-extensions-gallery and sign in with the same account
 3. Click the “Clone in Windows” button; GitHub for Windows should automatically download the files
+2. Follow the steps in the section above to get the necessary external libraries
 
 ####Running the app
 1. Open Google App Engine Launcher (installed with the App Engine SDK)
@@ -43,7 +56,6 @@ This app is meant to be an index of and (in the case of gadgets) storage for wav
 5. The app should now be running locally, accessible at localhost:8080
 
 --------
-
 ###Running the app locally without using Git
 
 1. Go to http://github.com/zmyaro/wave-extensions-gallery
