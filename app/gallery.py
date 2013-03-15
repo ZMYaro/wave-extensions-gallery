@@ -149,7 +149,7 @@ class InfoPage(webapp.RequestHandler):
 				'upvotePercent':0,
 				'downvotePercent':0,
 				'ratingCount':0,
-				'userRating':0,
+				'userRating':None,
 				'starred':False,
 				'userIsDev':False
 			}
@@ -168,6 +168,8 @@ class InfoPage(webapp.RequestHandler):
 				userRating = Rating.gql('WHERE user = :1 AND extID = :2',user,extID).get()
 				if userRating:
 					templateVars['userRating'] = userRating.value
+				else:
+					templateVars['userRating'] = 0 # Every user's default vote is zero
 				
 				if user == ext.developer:
 					templateVars['userIsDev'] = True
