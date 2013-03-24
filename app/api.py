@@ -11,7 +11,7 @@ from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
 from datastore import Extension,Rating,User
-from gallery import getRatingInfo
+from gallery import getRatingInfo,searchFor
 
 def extToDict(ext,baseURL=''):
 	ext = {
@@ -37,7 +37,25 @@ def error404(response):
 	response.headers['Content-Type'] = 'text/plain'
 	response.out.write('Error 404')
 	response.set_status(404)
-	
+
+def createExtDictList(extList,baseURL=''):
+	# Create a list for the dictionaries
+	extDictList = []
+	# Loop over all the Extensions
+	for i in range(len(extList)):
+		# Skip extensions without IDs (this case should never happen)
+		if extList[i].extID == None:
+			continue
+		# Change the extension to a dictionary, which can then be converted to JSON
+		extList[i] = extToDict(extList[i],baseURL)
+		# Add rating information to each Extension object
+		extList[i]['ratingCount'],extList[i]['upvotePercent'],extList[i]['downvotePercent'] = getRatingInfo(extList[i]['id'])
+		# Add the dictionary to the dictionary list
+		# (I used a separate list here to avoid confusions that could
+		# occur when removing invalid items from the original list.)
+		extDictList.append(extList[i])
+	# Return the list of dictionaries
+	return extDictList
 
 class ListHandler(webapp.RequestHandler):
 	def get(self,format):
@@ -55,21 +73,26 @@ class ListHandler(webapp.RequestHandler):
 			else:
 				extList = Extension.gql('').fetch(limit=None)
 			
-			extDictList = []
-			for i in range(len(extList)):
-				# Skip extensions without IDs (this case should never happen)
-				if extList[i].extID == None:
-					continue
-				# Change the extension to a dictionary, which can then be converted to JSON
-				extList[i] = extToDict(extList[i],self.request.host_url)
-				# Add rating information to each Extension object
-				extList[i]['ratingCount'],extList[i]['upvotePercent'],extList[i]['downvotePercent'] = getRatingInfo(extList[i]['id'])
-				# Add the dictionary to the dictionary list
-				# (I used a separate list here to avoid confusions that could
-				# occur when removing invalid items from the original list.)
-				extDictList.append(extList[i])
+			# Turn the list of Extensions into a list of dictionaries
+			extDictList = createExtDictList(extList,self.request.host_url)
+			# Convert the dictionaries to JSON and print it
+			self.response.out.write(json.dumps(extDictList))
+		else:
+			error404(self.response)
+
+class SearchHandler(webapp.RequestHandler):
+	def get(self,format):
+		if format == 'json':
+			# set the type to JSON
+			self.response.headers['Content-Type'] = 'application/json'
 			
-			# Convert the dictionaries to JSON
+			# Get the query
+			query = self.request.get('q')
+			# Get the search results
+			extList = searchFor(query)
+			# Turn the list of Extensions into a list of dictionaries
+			extDictList = createExtDictList(extList,self.request.host_url)
+			# Convert the dictionaries to JSON and print it
 			self.response.out.write(json.dumps(extDictList))
 		else:
 			error404(self.response)
@@ -109,7 +132,7 @@ class OtherPage(webapp.RequestHandler):
 
 site = webapp.WSGIApplication([('/api/v0/list.(\w+)', ListHandler),
                                ('/api/v0/info.(\w+)', ExtInfo),
-                               #('/api/v1/search.(\w+)', SearchHandler),
+                               ('/api/v0/search.(\w+)', SearchHandler),
                                ('/.*', OtherPage)],
                               debug=True)
 
