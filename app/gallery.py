@@ -25,8 +25,8 @@ def getRatingInfo(extID):
 		upvotePercent = Rating.gql('WHERE extID = :1 AND value = :2',extID,1).count(limit=None) * 1.0 / ratingCount * 100
 		downvotePercent = 100 - upvotePercent
 	else:
-		upvotePercent = 0
-		downvotePercent = 0
+		upvotePercent = 0.0
+		downvotePercent = 0.0
 	return ratingCount,upvotePercent,downvotePercent
 
 class MainPage(webapp.RequestHandler):
