@@ -29,6 +29,22 @@ def getRatingInfo(extID):
 		downvotePercent = 0.0
 	return ratingCount,upvotePercent,downvotePercent
 
+def searchFor(query):
+	# Search for the query
+	results = galleryIndex.search(query)
+	# Create a list for the returned extensions
+	extlist = []
+	# Loop over the scored documents
+	for result in results.results:
+		# Do a datastore lookup for each extension ID
+		ext = Extension.gql('WHERE extID = :1', result._doc_id).get()
+		# If the  extension is found, fetch its rating info. and add it to the list
+		if ext:
+			ext.ratingCount,ext.upvotePercent,ext.downvotePercent = getRatingInfo(ext.extID)
+			extlist.append(ext)
+	
+	return extlist
+
 class MainPage(webapp.RequestHandler):
 	def get(self):
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
@@ -106,18 +122,7 @@ class SearchHandler(webapp.RequestHandler):
 		
 		# Get the query
 		query = self.request.get('q')
-		# Search for the query
-		results = galleryIndex.search(query)
-		# Create a list for the returned extensions
-		extlist = []
-		# Loop over the scored documents
-		for result in results.results:
-			# Do a datastore lookup for each extension ID
-			ext = Extension.gql('WHERE extID = :1', result._doc_id).get()
-			# If the  extension is found, fetch its rating info. and add it to the list
-			if ext:
-				ext.ratingCount,ext.upvotePercent,ext.downvotePercent = getRatingInfo(ext.extID)
-				extlist.append(ext)
+		extlist = searchFor(query)
 		
 		query = u'Results for \u201c' + query + u'\u201d'
 		
