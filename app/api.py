@@ -11,16 +11,7 @@ from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
 from datastore import Extension,Rating,User
-
-def getRatingInfo(extID):
-	ratingCount = Rating.gql('WHERE extID = :1 AND value != :2',extID,0).count(limit=None)
-	if ratingCount > 0: # prevent dividing by zero; the percents already default to zero
-		upvotePercent = Rating.gql('WHERE extID = :1 AND value = :2',extID,1).count(limit=None) * 1.0 / ratingCount * 100
-		downvotePercent = 100 - upvotePercent
-	else:
-		upvotePercent = 0.0
-		downvotePercent = 0.0
-	return ratingCount,upvotePercent,downvotePercent
+from gallery import getRatingInfo
 
 def extToDict(ext,baseURL=''):
 	ext = {
@@ -41,6 +32,12 @@ def extToDict(ext,baseURL=''):
 		'robotAddress': ext.robotAddress
 	}
 	return ext
+
+def error404(response):
+	response.headers['Content-Type'] = 'text/plain'
+	response.out.write('Error 404')
+	response.set_status(404)
+	
 
 class ListHandler(webapp.RequestHandler):
 	def get(self,format):
@@ -75,9 +72,7 @@ class ListHandler(webapp.RequestHandler):
 			# Convert the dictionaries to JSON
 			self.response.out.write(json.dumps(extDictList))
 		else:
-			self.response.headers['Content-Type'] = 'text/plain'
-			self.response.out.write('Error 404')
-			self.response.set_status(404)
+			error404(self.response)
 
 class ExtInfo(webapp.RequestHandler):
 	def get(self,format):
@@ -106,15 +101,11 @@ class ExtInfo(webapp.RequestHandler):
 			# convert the dictionary to JSON
 			self.response.out.write(json.dumps(ext))
 		else:
-			self.response.headers['Content-Type'] = 'text/plain'
-			self.response.out.write('Error 404')
-			self.response.set_status(404)
+			error404(self.response)
 
 class OtherPage(webapp.RequestHandler):
 	def get(self):
-		self.response.headers['Content-Type'] = 'text/plain'
-		self.response.out.write('Error 404')
-		self.response.set_status(404)
+		error404(self.response)
 
 site = webapp.WSGIApplication([('/api/v0/list.(\w+)', ListHandler),
                                ('/api/v0/info.(\w+)', ExtInfo),
