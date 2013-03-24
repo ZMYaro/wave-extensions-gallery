@@ -1,0 +1,18 @@
+<section id="middle">
+	<h1>Search API</h1>
+	<p>The search API allows for the fetching of search results from the gallery.</p>
+	<p>Send a request to the following URL:</p>
+	<p><code>GET {{ baseURL }}/api/v0/search.json?<i>parameters</i></code></p>
+	<table border="1">
+		<tr>
+			<th>Parameter</th>
+			<th>Description</th>
+		</tr>
+		<tr>
+			<td><code>q</code></td>
+			<td>The search query.  This can be any query a user could type into the search box on the Wave Extensions Gallery site.</td>
+		</tr>
+	</table>
+	<hr />
+	<p>The response will contain an <i>Array</i> of <i>Objects</i>, each of which has the same properties as a result from the <a href="/docs/info">extension info API</a>.</p>
+</section>
