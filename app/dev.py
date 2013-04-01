@@ -58,14 +58,14 @@ class EditExt(webapp.RequestHandler):
 			templateArgs = {'title':'Edit Extension'}
 			if self.request.get('msg'):
 				if self.request.get('msg') == 'success':
-					templateArgs['message'] = 'Your extension has been successfully updated. <a href=\"/gallery/info/' + extID + '\">Click here</a> to see your extension in the gallery.'
+					templateArgs['message'] = 'Your extension has been successfully updated.   You can stay here, <a href=\"/gallery/info/' + extID + '\">see your extension in the gallery</a>, or '
 				elif self.request.get('msg') == 'icontype':
-					templateArgs['message'] = 'The icon you uploaded was not a PNG.  Your extension\'s other properties have been successfully updated.'
+					templateArgs['message'] = 'The icon you uploaded was not a PNG.  Your extension\'s other properties have been successfully updated.  You can stay here or '
 				elif self.request.get('msg') == 'badurl':
-					templateArgs['message'] = 'The gadget URL you entered was improperly formatted and therefore not saved.  Your extension\'s other properties have been successfully updated.'
+					templateArgs['message'] = 'The gadget URL you entered was improperly formatted and therefore not saved.  Your extension\'s other properties have been successfully updated.  You can stay here or '
 				elif self.request.get('msg') == 'badaddress':
-					templateArgs['message'] = 'The address you entered was improperly formatted and therefore not saved.  Your extension\'s other properties have been successfully updated.'
-				templateArgs['message'] += '<br /><a href=\"/dev\">Click here</a> to return to your developer dashboard.</a>'
+					templateArgs['message'] = 'The address you entered was improperly formatted and therefore not saved.  Your extension\'s other properties have been successfully updated.  You can stay here or '
+				templateArgs['message'] += '<a href=\"/dev\">return to your developer dashboard.</a>'
 			path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 			self.response.out.write(template.render(path, templateArgs))
 			
