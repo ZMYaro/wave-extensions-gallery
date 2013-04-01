@@ -227,7 +227,7 @@ class IndexRebuilder(webapp.RequestHandler):
 				# Clear the existing index
 				while True:
 					# Get a list of documents populating only the doc_id field and extract the ids.
-					docIDs = [doc.doc_id for doc in galleryIndex.list_documents(ids_only=True)]
+					docIDs = [doc.doc_id for doc in galleryIndex.get_range(limit=None,ids_only=True)]
 					if not docIDs:
 						break
 					# Remove the documents for the given ids from the Index.
@@ -259,7 +259,7 @@ class IndexRebuilder(webapp.RequestHandler):
 					)
 					self.response.out.write('Created document for ' + ext.title + ' (' + ext.extID + ')\n')
 					try:
-						galleryIndex.add(doc)
+						galleryIndex.put(doc)
 						self.response.out.write('Successfully added document to index\n')
 					except search.Error:
 						self.response.out.write('Failed to add document to index\n')
