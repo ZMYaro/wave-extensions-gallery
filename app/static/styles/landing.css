@@ -26,7 +26,7 @@ ul.grid li {
 	        box-shadow:inset 1px 1px 6px 0px rgba(0,0,0,0.2);
 }
 ul.grid li.big {
-	min-height:256px;
+	min-height: 192px;
 }
 ul.grid li:not(.big) {
 	white-space:nowrap;
