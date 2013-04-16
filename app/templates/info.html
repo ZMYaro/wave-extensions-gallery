@@ -17,10 +17,10 @@
 		<a href="/gallery/nullvote/{{ ext.extID }}" class="button ratingButton{% if userRating == 0 %} active{% endif %}" title="No vote"><img src="/static/images/nullvote.png" alt="&#177;0" /></a>
 		<a href="/gallery/upvote/{{ ext.extID }}"   class="button ratingButton{% if userRating == 1 %} active{% endif %}" title="Upvote" style="color: #008000 !important;"><img src="/static/images/upvote.png" alt="+1" /></a>
 		<div class="rating">
-			<div class="dislikes"{% if downvotePercent %}style="width:{{ downvotePercent }}%;"{% endif %}></div>
-			<div class="likes"{% if upvotePercent %}style="width:{{ upvotePercent }}%;"{% endif %}></div>
+			<div class="dislikes"{% if ext.downvotePercentage %}style="width:{{ ext.downvotePercentage }}%;"{% endif %}></div>
+			<div class="likes"{% if ext.upvotePercentage %}style="width:{{ ext.upvotePercentage }}%;"{% endif %}></div>
 		</div>
-		<div class="ratingCount">{% if ratingCount %}{{ ratingCount }}{% else %}0{% endif %} rating{% if ratingCount != 1 %}s{% endif %}</div>
+		<div class="ratingCount">{% if ext.ratingCount %}{{ ext.ratingCount }}{% else %}0{% endif %} rating{% if ext.ratingCount != 1 %}s{% endif %}</div>
 	</div>
 	<hr />
 	<div style="margin-left: 32px;">

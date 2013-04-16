@@ -8,7 +8,7 @@ import re
 
 from google.appengine.api import images
 from google.appengine.api import users
-from google.appengine.ext import ndb
+from google.appengine.ext import db
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
@@ -141,7 +141,7 @@ class EditExt(webapp.RequestHandler):
 						error = 'icontype'
 					else:
 						iconFile = images.resize(iconFile, 128, 128)
-						ext.icon = ndb.Blob(iconFile)
+						ext.icon = db.Blob(iconFile)
 				
 				ext.put()
 				

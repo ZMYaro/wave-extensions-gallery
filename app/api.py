@@ -11,7 +11,7 @@ from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
 from datastore import Extension,Rating,User
-from gallery import getRatingInfo,searchFor
+from gallery import searchFor
 
 def extToDict(ext,baseURL=''):
 	ext = {
@@ -29,7 +29,11 @@ def extToDict(ext,baseURL=''):
 		'description': ext.description,
 		'iconURL': baseURL + '/gallery/icon/' + ext.extID + '.png',
 		'gadgetURL': ext.gadgetURL,
-		'robotAddress': ext.robotAddress
+		'robotAddress': ext.robotAddress,
+		'rating': ext.rating,
+		'ratingCount': ext.ratingCount,
+		'upvotePercentage': ext.upvotePercentage,
+		'downvotePercentage': ext.downvotePercentage
 	}
 	return ext
 
@@ -48,8 +52,7 @@ def createExtDictList(extList,baseURL=''):
 			continue
 		# Change the extension to a dictionary, which can then be converted to JSON
 		extList[i] = extToDict(extList[i],baseURL)
-		# Add rating information to each Extension object
-		extList[i]['ratingCount'],extList[i]['upvotePercent'],extList[i]['downvotePercent'] = getRatingInfo(extList[i]['id'])
+		
 		# Add the dictionary to the dictionary list
 		# (I used a separate list here to avoid confusions that could
 		# occur when removing invalid items from the original list.)
@@ -118,8 +121,6 @@ class ExtInfo(webapp.RequestHandler):
 			
 			# change the extension to a dictionary, which can then be converted to JSON
 			ext = extToDict(ext,self.request.host_url)
-			# add rating information to each Extension object
-			ext['ratingCount'],ext['upvotePercent'],ext['downvotePercent'] = getRatingInfo(ext['id'])
 			
 			# convert the dictionary to JSON
 			self.response.out.write(json.dumps(ext))

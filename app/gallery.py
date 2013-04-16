@@ -17,21 +17,9 @@ import gfm
 
 from datastore import Extension,Rating,User
 
-galleryIndex = search.Index(name='galleryindex')
-
-def getRatingInfo(extID):
-	ratingCount = Rating.gql('WHERE extID = :1 AND value != :2',extID,0).count(limit=None)
-	if ratingCount > 0: # prevent dividing by zero; the percents already default to zero
-		upvotePercent = Rating.gql('WHERE extID = :1 AND value = :2',extID,1).count(limit=None) * 1.0 / ratingCount * 100
-		downvotePercent = 100 - upvotePercent
-	else:
-		upvotePercent = 0.0
-		downvotePercent = 0.0
-	return ratingCount,upvotePercent,downvotePercent
-
 def searchFor(query):
 	# Search for the query
-	results = galleryIndex.search(query)
+	results = search.Index(name='galleryindex').search(query)
 	# Create a list for the returned extensions
 	extlist = []
 	# Loop over the scored documents
@@ -40,7 +28,6 @@ def searchFor(query):
 		ext = Extension.gql('WHERE extID = :1', result._doc_id).get()
 		# If the  extension is found, fetch its rating info. and add it to the list
 		if ext:
-			ext.ratingCount,ext.upvotePercent,ext.downvotePercent = getRatingInfo(ext.extID)
 			extlist.append(ext)
 	
 	return extlist
@@ -51,8 +38,6 @@ class MainPage(webapp.RequestHandler):
 		self.response.out.write(template.render(path, {'stylesheet':'gallery'}))
 		
 		extlist = Extension.gql('').fetch(limit=None)
-		for ext in extlist:
-			ext.ratingCount,ext.upvotePercent,ext.downvotePercent = getRatingInfo(ext.extID)
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/gallerylist.html')
 		self.response.out.write(template.render(path, {'extlist':extlist}))
@@ -66,8 +51,7 @@ class GadgetsPage(webapp.RequestHandler):
 		self.response.out.write(template.render(path, {'stylesheet':'gallery'}))
 		
 		extlist = Extension.gql('WHERE type = :1','gadget').fetch(limit=None)
-		for ext in extlist:
-			ext.ratingCount,ext.upvotePercent,ext.downvotePercent = getRatingInfo(ext.extID)
+		
 		path = os.path.join(os.path.dirname(__file__), 'templates/gallerylist.html')
 		self.response.out.write(template.render(path, {'extlist':extlist}))
 		
@@ -80,8 +64,7 @@ class RobotsPage(webapp.RequestHandler):
 		self.response.out.write(template.render(path, {'stylesheet':'gallery'}))
 		
 		extlist = Extension.gql('WHERE type = :1','robot').fetch(limit=None)
-		for ext in extlist:
-			ext.ratingCount,ext.upvotePercent,ext.downvotePercent = getRatingInfo(ext.extID)
+		
 		path = os.path.join(os.path.dirname(__file__), 'templates/gallerylist.html')
 		self.response.out.write(template.render(path, {'extlist':extlist}))
 		
@@ -94,18 +77,16 @@ class CategoryPage(webapp.RequestHandler):
 		self.response.out.write(template.render(path, {'stylesheet':'gallery'}))
 		
 		# Search for extensions in the category
-		results = galleryIndex.search('category:' + category)
+		extlist = Extension.gql('WHERE category = :1',category).fetch(limit=None)
+		#results = search.Index(name='galleryindex').search('category:' + category)
 		
 		# Create a list for the returned extensions
-		extlist = []
+		#extlist = []
 		# Loop over the scored documents
-		for result in results.results:
+		#for result in results.results:
 			# Do a datastore lookup for each extension ID
-			ext = Extension.gql('WHERE extID = :1', result._doc_id).get()
-			# If the  extension is found, fetch its rating info. and add it to the list
-			if ext:
-				ext.ratingCount,ext.upvotePercent,ext.downvotePercent = getRatingInfo(ext.extID)
-				extlist.append(ext)
+		#	ext = Extension.gql('WHERE extID = :1', result._doc_id).get()
+			# If the  extension is found, and add it to the list
 		
 		category = category[0].upper() + category[1:].lower()
 		
@@ -151,9 +132,6 @@ class InfoPage(webapp.RequestHandler):
 			# set other template vars to their default values.
 			templateVars = {
 				'ext':ext,
-				'upvotePercent':0,
-				'downvotePercent':0,
-				'ratingCount':0,
 				'userRating':None,
 				'starred':False,
 				'userIsDev':False
@@ -161,8 +139,6 @@ class InfoPage(webapp.RequestHandler):
 			
 			if ext.developer:
 				templateVars['devname'] = ext.developer.nickname()
-			
-			templateVars['ratingCount'],templateVars['upvotePercent'],templateVars['downvotePercent'] = getRatingInfo(extID)
 			
 			user = users.get_current_user()
 			if user:
@@ -218,58 +194,6 @@ class RatingHandler(webapp.RequestHandler):
 				rating.put()
 				self.redirect('/gallery/info/' + extID)
 
-class IndexRebuilder(webapp.RequestHandler):
-	def get(self):
-		user = users.get_current_user()
-		if user:
-			self.response.headers['Content-Type'] = 'text/plain'
-			if users.is_current_user_admin():
-				# Clear the existing index
-				while True:
-					# Get a list of documents populating only the doc_id field and extract the ids.
-					docIDs = [doc.doc_id for doc in galleryIndex.get_range(limit=None,ids_only=True)]
-					if not docIDs:
-						break
-					# Remove the documents for the given ids from the Index.
-					galleryIndex.remove(docIDs)
-				
-				extlist = Extension.gql('').fetch(limit=None)
-				ratinglist = Rating.gql('').fetch(limit=None)
-				for ext in extlist:
-					if ext.title == None:
-						ext.title = ''
-					if ext.description == None:
-						ext.description = ''
-					if ext.type == None:
-						ext.type = 'gadget'
-					if ext.category == None:
-						ext.category = 'other'
-					
-					rating = getRatingInfo(ext.extID)[1]
-					
-					doc = search.Document(
-						doc_id=ext.extID,
-						fields=[
-							search.TextField(name='title', value=ext.title),
-							search.TextField(name='description', value=ext.description),
-							search.AtomField(name='type', value=ext.type),
-							search.AtomField(name='category', value=ext.category),
-							search.NumberField(name='rating', value=rating)
-						]
-					)
-					self.response.out.write('Created document for ' + ext.title + ' (' + ext.extID + ')\n')
-					try:
-						galleryIndex.put(doc)
-						self.response.out.write('Successfully added document to index\n')
-					except search.Error:
-						self.response.out.write('Failed to add document to index\n')
-				self.response.out.write('Done!')
-			else:
-				self.response.out.write('Access denied')
-				self.response.set_status(401)
-		else:
-			self.redirect(users.create_login_url(self.request.uri))
-
 class OtherPage(webapp.RequestHandler):
 	def get(self,page):
 		if page == 'info':
@@ -291,7 +215,6 @@ site = webapp.WSGIApplication([('/gallery', MainPage),
                                ('/gallery/info/(\w{16})/?', InfoPage),
                                ('/gallery/icon/(\w{16})\.png', IconFetcher),
                                ('/gallery/(up|down|null)vote/(\w{16})/?', RatingHandler),
-                               ('/gallery/rebuildindex', IndexRebuilder),
                                ('/(.*)', OtherPage)],
                               debug=True)
 

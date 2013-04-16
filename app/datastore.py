@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from google.appengine.api import search
 from google.appengine.ext import ndb
 
 class Extension(ndb.Model):
@@ -13,11 +14,84 @@ class Extension(ndb.Model):
 	icon = ndb.BlobProperty()
 	gadgetURL = ndb.StringProperty()
 	robotAddress = ndb.StringProperty()
+		
+	def _post_put_hook(self,future):
+		if self.title == None:
+			self.title = ''
+		if self.description == None:
+			self.description = ''
+		if self.type == None:
+			self.type = 'gadget'
+		if self.category == None:
+			self.category = 'other'
+		
+		doc = search.Document(
+			doc_id=self.extID,
+			fields=[
+				search.TextField(name='title', value=self.title),
+				search.TextField(name='description', value=self.description),
+				search.AtomField(name='type', value=self.type),
+				search.AtomField(name='category', value=self.category),
+				search.NumberField(name='rating', value=self.rating)
+			]
+		)
+		search.Index(name='galleryindex').put(doc)
+	
+	def getRatingCount(self):
+		return Rating.gql('WHERE extID = :1 AND value != :2',self.extID,0).count(limit=None)
+	
+	def getRating(self):
+		ratingCount = Rating.gql('WHERE extID = :1 AND value != :2',self.extID,0).count(limit=None)
+		upvotes = Rating.gql('WHERE extID = :1 AND value = :2',self.extID,1).count(limit=None)
+		return -ratingCount + upvotes
+	
+	def getUpvotePercentage(self):
+		ratingCount = Rating.gql('WHERE extID = :1 AND value != :2',self.extID,0).count(limit=None)
+		if ratingCount > 0: # prevent dividing by zero; the percents already default to zero
+			return Rating.gql('WHERE extID = :1 AND value = :2',self.extID,1).count(limit=None) * 1.0 / ratingCount * 100
+		else:
+			return 0.0
+	
+	def getDownvotePercentage(self):
+		ratingCount = Rating.gql('WHERE extID = :1 AND value != :2',self.extID,0).count(limit=None)
+		if ratingCount > 0: # prevent dividing by zero; the percents already default to zero
+			return Rating.gql('WHERE extID = :1 AND value = :2',self.extID,-1).count(limit=None) * 1.0 / ratingCount * 100
+		else:
+			return 0.0
+	
+	ratingCount = property(getRatingCount)
+	rating = property(getRating)
+	upvotePercentage = property(getUpvotePercentage)
+	downvotePercentage = property(getDownvotePercentage)
 
 class Rating(ndb.Model):
 	value = ndb.IntegerProperty() # -1 || 1
 	extID = ndb.StringProperty()
 	user = ndb.UserProperty() # the user who submitted this rating
+	
+	def _post_put_hook(self,future):
+		ext = Extension.gql('WHERE extID = :1',self.extID).get()
+		if ext:
+			if ext.title == None:
+				ext.title = ''
+			if ext.description == None:
+				ext.description = ''
+			if ext.type == None:
+				ext.type = 'gadget'
+			if ext.category == None:
+				ext.category = 'other'
+			
+			doc = search.Document(
+				doc_id=ext.extID,
+				fields=[
+					search.TextField(name='title', value=ext.title),
+					search.TextField(name='description', value=ext.description),
+					search.AtomField(name='type', value=ext.type),
+					search.AtomField(name='category', value=ext.category),
+					search.NumberField(name='rating', value=ext.rating)
+				]
+			)
+			search.Index(name='galleryindex').put(doc)
 
 class User(ndb.Model):
 	user = ndb.UserProperty()
