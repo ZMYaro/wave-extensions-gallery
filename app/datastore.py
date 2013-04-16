@@ -1,24 +1,24 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from google.appengine.ext import db
+from google.appengine.ext import ndb
 
-class Extension(db.Model):
-	extID = db.StringProperty() # 
-	type = db.StringProperty() # gadget || robot
-	developer = db.UserProperty()
-	title = db.StringProperty()
-	description = db.TextProperty()
-	category = db.StringProperty()
-	icon = db.BlobProperty()
-	gadgetURL = db.LinkProperty()
-	robotAddress = db.EmailProperty()
+class Extension(ndb.Model):
+	extID = ndb.StringProperty() # 
+	type = ndb.StringProperty() # gadget || robot
+	developer = ndb.UserProperty()
+	title = ndb.StringProperty()
+	description = ndb.TextProperty()
+	category = ndb.StringProperty()
+	icon = ndb.BlobProperty()
+	gadgetURL = ndb.StringProperty()
+	robotAddress = ndb.StringProperty()
 
-class Rating(db.Model):
-	value = db.IntegerProperty() # -1 || 1
-	extID = db.StringProperty()
-	user = db.UserProperty() # the user who submitted this rating
+class Rating(ndb.Model):
+	value = ndb.IntegerProperty() # -1 || 1
+	extID = ndb.StringProperty()
+	user = ndb.UserProperty() # the user who submitted this rating
 
-class User(db.Model):
-	user = db.UserProperty()
-	starred = db.StringListProperty()
+class User(ndb.Model):
+	user = ndb.UserProperty()
+	starred = ndb.StringProperty(repeated=True)
