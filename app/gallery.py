@@ -194,6 +194,42 @@ class RatingHandler(webapp.RequestHandler):
 				rating.put()
 				self.redirect('/gallery/info/' + extID)
 
+class IndexUpdater(webapp.RequestHandler):
+	def get(self):
+		if not users.get_current_user():
+			self.redirect(users.create_login_url(self.request.uri))
+			return
+		elif not users.is_current_user_admin():
+			self.response.headers['Content-Type'] = 'text/plain; charset=utf-8'
+			self.response.out.write('Error 401')
+			self.response.set_status(401)
+			return
+		
+		self.response.headers['Content-Type'] = 'text/plain; charset=utf-8'
+		
+		self.response.out.write('Loading extensions from the datastore...\n\n')
+		
+		extlist = Extension.gql('').fetch(limit=None)
+		
+		galleryIndex = search.Index(name='galleryindex')
+		for ext in extlist:
+			doc = search.Document(
+				doc_id=ext.extID,
+				fields=[
+					search.TextField(name='title', value=ext.title),
+					search.TextField(name='description', value=ext.description),
+					search.AtomField(name='developer', value=ext.developer.nickname()),
+					search.AtomField(name='type', value=ext.type),
+					search.AtomField(name='category', value=ext.category),
+					search.NumberField(name='rating', value=ext.rating)
+				]
+			)
+			galleryIndex.put(doc)
+			self.response.out.write(u'Updated search Document for \u201c' + ext.title + u'\u201d (' + ext.extID + ')\n')
+		
+		self.response.out.write('\nThe search index has been updated.')
+		
+
 class OtherPage(webapp.RequestHandler):
 	def get(self,page):
 		if page == 'info':
@@ -215,6 +251,7 @@ site = webapp.WSGIApplication([('/gallery', MainPage),
                                ('/gallery/info/(\w{16})/?', InfoPage),
                                ('/gallery/icon/(\w{16})\.png', IconFetcher),
                                ('/gallery/(up|down|null)vote/(\w{16})/?', RatingHandler),
+                               ('/gallery/updateindex', IndexUpdater),
                                ('/(.*)', OtherPage)],
                               debug=True)
 
