@@ -213,19 +213,28 @@ class IndexUpdater(webapp.RequestHandler):
 		
 		galleryIndex = search.Index(name='galleryindex')
 		for ext in extlist:
+			if ext.title == None:
+				ext.title = ''
+			if ext.description == None:
+				ext.description = ''
+			if ext.type == None:
+				ext.type = 'gadget'
+			if ext.category == None:
+				ext.category = 'other'
+			
 			doc = search.Document(
 				doc_id=ext.extID,
 				fields=[
 					search.TextField(name='title', value=ext.title),
 					search.TextField(name='description', value=ext.description),
-					search.AtomField(name='developer', value=ext.developer.nickname()),
+					search.AtomField(name='developer', value=ext.developer.nickname() if ext.developer else ''),
 					search.AtomField(name='type', value=ext.type),
 					search.AtomField(name='category', value=ext.category),
 					search.NumberField(name='rating', value=ext.rating)
 				]
 			)
 			galleryIndex.put(doc)
-			self.response.out.write(u'Updated search Document for \u201c' + ext.title + u'\u201d (' + ext.extID + ')\n')
+			self.response.out.write('Updated search Document for \"' + ext.title + '\" (' + ext.extID + ')\n')
 		
 		self.response.out.write('\nThe search index has been updated.')
 		
