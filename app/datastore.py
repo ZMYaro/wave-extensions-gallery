@@ -30,6 +30,7 @@ class Extension(ndb.Model):
 			fields=[
 				search.TextField(name='title', value=self.title),
 				search.TextField(name='description', value=self.description),
+				search.AtomField(name='developer', value=self.developer.nickname()),
 				search.AtomField(name='type', value=self.type),
 				search.AtomField(name='category', value=self.category),
 				search.NumberField(name='rating', value=self.rating)
