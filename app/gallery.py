@@ -165,9 +165,12 @@ class InfoPage(webapp.RequestHandler):
 class IconFetcher(webapp.RequestHandler):
 	def get(self,extID):
 		ext = Extension.gql('WHERE extID = :1',extID).get()
-		if ext.icon:
-			self.response.headers['Content-Type'] = 'image/png'
-			self.response.out.write(ext.icon)
+		if ext:
+			if ext.icon:
+				self.response.headers['Content-Type'] = 'image/png'
+				self.response.out.write(ext.icon)
+			else:
+				self.redirect('/static/images/gadget_icon_128x128.png')
 		else:
 			self.error(404)
 
