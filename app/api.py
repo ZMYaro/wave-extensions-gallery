@@ -62,7 +62,12 @@ def createExtDictList(extList,baseURL=''):
 
 class ListHandler(webapp.RequestHandler):
 	def get(self,format):
+		# allow cross-origin requests
+		self.response.headers['Access-Control-Allow-Origin'] = '*'
+		self.response.headers['Access-Control-Allow-Methods'] = 'GET'
+		
 		if format == 'json':
+			
 			# set the type to JSON
 			self.response.headers['Content-Type'] = 'application/json'
 			
@@ -85,6 +90,10 @@ class ListHandler(webapp.RequestHandler):
 
 class SearchHandler(webapp.RequestHandler):
 	def get(self,format):
+		# allow cross-origin requests
+		self.response.headers['Access-Control-Allow-Origin'] = '*'
+		self.response.headers['Access-Control-Allow-Methods'] = 'GET'
+		
 		if format == 'json':
 			# set the type to JSON
 			self.response.headers['Content-Type'] = 'application/json'
@@ -102,6 +111,10 @@ class SearchHandler(webapp.RequestHandler):
 
 class ExtInfo(webapp.RequestHandler):
 	def get(self,format):
+		# allow cross-origin requests
+		self.response.headers['Access-Control-Allow-Origin'] = '*'
+		self.response.headers['Access-Control-Allow-Methods'] = 'GET'
+		
 		if format == 'json':
 			# set the type to JSON
 			self.response.headers['Content-Type'] = 'application/json'
