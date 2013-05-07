@@ -12,9 +12,23 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 
 from datastore import Extension,Rating,User
 
-def searchFor(query):
+def searchFor(query='',limit=20,offset=0,expressions=None):
+	# Create the search query
+	searchQuery = search.Query(
+		query_string=query,
+		options=search.QueryOptions(
+			limit=limit,
+			offset=offset,
+			sort_options=search.SortOptions(
+				match_scorer=(search.MatchScorer() if expressions == None else None),
+				expressions=expressions,
+				limit=limit
+			)
+		)
+	)
+	
 	# Search for the query
-	results = search.Index(name='galleryindex').search(query)
+	results = search.Index(name='galleryindex').search(searchQuery)
 	# Create a list for the returned extensions
 	extlist = []
 	# Loop over the scored documents
