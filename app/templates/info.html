@@ -48,7 +48,7 @@
 <section id="middle">
 	<h2>{{ ext.title }}</h2>
 	{% if devname %}<small>By <a href="/gallery/search?q=developer%3A{{ devname }}">{{ devname }}</a></small>{% endif %}
-	<div id="description">{{ ext.description|safe }}</div>
+	<div id="description">{{ ext.htmlDescription|safe }}</div>
 	<hr />
 	{% if ext.type == 'gadget' and ext.gadgetURL %}
 	<p>

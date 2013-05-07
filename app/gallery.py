@@ -10,11 +10,6 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
-# The Python Markdown implementation by Waylan Limberg
-import markdown
-# The GitHub-Flavored Markdown
-import gfm
-
 from datastore import Extension,Rating,User
 
 def searchFor(query):
@@ -124,9 +119,6 @@ class InfoPage(webapp.RequestHandler):
 			self.response.out.write(template.render(path, {}))
 			self.response.set_status(404);
 		else:
-			# Convert the Markdown in the description to HTML,
-			# but escape any HTML added by the user.
-			ext.description = markdown.markdown(text=gfm.gfm(ext.description), safe_mode='escape')
 			
 			# Add the Extension to the template vars dictionary and
 			# set other template vars to their default values.
@@ -229,7 +221,7 @@ class IndexUpdater(webapp.RequestHandler):
 				doc_id=ext.extID,
 				fields=[
 					search.TextField(name='title', value=ext.title),
-					search.TextField(name='description', value=ext.description),
+					search.HtmlField(name='description', value=ext.htmlDescription),
 					search.AtomField(name='developer', value=ext.developer.nickname() if ext.developer else ''),
 					search.AtomField(name='type', value=ext.type),
 					search.AtomField(name='category', value=ext.category),

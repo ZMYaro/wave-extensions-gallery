@@ -4,6 +4,11 @@
 from google.appengine.api import search
 from google.appengine.ext import ndb
 
+# The Python Markdown implementation by Waylan Limberg
+import markdown
+# The GitHub-Flavored Markdown
+import gfm
+
 class Extension(ndb.Model):
 	extID = ndb.StringProperty() # 
 	type = ndb.StringProperty() # gadget || robot
@@ -29,7 +34,7 @@ class Extension(ndb.Model):
 			doc_id=self.extID,
 			fields=[
 				search.TextField(name='title', value=self.title),
-				search.TextField(name='description', value=self.description),
+				search.HtmlField(name='description', value=self.htmlDescription),
 				search.AtomField(name='developer', value=self.developer.nickname()),
 				search.AtomField(name='type', value=self.type),
 				search.AtomField(name='category', value=self.category),
@@ -37,6 +42,11 @@ class Extension(ndb.Model):
 			]
 		)
 		search.Index(name='galleryindex').put(doc)
+	
+	def getHTMLDescription(self):
+		# Convert the Markdown in the description to HTML,
+		# but escape any HTML added by the user.
+		return markdown.markdown(text=gfm.gfm(self.description),safe_mode='escape')
 	
 	def getRatingCount(self):
 		return Rating.gql('WHERE extID = :1 AND value != :2',self.extID,0).count(limit=None)
@@ -60,6 +70,7 @@ class Extension(ndb.Model):
 		else:
 			return 0.0
 	
+	htmlDescription = property(getHTMLDescription)
 	ratingCount = property(getRatingCount)
 	rating = property(getRating)
 	upvotePercentage = property(getUpvotePercentage)
@@ -86,7 +97,7 @@ class Rating(ndb.Model):
 				doc_id=ext.extID,
 				fields=[
 					search.TextField(name='title', value=ext.title),
-					search.TextField(name='description', value=ext.description),
+					search.HtmlField(name='description', value=ext.htmlDescription),
 					search.AtomField(name='type', value=ext.type),
 					search.AtomField(name='category', value=ext.category),
 					search.NumberField(name='rating', value=ext.rating)

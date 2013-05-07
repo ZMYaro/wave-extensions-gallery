@@ -27,6 +27,7 @@ def extToDict(ext,baseURL=''):
 		}),
 		'title': ext.title,
 		'description': ext.description,
+		'htmlDescription': ext.htmlDescription,
 		'iconURL': baseURL + '/gallery/icon/' + ext.extID + '.png',
 		'gadgetURL': ext.gadgetURL,
 		'robotAddress': ext.robotAddress,
