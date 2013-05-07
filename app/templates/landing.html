@@ -5,7 +5,20 @@
 			<h1><a href="/gallery">Browse the gallery &rarr;</a></h1>
 			<p style="font-size:larger;">Note that the Wave Extensions Gallery is still in development, so it may not yet be reliable.  However, please feel free to provide feedback on your experience using the gallery.</p>
 		</li>
-		<li class="big">...</li>
+		<li class="big">
+			<h2 style="margin: 0;">Top Extensions</h2>
+			<ul class="extlist">
+			{% for ext in extlist %}
+				<li>
+					<a href="/gallery/info/{{ ext.extID }}">
+						<img src="/gallery/icon/{{ ext.extID}}.png" />
+						<h3>{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</h3>
+					</a>
+					<div>{% if ext.description %}{{ ext.htmlDescription|safe }}{% endif %}</div>
+				</li>
+			{% endfor %}
+			</ul>
+		</li>
 		<br />
 		<li style="padding-top:8px;">
 			<a href="/about"><img src="/static/images/wave_logo_simple_128x96.png" alt="wave logo" style="float: left; margin: -8px 16px 0 -4px;" /></a>

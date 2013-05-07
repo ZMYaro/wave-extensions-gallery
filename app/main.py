@@ -4,16 +4,24 @@
 import cgi
 import os
 
+from google.appengine.api import search
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
+from gallery import searchFor
+
 class MainPage(webapp.RequestHandler):
 	def get(self, page):
+		# Get the top five extensions
+		extlist = searchFor('',limit=4,expressions=[
+			search.SortExpression(expression='rating',direction=search.SortExpression.DESCENDING,default_value=0)
+		])
+		
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 		self.response.out.write(template.render(path, {'stylesheet':'landing'}))
 		path = os.path.join(os.path.dirname(__file__), 'templates/landing.html')
-		self.response.out.write(template.render(path, {}))
+		self.response.out.write(template.render(path, {'extlist':extlist}))
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
 

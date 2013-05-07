@@ -4,7 +4,7 @@ ul.grid {
 	margin:0px;
 	padding:0px;
 }
-ul.grid li {
+ul.grid > li {
 	display:inline-block;
 	overflow:hidden;
 	width:47%;
@@ -25,27 +25,77 @@ ul.grid li {
 	   -moz-box-shadow:inset 1px 1px 6px 0px rgba(0,0,0,0.2);
 	        box-shadow:inset 1px 1px 6px 0px rgba(0,0,0,0.2);
 }
-ul.grid li.big {
+ul.grid > li.big {
 	min-height: 192px;
 }
-ul.grid li:not(.big) {
+ul.grid > li:not(.big) {
 	white-space:nowrap;
 	white-space:ellipsis;
 }
 
-ul.grid li h1, ul.grid li h2, ul.grid li h3 {
+ul.grid > li h1, ul.grid > li h2, ul.grid > li h3 {
 	margin:0.5em 0em;
 }
 
+/* Top extensions list */
+ul.extlist {
+	list-style-type: none;
+	padding: 0;
+}
+ul.extlist > li {
+	display: inline-block;
+	width: 49%;
+	height: 64px;
+	margin-bottom: 0.3em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	
+	vertical-align: top;
+}
+ul.extlist > li img {
+	float: left;
+	width: 64px;
+	height: 64px;
+	margin-right: 4px;
+}
+ul.extlist > li h3 {
+	margin: 0.25em 0 0;
+}
+ul.extlist > li div {
+	font-size: small;
+	margin: -0.25em 0;
+	height: 3em;
+	overflow: hidden;
+}
+
+
 @media (min-width:601px) and (max-width:900px) {
-	ul.grid li img {
+	ul.grid > li img {
 		display:none;
 	}
 }
-@media (max-width:600px) {
-	ul.grid li {
+@media (max-width: 600px) {
+	ul.grid > li {
 		display:block;
 		width:95%;
 		margin:8px auto;
+	}
+}
+@media (max-width: 450px) {
+	ul.grid > li img {
+		display: none;
+	}
+}
+@media (max-width: 300px) {
+	ul.extlist > li {
+		width: 100%;
+	}
+	ul.extlist > li img {
+		display: block;
+	}
+}
+@media (max-width: 200px) {
+	ul.extlist > li img {
+		display: none;
 	}
 }
