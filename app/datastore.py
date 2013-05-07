@@ -52,9 +52,9 @@ class Extension(ndb.Model):
 		return Rating.gql('WHERE extID = :1 AND value != :2',self.extID,0).count(limit=None)
 	
 	def getRating(self):
-		ratingCount = Rating.gql('WHERE extID = :1 AND value != :2',self.extID,0).count(limit=None)
+		downvotes = Rating.gql('WHERE extID = :1 AND value = :2',self.extID,-1).count(limit=None)
 		upvotes = Rating.gql('WHERE extID = :1 AND value = :2',self.extID,1).count(limit=None)
-		return -ratingCount + upvotes
+		return -downvotes + upvotes
 	
 	def getUpvotePercentage(self):
 		ratingCount = Rating.gql('WHERE extID = :1 AND value != :2',self.extID,0).count(limit=None)
