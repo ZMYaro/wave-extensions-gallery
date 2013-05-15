@@ -10,8 +10,10 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
+from constants import DEFAULT_QUERY_LIMIT,DEFAULT_QUERY_OFFSET
 from datastore import Extension,Rating,User
 from gallery import searchFor
+from util import parseInt
 
 def extToDict(ext,baseURL=''):
 	ext = {
@@ -99,10 +101,15 @@ class SearchHandler(webapp.RequestHandler):
 			# set the type to JSON
 			self.response.headers['Content-Type'] = 'application/json'
 			
-			# Get the query
+			# Get the parameters, filling in default values where needed
 			query = self.request.get('q')
+			if not query:
+				query = ''
+			limit = parseInt(self.request.get('limit'), DEFAULT_QUERY_LIMIT)
+			offset = parseInt(self.request.get('offset'), DEFAULT_QUERY_OFFSET)
+			
 			# Get the search results
-			extList = searchFor(query)
+			extList = searchFor(query,limit,offset)
 			# Turn the list of Extensions into a list of dictionaries
 			extDictList = createExtDictList(extList,self.request.host_url)
 			# Convert the dictionaries to JSON and print it
