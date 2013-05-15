@@ -86,17 +86,18 @@ class CategoryPage(webapp.RequestHandler):
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 		self.response.out.write(template.render(path, {'stylesheet':'gallery'}))
 		
-		# Search for extensions in the category
-		extlist = Extension.gql('WHERE category = :1',category).fetch(limit=None)
-		#results = search.Index(name='galleryindex').search('category:' + category)
-		
-		# Create a list for the returned extensions
-		#extlist = []
-		# Loop over the scored documents
-		#for result in results.results:
-			# Do a datastore lookup for each extension ID
-		#	ext = Extension.gql('WHERE extID = :1', result._doc_id).get()
-			# If the  extension is found, and add it to the list
+		# Get the list of extensions in the category, sorted by rating
+		#extlist = Extension.gql('WHERE category = :1',category).fetch(limit=None)
+		extlist = searchFor(
+			'category:' + category,
+			expressions=[
+				search.SortExpression(
+					expression='rating',
+					direction=search.SortExpression.DESCENDING,
+					default_value=0
+				)
+			]
+		)
 		
 		category = category[0].upper() + category[1:].lower()
 		
