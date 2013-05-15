@@ -15,7 +15,11 @@ class MainPage(webapp.RequestHandler):
 	def get(self, page):
 		# Get the top five extensions
 		extlist = searchFor('',limit=4,expressions=[
-			search.SortExpression(expression='rating',direction=search.SortExpression.DESCENDING,default_value=0)
+			search.SortExpression(
+				expression='rating',
+				direction=search.SortExpression.DESCENDING,
+				default_value=0
+			)
 		])
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
