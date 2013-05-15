@@ -13,7 +13,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
-from datastore import Extension
+from datastore import Extension,Rating
 
 class DevDash(webapp.RequestHandler):
 	def get(self):
@@ -40,12 +40,26 @@ class NewExt(webapp.RequestHandler):
 			newExt.developer = user
 			
 			# Give the Extension a random unique ID (I decided on 16 hexadecimal
-			# characters, but other suggestions are welcome)
+			# characters, but other suggestions are welcome).
 			newExt.extID = hashlib.md5(os.urandom(128)).hexdigest()[:16]
 			while Extension.gql('WHERE extID = :1', newExt.extID).count(limit=1) > 0:
 				newExt.extID = hashlib.md5(os.urandom(128)).hexdigest()[:16]
 			newExt.put()
-		
+			
+			# Automatically upvote the extension as the developer
+			
+			# Check if a rating for that extension ID exists
+			# (it should not, but just in case).
+			rating = Rating.gql('WHERE user = :1 AND extID = :2',user,newExt.extID).get()
+			# Create the rating if it does not exist
+			# (which, again, it should not).
+			if not rating:
+				rating = Rating()
+				rating.user = user
+				rating.extID = newExt.extID
+			rating.value = 1
+			rating.put()
+			
 			# Redirect to the editing page
 			self.redirect('/dev/edit/' + newExt.extID)
 		else:
