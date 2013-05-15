@@ -208,7 +208,20 @@ footer a:active {
 	margin:0px;
 }
 #middle table {
-	width:100%;
+	font-size: small;
+	
+	width: 100%;
+	margin: 0 -1px;
+	
+	border-spacing: 0;
+	border-collapse: collapse;
+	border-color: #CCCCCC;
+}
+#middle table th, #middle table td {
+	padding: 2px 3px;
+}
+#middle table th {
+	border-bottom-color: gray;
 }
 
 .formtable {
