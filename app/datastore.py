@@ -10,17 +10,18 @@ import markdown
 import gfm
 
 class Extension(ndb.Model):
-	extID = ndb.StringProperty() # 
-	type = ndb.StringProperty() # gadget || robot
+	extID = ndb.StringProperty() # The extension's unique ID 
+	type = ndb.StringProperty() # “gadget” or “robot”
 	developer = ndb.UserProperty()
 	title = ndb.StringProperty()
 	description = ndb.TextProperty()
 	category = ndb.StringProperty()
 	icon = ndb.BlobProperty()
-	gadgetURL = ndb.StringProperty()
-	robotAddress = ndb.StringProperty()
+	gadgetURL = ndb.StringProperty() # `None` for robots
+	robotAddress = ndb.StringProperty() # `None` for gadgets
 		
 	def _post_put_hook(self,future):
+		# Fill in default values for fields.
 		if self.title == None:
 			self.title = ''
 		if self.description == None:
@@ -30,6 +31,7 @@ class Extension(ndb.Model):
 		if self.category == None:
 			self.category = 'other'
 		
+		# Update the extension's assosciated search document.
 		doc = search.Document(
 			doc_id=self.extID,
 			fields=[
@@ -52,9 +54,10 @@ class Extension(ndb.Model):
 		return Rating.gql('WHERE extID = :1 AND value != :2',self.extID,0).count(limit=None)
 	
 	def getRating(self):
+		# Fetch the numbers of downvotes and upvotes and return the difference
 		downvotes = Rating.gql('WHERE extID = :1 AND value = :2',self.extID,-1).count(limit=None)
 		upvotes = Rating.gql('WHERE extID = :1 AND value = :2',self.extID,1).count(limit=None)
-		return -downvotes + upvotes
+		return upvotes - downvotes
 	
 	def getUpvotePercentage(self):
 		ratingCount = Rating.gql('WHERE extID = :1 AND value != :2',self.extID,0).count(limit=None)
@@ -77,9 +80,9 @@ class Extension(ndb.Model):
 	downvotePercentage = property(getDownvotePercentage)
 
 class Rating(ndb.Model):
-	value = ndb.IntegerProperty() # -1 || 1
-	extID = ndb.StringProperty()
-	user = ndb.UserProperty() # the user who submitted this rating
+	value = ndb.IntegerProperty() # -1, 0, or 1
+	extID = ndb.StringProperty() # The ID of the extension being voted on
+	user = ndb.UserProperty() # The user who submitted this rating
 	
 	def _post_put_hook(self,future):
 		ext = Extension.gql('WHERE extID = :1',self.extID).get()
@@ -107,4 +110,4 @@ class Rating(ndb.Model):
 
 class User(ndb.Model):
 	user = ndb.UserProperty()
-	starred = ndb.StringProperty(repeated=True)
+	starred = ndb.StringProperty(repeated=True) # The list of starred extension IDs

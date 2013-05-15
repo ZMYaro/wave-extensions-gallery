@@ -20,6 +20,7 @@ def searchFor(query='',limit=20,offset=0,expressions=None):
 			limit=limit,
 			offset=offset,
 			sort_options=search.SortOptions(
+				# Find best matches unless a different expression is passed
 				match_scorer=(search.MatchScorer() if expressions == None else None),
 				expressions=expressions,
 				limit=limit
