@@ -10,9 +10,10 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
+from constants import *
 from datastore import Extension,Rating,User
 
-def searchFor(query='',limit=20,offset=0,expressions=None):
+def searchFor(query='',limit=DEFAULT_QUERY_LIMIT,offset=DEFAULT_QUERY_OFFSET,expressions=None):
 	# Create the search query
 	searchQuery = search.Query(
 		query_string=query,
@@ -29,7 +30,7 @@ def searchFor(query='',limit=20,offset=0,expressions=None):
 	)
 	
 	# Search for the query
-	results = search.Index(name='galleryindex').search(searchQuery)
+	results = search.Index(name=SEARCH_INDEX_NAME).search(searchQuery)
 	# Create a list for the returned extensions
 	extlist = []
 	# Loop over the scored documents
@@ -222,7 +223,7 @@ class IndexUpdater(webapp.RequestHandler):
 		
 		extlist = Extension.gql('').fetch(limit=None)
 		
-		galleryIndex = search.Index(name='galleryindex')
+		galleryIndex = search.Index(name=SEARCH_INDEX_NAME)
 		for ext in extlist:
 			if ext.title == None:
 				ext.title = ''

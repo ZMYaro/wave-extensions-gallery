@@ -9,6 +9,8 @@ import markdown
 # The GitHub-Flavored Markdown
 import gfm
 
+from constants import *
+
 class Extension(ndb.Model):
 	extID = ndb.StringProperty() # The extension's unique ID 
 	type = ndb.StringProperty() # “gadget” or “robot”
@@ -23,13 +25,13 @@ class Extension(ndb.Model):
 	def _post_put_hook(self,future):
 		# Fill in default values for fields.
 		if self.title == None:
-			self.title = ''
+			self.title = DEFAULT_EXTENSION_TITLE
 		if self.description == None:
-			self.description = ''
+			self.description = DEFAULT_EXTENSION_DESCRIPTION
 		if self.type == None:
-			self.type = 'gadget'
+			self.type = DEFAULT_EXTENSION_TYPE
 		if self.category == None:
-			self.category = 'other'
+			self.category = DEFAULT_EXTENSION_CATEGORY
 		
 		# Update the extension's assosciated search document.
 		doc = search.Document(
@@ -43,7 +45,7 @@ class Extension(ndb.Model):
 				search.NumberField(name='rating', value=self.rating)
 			]
 		)
-		search.Index(name='galleryindex').put(doc)
+		search.Index(name=SEARCH_INDEX_NAME).put(doc)
 	
 	def getHTMLDescription(self):
 		# Convert the Markdown in the description to HTML,
@@ -88,13 +90,13 @@ class Rating(ndb.Model):
 		ext = Extension.gql('WHERE extID = :1',self.extID).get()
 		if ext:
 			if ext.title == None:
-				ext.title = ''
+				ext.title = DEFAULT_EXTENSION_TITLE
 			if ext.description == None:
-				ext.description = ''
+				ext.description = DEFAULT_EXTENSION_DESCRIPTION
 			if ext.type == None:
-				ext.type = 'gadget'
+				ext.type = DEFAULT_EXTENSION_TYPE
 			if ext.category == None:
-				ext.category = 'other'
+				ext.category = DEFAULT_EXTENSION_CATEGORY
 			
 			doc = search.Document(
 				doc_id=ext.extID,
@@ -106,7 +108,7 @@ class Rating(ndb.Model):
 					search.NumberField(name='rating', value=ext.rating)
 				]
 			)
-			search.Index(name='galleryindex').put(doc)
+			search.Index(name=SEARCH_INDEX_NAME).put(doc)
 
 class User(ndb.Model):
 	user = ndb.UserProperty()

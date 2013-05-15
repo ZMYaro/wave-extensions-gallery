@@ -13,6 +13,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
+from constants import *
 from datastore import Extension,Rating
 
 class DevDash(webapp.RequestHandler):
@@ -110,12 +111,12 @@ class EditExt(webapp.RequestHandler):
 				if self.request.get('title'):
 					ext.title = self.request.get('title')
 				else:
-					ext.title = ''
+					ext.title = DEFAULT_EXTENSION_TITLE
 				
 				if self.request.get('type'):
 					ext.type = self.request.get('type')
 				else: # default to gadget if no type is sent
-					ext.type = 'gadget'
+					ext.type = DEFAULT_EXTENSION_TYPE
 				
 				if ext.type == 'gadget':
 					if self.request.get('gadgetURL'):
@@ -141,12 +142,12 @@ class EditExt(webapp.RequestHandler):
 				if self.request.get('description'):
 					ext.description = self.request.get('description')
 				else:
-					ext.description = ''
+					ext.description = DEFAULT_EXTENSION_DESCRIPTION
 				
 				if self.request.get('category'):
 					ext.category = self.request.get('category')
 				else:
-					ext.category = 'other'
+					ext.category = DEFAULT_EXTENSION_CATEGORY
 				
 				if self.request.get('icon'):
 					iconFile = self.request.get('icon')
