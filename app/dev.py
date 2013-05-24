@@ -76,6 +76,8 @@ class EditExt(webapp.RequestHandler):
 					templateArgs['message'] = 'Your extension has been successfully updated.   You can stay here, <a href=\"/gallery/info/' + extID + '\">see your extension in the gallery</a>, or '
 				elif self.request.get('msg') == 'icontype':
 					templateArgs['message'] = 'The icon you uploaded was not a PNG.  Your extension\'s other properties have been successfully updated.  You can stay here or '
+				elif self.request.get('msg') == 'screenshottype':
+					templateArgs['message'] = 'One or more of the screenshots you uploaded was not a PNG.  Your extension\'s other properties have been successfully updated.  You can stay here or '
 				elif self.request.get('msg') == 'badurl':
 					templateArgs['message'] = 'The gadget URL you entered was improperly formatted and therefore not saved.  Your extension\'s other properties have been successfully updated.  You can stay here or '
 				elif self.request.get('msg') == 'badaddress':
@@ -151,12 +153,26 @@ class EditExt(webapp.RequestHandler):
 				
 				if self.request.get('icon'):
 					iconFile = self.request.get('icon')
-					icon = images.Image(image_data = iconFile)
+					icon = images.Image(image_data=iconFile)
 					if icon.format != images.PNG:
 						error = 'icontype'
 					else:
 						iconFile = images.resize(iconFile, 128, 128)
 						ext.icon = db.Blob(iconFile)
+				
+				# Loop over the screenshot <input>s.
+				screenshotFiles = self.request.get_all('screenshot')
+				for i in range(len(screenshotFiles)):
+					if screenshotFiles[i]:
+						screenshot = images.Image(image_data=screenshotFiles[i])
+						if screenshot.format != images.PNG:
+							error = 'screenshottype'
+						else:
+							screenshotFiles[i] = images.resize(screenshotFiles[i], 640, 400)
+							if i < len(ext.screenshots):
+								ext.screenshots[i] = db.Blob(screenshotFiles[i])
+							else:
+								ext.screenshots.append(db.Blob(screenshotFiles[i]))
 				
 				ext.put()
 				

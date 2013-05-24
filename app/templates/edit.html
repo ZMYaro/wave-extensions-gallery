@@ -63,16 +63,41 @@
 			</tr>
 			<tr style="vertical-align:top;">
 				<td style="padding-top:6px;">
-					<label for="icon">
-						Icon:
-						<br />
-						<small>128&times;128 PNG</small>
-					</label>
+					Icon:
+					<br />
+					<small>(128&times;128 PNG)</small>
 				</td>
 				<td>
 					<input type="file" name="icon" id="icon" accept="image/png" />
 					<br />
-					<img src="/gallery/icon/{{ ext.extID }}.png" />
+					<img src="/gallery/icon/{{ ext.extID }}.png" alt="Icon" />
+				</td>
+			</tr>
+			<tr style="vertical-align:top;">
+				<td>
+					Screenshots:
+					<br />
+					<small>
+						(640&times;400 PNG)
+						<br />
+						What will your extension look like when people use it?
+					</small>
+				</td>
+				<td>
+					{% for i in 'xxxx' %}{% comment %}Number of 'x'es = number of screenshots{% endcomment %}
+						<div style="display: inline-block; width: 49%; vertical-align: top;">
+							<input type="file" name="screenshot" id="screenshot" accept="image/png" />
+							<br />
+							{% if forloop.counter0 < ext.screenshots|length %}
+								<img src="/gallery/screenshot/{{ ext.extID }}_{{ forloop.counter0 }}.png" alt="Screenshot {{ forloop.counter }}" style="width: 240px; height: 150px;" />
+							{% else %}
+								<div style="width: 240px; height: 150px; border: 1px solid #C0C0C0; text-align: center;">
+									<br /><br /><br /><br />
+									No screenshot uploaded
+								</div>
+							{% endif %}
+						</div>
+					{% endfor %}
 				</td>
 			</tr>
 			<tr>

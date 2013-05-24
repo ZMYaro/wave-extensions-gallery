@@ -12,6 +12,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 
 from constants import *
 from datastore import Extension,Rating,User
+from util import parseInt
 
 def searchFor(query='',limit=DEFAULT_QUERY_LIMIT,offset=DEFAULT_QUERY_OFFSET,expressions=None):
 	# Create the search query
@@ -171,7 +172,7 @@ class InfoPage(webapp.RequestHandler):
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
 
-class IconFetcher(webapp.RequestHandler):
+class IconHandler(webapp.RequestHandler):
 	def get(self,extID):
 		ext = Extension.gql('WHERE extID = :1',extID).get()
 		if ext:
@@ -180,6 +181,16 @@ class IconFetcher(webapp.RequestHandler):
 				self.response.out.write(ext.icon)
 			else:
 				self.redirect('/static/images/gadget_icon_128x128.png')
+		else:
+			self.error(404)
+
+class ScreenshotHandler(webapp.RequestHandler):
+	def get(self,extID,number):
+		ext = Extension.gql('WHERE extID = :1',extID).get()
+		number = parseInt(number,-1)
+		if number != -1 and ext and ext.screenshots and number < len(ext.screenshots):
+			self.response.headers['Content-Type'] = 'image/png'
+			self.response.out.write(ext.screenshots[number])
 		else:
 			self.error(404)
 
@@ -270,7 +281,8 @@ site = webapp.WSGIApplication([('/gallery', MainPage),
                                ('/gallery/category/(\w+)', CategoryPage),
                                ('/gallery/search', SearchHandler),
                                ('/gallery/info/(\w{16})/?', InfoPage),
-                               ('/gallery/icon/(\w{16})\.png', IconFetcher),
+                               ('/gallery/icon/(\w{16})\.png', IconHandler),
+                               ('/gallery/screenshot/(\w{16})_([0-9])\.png', ScreenshotHandler),
                                ('/gallery/(up|down|null)vote/(\w{16})/?', RatingHandler),
                                ('/gallery/updateindex', IndexUpdater),
                                ('/(.*)', OtherPage)],

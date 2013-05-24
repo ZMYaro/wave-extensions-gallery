@@ -19,6 +19,7 @@ class Extension(ndb.Model):
 	description = ndb.TextProperty()
 	category = ndb.StringProperty()
 	icon = ndb.BlobProperty()
+	screenshots = ndb.BlobProperty(repeated=True)
 	gadgetURL = ndb.StringProperty() # `None` for robots
 	robotAddress = ndb.StringProperty() # `None` for gadgets
 		
