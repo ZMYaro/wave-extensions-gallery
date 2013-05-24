@@ -151,24 +151,33 @@ class EditExt(webapp.RequestHandler):
 				else:
 					ext.category = DEFAULT_EXTENSION_CATEGORY
 				
+				# If a new icon was uploaded,
 				if self.request.get('icon'):
+					# Get the icon <input>.
 					iconFile = self.request.get('icon')
+					# Make sure it is a PNG and return an error if it is not.
 					icon = images.Image(image_data=iconFile)
 					if icon.format != images.PNG:
 						error = 'icontype'
 					else:
+						# Make sure it is the porper size.
 						iconFile = images.resize(iconFile, 128, 128)
+						# Overwrite the existing icon.
 						ext.icon = db.Blob(iconFile)
 				
 				# Loop over the screenshot <input>s.
 				screenshotFiles = self.request.get_all('screenshot')
 				for i in range(len(screenshotFiles)):
+					# Make sure something was actually uploaded in that <input>.
 					if screenshotFiles[i]:
+						# Make sure it is a PNG and return an error if it is not.
 						screenshot = images.Image(image_data=screenshotFiles[i])
 						if screenshot.format != images.PNG:
 							error = 'screenshottype'
 						else:
+							# Make sure it is the proper size.
 							screenshotFiles[i] = images.resize(screenshotFiles[i], 640, 400)
+							# Put it in the extension's screenshots array.
 							if i < len(ext.screenshots):
 								ext.screenshots[i] = db.Blob(screenshotFiles[i])
 							else:
