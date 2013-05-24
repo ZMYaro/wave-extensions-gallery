@@ -31,6 +31,8 @@ def extToDict(ext,baseURL=''):
 		'description': ext.description,
 		'htmlDescription': ext.htmlDescription,
 		'iconURL': baseURL + '/gallery/icon/' + ext.extID + '.png',
+		'screenshots': [baseURL + '/gallery/screenshot/' + ext.extID + '_' + `i` + '.png'
+			for i in range(len(ext.screenshots))],
 		'gadgetURL': ext.gadgetURL,
 		'robotAddress': ext.robotAddress,
 		'rating': ext.rating,
