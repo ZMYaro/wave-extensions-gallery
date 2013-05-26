@@ -22,8 +22,8 @@ class Extension(ndb.Model):
 	screenshots = ndb.BlobProperty(repeated=True)
 	gadgetURL = ndb.StringProperty() # `None` for robots
 	robotAddress = ndb.StringProperty() # `None` for gadgets
-		
-	def _post_put_hook(self,future):
+	
+	def _pre_put_hook(self):
 		# Fill in default values for fields.
 		if self.title == None:
 			self.title = DEFAULT_EXTENSION_TITLE
@@ -33,7 +33,8 @@ class Extension(ndb.Model):
 			self.type = DEFAULT_EXTENSION_TYPE
 		if self.category == None:
 			self.category = DEFAULT_EXTENSION_CATEGORY
-		
+	
+	def _post_put_hook(self,future):
 		# Update the extension's assosciated search document.
 		doc = search.Document(
 			doc_id=self.extID,
