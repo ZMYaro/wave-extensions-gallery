@@ -53,7 +53,7 @@
 	{% if ext.type == 'gadget' and ext.gadgetURL %}
 	<p>
 		Gadget URL: <b>{{ ext.gadgetURL }}</b>
-		<br >
+		<br />
 		<a href="/docs/help/addgadget?gadgetURL={{ ext.gadgetURL }}" target="_blank" style="font-size: smaller;">What should I do with this link?</a>
 	</p>
 	{% endif %}
@@ -61,6 +61,14 @@
 	<p>
 		Robot address: <b>{{ ext.robotAddress }}</b>
 	</p>
+	{% endif %}
+	{% if ext.screenshots|length > 0 %}
+		<hr />
+		<div id="screenshots">
+		{% for screenshot in ext.screenshots %}
+			<img src="/gallery/screenshot/{{ ext.extID }}_{{ forloop.counter0 }}.png" alt="screenshot {{ forloop.counter }}" />
+		{% endfor %}
+		</div>
 	{% endif %}
 </section>
 
