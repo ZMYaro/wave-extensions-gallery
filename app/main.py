@@ -4,23 +4,17 @@
 import cgi
 import os
 
-from google.appengine.api import search
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
+from constants import SORT_TOP_RATING
 from gallery import searchFor
 
 class MainPage(webapp.RequestHandler):
 	def get(self, page):
 		# Get the top five extensions
-		extlist = searchFor('',limit=4,expressions=[
-			search.SortExpression(
-				expression='rating',
-				direction=search.SortExpression.DESCENDING,
-				default_value=0
-			)
-		])
+		extlist = searchFor('',limit=4,sortBy=SORT_TOP_RATING)
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 		self.response.out.write(template.render(path, {'stylesheet':'landing'}))

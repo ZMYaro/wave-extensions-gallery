@@ -14,16 +14,28 @@ from constants import *
 from datastore import Extension,Rating,User
 from util import parseInt
 
-def searchFor(query='',limit=DEFAULT_QUERY_LIMIT,offset=DEFAULT_QUERY_OFFSET,expressions=None):
-	# Create the search query
+def searchFor(query='',limit=DEFAULT_QUERY_LIMIT,offset=DEFAULT_QUERY_OFFSET,sortBy=SORT_BEST_MATCH):
+	# Create a sort expression for the given sort method, if any.
+	expressions = None
+	if sortBy == SORT_TOP_RATING:
+		expressions = [
+			search.SortExpression(
+				expression='rating',
+				direction=search.SortExpression.DESCENDING,
+				default_value=0
+			)
+		]
+		
+	
+	# Create the search query.
 	searchQuery = search.Query(
 		query_string=query,
 		options=search.QueryOptions(
 			limit=limit,
 			offset=offset,
 			sort_options=search.SortOptions(
-				# Find best matches unless a different expression is passed
-				match_scorer=(search.MatchScorer() if expressions == None else None),
+				# Find best matches unless a different sort method is chosen.
+				match_scorer=(search.MatchScorer() if sortBy == SORT_BEST_MATCH else None),
 				expressions=expressions,
 				limit=limit
 			)

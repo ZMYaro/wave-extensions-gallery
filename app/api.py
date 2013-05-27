@@ -10,7 +10,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 
-from constants import DEFAULT_QUERY_LIMIT,DEFAULT_QUERY_OFFSET
+from constants import *
 from datastore import Extension,Rating,User
 from gallery import searchFor
 from util import parseInt
@@ -109,9 +109,12 @@ class SearchHandler(webapp.RequestHandler):
 				query = ''
 			limit = parseInt(self.request.get('limit'), DEFAULT_QUERY_LIMIT)
 			offset = parseInt(self.request.get('offset'), DEFAULT_QUERY_OFFSET)
+			sortBy = self.request.get('sortby')
+			if not sortBy:
+				sortBy = SORT_BEST_MATCH
 			
 			# Get the search results
-			extList = searchFor(query,limit,offset)
+			extList = searchFor(query,limit,offset,sortBy)
 			# Turn the list of Extensions into a list of dictionaries
 			extDictList = createExtDictList(extList,self.request.host_url)
 			# Convert the dictionaries to JSON and print it
