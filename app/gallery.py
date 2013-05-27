@@ -61,10 +61,11 @@ class MainPage(webapp.RequestHandler):
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 		self.response.out.write(template.render(path, {'stylesheet':'gallery'}))
 		
-		extlist = Extension.gql('').fetch(limit=None)
+		#extlist = Extension.gql('').fetch(limit=None)
+		extlist = searchFor('',limit=20,sortBy=SORT_TOP_RATING)
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/gallerylist.html')
-		self.response.out.write(template.render(path, {'extlist':extlist}))
+		self.response.out.write(template.render(path, {'query':'Top Extensions','extlist':extlist}))
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
@@ -74,10 +75,11 @@ class GadgetsPage(webapp.RequestHandler):
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 		self.response.out.write(template.render(path, {'stylesheet':'gallery'}))
 		
-		extlist = Extension.gql('WHERE type = :1','gadget').fetch(limit=None)
+		#extlist = Extension.gql('WHERE type = :1','gadget').fetch(limit=None)
+		extlist = searchFor('type:gadget',limit=20,sortBy=SORT_TOP_RATING)
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/gallerylist.html')
-		self.response.out.write(template.render(path, {'extlist':extlist}))
+		self.response.out.write(template.render(path, {'query':'Top Gadgets','extlist':extlist}))
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
@@ -87,10 +89,11 @@ class RobotsPage(webapp.RequestHandler):
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 		self.response.out.write(template.render(path, {'stylesheet':'gallery'}))
 		
-		extlist = Extension.gql('WHERE type = :1','robot').fetch(limit=None)
+		#extlist = Extension.gql('WHERE type = :1','robot').fetch(limit=None)
+		extlist = searchFor('type:robot',limit=20,sortBy=SORT_TOP_RATING)
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/gallerylist.html')
-		self.response.out.write(template.render(path, {'extlist':extlist}))
+		self.response.out.write(template.render(path, {'query':'Top Robots','extlist':extlist}))
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
 		self.response.out.write(template.render(path, {}))
@@ -102,18 +105,11 @@ class CategoryPage(webapp.RequestHandler):
 		
 		# Get the list of extensions in the category, sorted by rating
 		#extlist = Extension.gql('WHERE category = :1',category).fetch(limit=None)
-		extlist = searchFor(
-			'category:' + category,
-			expressions=[
-				search.SortExpression(
-					expression='rating',
-					direction=search.SortExpression.DESCENDING,
-					default_value=0
-				)
-			]
-		)
+		extlist = searchFor('category:' + category,limit=20,sortBy=SORT_TOP_RATING)
 		
-		category = category[0].upper() + category[1:].lower()
+		category = 'Top ' +\
+			category[0].upper() + category[1:].lower() +\
+			' Extensions'
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/gallerylist.html')
 		self.response.out.write(template.render(path, {'query':category,'extlist':extlist}))
