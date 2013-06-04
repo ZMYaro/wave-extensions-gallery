@@ -35,7 +35,7 @@ class AboutPage(webapp.RequestHandler):
 class RobotsTxt(webapp.RequestHandler):
 	def get(self):
 		self.response.headers['Content-Type'] = 'text/plain'
-		self.response.out.write('User-agent: *\nDisallow: /')
+		self.response.out.write('User-agent: *\nDisallow:')
 
 class FaviconHandler(webapp.RequestHandler):
 	def get(self):
