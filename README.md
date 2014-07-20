@@ -71,7 +71,7 @@ These allow extension descriptions to be rendered properly.  This assumes you ha
 ### Credits
 
 * The WEG uses a [Python](http://python.org) backend running on [Google App Engine](https://developers.google.com/appengine).
-* Created, coded, and maintained by [Zachary “Gamer_Z.” Yaro](http://zmyaro.com).
+* Created, coded, and maintained by [Zachary Yaro](http://zmyaro.com).
 * Modified [open-source wave logo](http://www.waveprotocol.org/logo) created by [Jérémy Naegel](https://plus.google.com/110860203879684078598).
 * Portions of the site are modifications based on work created and [shared by Google](http://code.google.com/policies.html) and used according to terms described in the [Creative Commons 3.0 Attribution License](http://creativecommons.org/licenses/by/3.0).
 * [Python Markdown implementation](https://pypi.python.org/pypi/Markdown) created by Waylan Limberg.
