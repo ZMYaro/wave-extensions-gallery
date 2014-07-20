@@ -6,7 +6,7 @@
 		document.getElementById(id).style.display = "none";
 	}
 </script>
-<section id="main">
+<section class="middle card z1">
 	<h1>Edit Extension</h1>
 	<form method="post" enctype="multipart/form-data">
 		<table class="formtable">
@@ -15,11 +15,11 @@
 					<label for="title">Title:</label>
 				</td>
 				<td>
-					<input type="text" maxlength="500" name="title" id="title" {% if ext.title %}value="{{ ext.title }}"{% endif %} />
+					<input type="text" maxlength="500" name="title" id="title" placeholder="Extension Name" {% if ext.title %}value="{{ ext.title }}"{% endif %} />
 				</td>
 			</tr>
 			<tr>
-				<td></td>
+				<td>Extension type:</td>
 				<td>
 					<label for="type-gadget" onclick="hideRow('robotInput'); showRow('gadgetInput');">
 						<input type="radio" name="type" value="gadget" id="type-gadget"{% if ext.type != 'robot' %} checked="checked"{% endif %} />
@@ -126,9 +126,9 @@
 			<tr>
 				<td></td>
 				<td>
-					<a href="/dev" class="button" title="Discard your changes and return to your developer dashboard">Discard Changes</a>
+					<a href="/dev" role="button" title="Discard your changes and return to your developer dashboard">Discard Changes</a>
 					<button type="submit">Save Changes</button>
-					<a href="/gallery/info/{{ ext.extID }}">View in gallery</a>
+					<a href="/gallery/info/{{ ext.extID }}" style="margin-left: 8px;">View in gallery</a>
 				</td>
 			</tr>
 		</table>

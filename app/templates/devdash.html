@@ -1,4 +1,4 @@
-<section id="main">
+<section class="middle card z1">
 	<h1>Developer Dashboard</h1>
 	<a href="/dev/new" style="text-decoration:none;"><button>New extension</button></a>
 	<br />
@@ -20,9 +20,9 @@
 				<td>{% if ext.category %}{{ ext.category }}{% else %}other{% endif %}</td>
 				<td>{{ ext.extID }}</td>
 				<td>
-					<a href="/dev/edit/{{ ext.extID }}" class="button">Edit</a>
+					<a href="/dev/edit/{{ ext.extID }}" role="button">Edit</a>
 					<button disabled="disabled">Delete</button>
-					<a href="/gallery/info/{{ ext.extID }}">View in gallery</a>
+					<a href="/gallery/info/{{ ext.extID }}" style="margin-left: 8px;">View in gallery</a>
 				</td>
 			</tr>
 		{% empty %}
