@@ -1,5 +1,5 @@
 application: wave-extensions-gallery
-version: ui2
+version: material
 runtime: python27
 api_version: 1
 threadsafe: false
