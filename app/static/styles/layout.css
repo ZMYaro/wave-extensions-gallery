@@ -103,7 +103,6 @@ footer {
 	}
 .middle {
 	margin: 0 auto;
-	width: 100%;
 	max-width: 800px;
 }
 
@@ -139,8 +138,7 @@ footer {
 	nav {
 		top: 56px;
 	}
-	#middle {
-		padding-top:4px;
-		padding-left:172px;
+	.middle {
+		margin: -16px;
 	}
 }
