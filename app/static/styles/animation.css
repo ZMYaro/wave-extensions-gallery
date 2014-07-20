@@ -1,0 +1,53 @@
+/* This stylesheet is for all CSS animations and transitions in the
+ * Wave Extensions Gallery.
+ */
+
+@charset "UTF-8";
+
+ body, header, header *, nav, .card {
+	-webkit-transition-duration: 0.2s;
+	   -moz-transition-duration: 0.2s;
+	    -ms-transition-duration: 0.2s;
+	     -o-transition-duration: 0.2s;
+	        transition-duration: 0.2s;
+	-webkit-transition-timing-function: linear;
+	   -moz-transition-timing-function: linear;
+	    -ms-transition-timing-function: linear;
+	     -o-transition-timing-function: linear;
+	        transition-timing-function: linear;
+}
+body {
+	-webkit-transition-property: padding;
+	   -moz-transition-property: padding;
+	    -ms-transition-property: padding;
+	     -o-transition-property: padding;
+	        transition-property: padding;
+}
+header {
+	-webkit-transition-property: font-size, padding, height;
+	   -moz-transition-property: font-size, padding, height;
+	    -ms-transition-property: font-size, padding, height;
+	     -o-transition-property: font-size, padding, height;
+	        transition-property: font-size, padding, height;
+}
+header * {
+	-webkit-transition-property: font-size, margin;
+	   -moz-transition-property: font-size, margin;
+	    -ms-transition-property: font-size, margin;
+	     -o-transition-property: font-size, margin;
+	        transition-property: font-size, margin;
+}
+nav {
+	-webkit-transition-property: left, top;
+	   -moz-transition-property: left, top;
+	    -ms-transition-property: left, top;
+	     -o-transition-property: left, top;
+	        transition-property: left, top;
+}
+.card {
+	-webkit-transition-property: box-shadow, width, height, margin, padding;
+	   -moz-transition-property: box-shadow, width, height, margin, padding;
+	    -ms-transition-property: box-shadow, width, height, margin, padding;
+	     -o-transition-property: box-shadow, width, height, margin, padding;
+	        transition-property: box-shadow, width, height, margin, padding;
+}

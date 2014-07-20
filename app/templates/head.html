@@ -7,7 +7,10 @@
 		<title>{% if title %}{{ title }} - {% endif %}Wave Extension Gallery</title>
 		<link rel="shortcut icon" type="image/x-icon" href="/static/images/gadget_icon_16x16.ico" />
 		<link rel="stylesheet" type="text/css" href="/static/styles/elems.css" />
-		<link rel="stylesheet" type="text/css" href="/static/styles/ui.css" />
+		<link rel="stylesheet" type="text/css" href="/static/styles/typography.css" />
+		<link rel="stylesheet" type="text/css" href="/static/styles/layout.css" />
+		<link rel="stylesheet" type="text/css" href="/static/styles/depth.css" />
+		<link rel="stylesheet" type="text/css" href="/static/styles/animation.css" />
 		<link rel="stylesheet" type="text/css" href="/static/styles/widgets.css" />
 		{% if stylesheet %}
 			<link rel="stylesheet" type="text/css" href="/static/styles/{{ stylesheet }}.css" />
@@ -19,21 +22,37 @@
 		</script>
 	</head>
 	<body>
-		<header id="header">
-			<nav>
-				<a href="/account" class="button" style="float:right;">Your account</a>
-				<a href="/"><h1>Wave Extensions Gallery</h1></a>
-				<div class="buttonGroup">
-					<a href="/gallery/gadgets" class="button">Gadgets</a><a href="/gallery/robots" class="button">Robots</a>
-				</div>
-				<a href="/about" class="button">About</a>
-				<form action="/gallery/search" method="GET">
-					<input type="search" placeholder="Search the gallery" name="q" accesskey="/" /><button type="submit" class="searchButton"><img src="/static/images/search.png" /></button>
-				</form>
-			</nav>
+		<header>
+			<form action="/gallery/search" method="GET" style="float: right;">
+				<input type="search" placeholder="Search the gallery" name="q" accesskey="/" /><button type="submit" class="searchButton"><img src="/static/images/search.png" /></button>
+			</form>
+			<h1>Wave Extensions Gallery</h1></a>
 		</header>
+		<nav>
+			<ul>
+				<li>
+					<a href="/">Home</a>
+				</li>
+				<li>
+					<a href="/about">About</a>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<a href="/gallery/gadgets">Gadgets</a>
+				</li>
+				<li>
+					<a href="/gallery/robots">Robots</a>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<a href="/account">Your account</a>
+				</li>
+			</ul>
+		</nav>
 		{% if message %}
-			<div id="message">
+			<div id="message" class="card z2">
 				<button class="closeButton" onclick="hideMessage();">&times;</button>
 				{{ message|safe }}
 			</div>

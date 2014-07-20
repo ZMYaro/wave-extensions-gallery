@@ -1,0 +1,146 @@
+/* This stylesheet is for the core parts of the Wave Extensions
+ * Gallery UI layout and their basic appearances.
+ */
+
+@charset "UTF-8";
+
+html {
+	height:100%;
+}
+html * {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+body {
+	min-height: 100%;
+	position: relative;
+	margin: 0;
+	padding: 24px;
+	padding-top: 88px; /* 64px action bar + 24px padding */
+	padding-bottom: 104px;
+	padding-left: 192px; /* 168px left bar + 24px padding */
+	
+	background-color: #EEEEEE;
+}
+header {
+	position: fixed;
+	display: block;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 64px;
+	padding: 0 24px;
+	
+	white-space: nowrap;
+	
+	background-color: #C1D9F4;
+	
+	/* Keep the header on top of other fixed elements */
+	z-index: 2;
+}
+	header h1 {
+		display: inline-block;
+		margin: 16px;
+		
+	}
+	header form {
+		margin: 14px;
+		vertical-align: baseline;
+	}
+nav {
+	position: fixed;
+	left: 0;
+	top: 64px;
+	width: 168px;
+	bottom: 0;
+	padding-bottom: 104px;
+	overflow: auto;
+	
+	background-color:#E4F0FD;
+}
+	nav ul {
+		list-style-type: none;
+		padding: 0;
+	}
+	nav ul li a {
+		display: block;
+		padding: 8px 24px;
+		text-decoration: none;
+		
+	}
+	nav ul li a:hover {
+		background-color: rgba(0, 0, 0, 0.075);
+	}
+	nav ul li a:active {
+		background-color: rgba(0, 0, 0, 0.15);
+	}
+
+footer {
+	position: absolute;
+	display: block;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 8px;
+
+	background-color: #4C4C4C;
+	-webkit-box-shadow: inset 0px 3px 8px 0px rgba(0,0,0,0.5);
+	   -moz-box-shadow: inset 0px 3px 8px 0px rgba(0,0,0,0.5);
+			box-shadow: inset 0px 3px 8px 0px rgba(0,0,0,0.5);
+	
+	text-align: center;
+	color: #C3C3C3;
+}
+	footer a, footer a:visited {
+		color: #C3C3C3;
+	}
+	footer a:hover {
+		color: #D4D4D4;
+	}
+	footer a:active {
+		color: #CACACA;
+	}
+.middle {
+	margin: 0 auto;
+	width: 100%;
+	max-width: 800px;
+}
+
+.formtable {
+	display: block;
+	width: 100%;
+}
+	.formtable td {
+		/*vertical-align:top;*/
+		padding-top: 8px;
+	}
+		.formtable td:first-child {
+			text-align: right;
+			width: 22%;
+		}
+	.formtable input[type="text"], .formtable input[type="email"], .formtable input[type="url"], .formtable textarea {
+		width: 100%;
+	}
+
+@media (max-width:600px) {
+	body {
+		padding: 16px;
+		padding-top: 72px; /* 56px action bar + 16px padding */
+		padding-bottom: 104px;
+		padding-left: 184px; /* 168px left bar + 16px padding */
+	}
+	header {
+		height: 56px;
+	}
+		header h1 {
+			margin: 12px;
+		}
+	nav {
+		top: 56px;
+	}
+	#middle {
+		padding-top:4px;
+		padding-left:172px;
+	}
+}

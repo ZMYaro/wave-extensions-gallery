@@ -27,51 +27,6 @@ aside[data-side="left"] {
 	}
 }
 
-/* ---- button groups ---- */
-.buttonGroup {
-	white-space:nowrap;
-	display:inline-block;
-}
-.buttonGroup button, .buttonGroup .button {
-	margin-left:0px;
-	margin-right:0px;
-	border-left-width:0px;
-	-webkit-border-radius:0px;
-	   -moz-border-radius:0px;
-	        border-radius:0px;
-}
-.buttonGroup button:first-child, .buttonGroup .button:first-child {
-	border-left-width:1px;
-	   -webkit-border-top-left-radius:3px;
-	-webkit-border-bottom-left-radius:3px;
-	       -moz-border-radius-topleft:3px;
-	    -moz-border-radius-bottomleft:3px;
-	           border-top-left-radius:3px;
-	        border-bottom-left-radius:3px;
-}
-.buttonGroup button:last-child, .buttonGroup .button:last-child {
-	border-right-width:1px;
-	   -webkit-border-top-right-radius:3px;
-	-webkit-border-bottom-right-radius:3px;
-	       -moz-border-radius-topright:3px;
-	    -moz-border-radius-bottomright:3px;
-	           border-top-right-radius:3px;
-	        border-bottom-right-radius:3px;
-}
-
-/* ---- search buttons ---- */
-.searchButton {
-	-webkit-box-sizing:border-box;
-	   -moz-box-sizing:border-box;
-	        box-sizing:border-box;
-	
-	/*margin-left:-31px;*/
-	padding:0px;
-	-webkit-border-radius:0 12px 12px 0;
-	   -moz-border-radius:0 12px 12px 0;
-	        border-radius:0 12px 12px 0;
-}
-
 /* ---- star buttons ---- */
 .star {
 	background-color:transparent;
