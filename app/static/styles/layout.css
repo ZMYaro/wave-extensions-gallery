@@ -19,7 +19,7 @@ body {
 	padding: 24px;
 	padding-top: 88px; /* 64px action bar + 24px padding */
 	padding-bottom: 104px;
-	padding-left: 192px; /* 168px left bar + 24px padding */
+	padding-left: 224px; /* 200px left bar + 24px padding */
 	
 	background-color: #EEEEEE;
 }
@@ -42,7 +42,6 @@ header {
 	header h1 {
 		display: inline-block;
 		margin: 16px;
-		
 	}
 	header form {
 		margin: 14px;
@@ -52,29 +51,33 @@ nav {
 	position: fixed;
 	left: 0;
 	top: 64px;
-	width: 168px;
+	width: 200px;
 	bottom: 0;
 	padding-bottom: 104px;
 	overflow: auto;
 	
 	background-color:#E4F0FD;
 }
+	nav h4 {
+		margin-left: 24px;
+	}
 	nav ul {
 		list-style-type: none;
 		padding: 0;
+		margin-top: 0;
 	}
-	nav ul li a {
-		display: block;
-		padding: 8px 24px;
-		text-decoration: none;
-		
-	}
-	nav ul li a:hover {
-		background-color: rgba(0, 0, 0, 0.075);
-	}
-	nav ul li a:active {
-		background-color: rgba(0, 0, 0, 0.15);
-	}
+		nav ul li a {
+			display: block;
+			padding: 8px 24px;
+			text-decoration: none;
+			
+		}
+			nav ul li a:hover {
+				background-color: rgba(0, 0, 0, 0.075);
+			}
+			nav ul li a:active {
+				background-color: rgba(0, 0, 0, 0.15);
+			}
 
 footer {
 	position: absolute;
@@ -122,12 +125,12 @@ footer {
 		width: 100%;
 	}
 
-@media (max-width:600px) {
+@media (max-width: 600px) {
 	body {
 		padding: 16px;
 		padding-top: 72px; /* 56px action bar + 16px padding */
 		padding-bottom: 104px;
-		padding-left: 184px; /* 168px left bar + 16px padding */
+		padding-left: 216px; /* 200px left bar + 16px padding */
 	}
 	header {
 		height: 56px;
@@ -138,6 +141,13 @@ footer {
 	nav {
 		top: 56px;
 	}
+		nav h4 {
+			margin-left: 16px;
+		}
+		nav ul li a {
+			padding-left: 16px;
+			padding-right: 16px;
+		}
 	.middle {
 		margin: -16px;
 	}

@@ -103,16 +103,6 @@ hr {
 nav hr {
 	border-color: #C0C0C0;
 }
-
-h1, h2 {
-	margin: 0;
-}
-h3 {
-	margin-bottom: 0;
-}
-p {
-	margin-top: 0.5em;
-}
 section ol, section ul {
 	margin-top:0.5em;
 	padding-left: 20px;

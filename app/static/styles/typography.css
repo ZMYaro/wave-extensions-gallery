@@ -16,6 +16,9 @@ body {
 input, button, select {
 	font: inherit;
 }
+h1, h2 {
+	margin: 0;
+}
 h1 {
 	font-size: 24px;
 	font-weight: 400;
@@ -28,12 +31,28 @@ h2 {
 	font-size: 20px;
 	font-weight: 500;
 }
+h3 {
+	font-size: 16px;
+	font-weight: 400;
+	margin-bottom: 0;
+}
+h4 {
+	font-size: 14px;
+	font-weight: 500;
+	margin-bottom: 0;
+}
+p {
+	margin-top: 0.5em;
+}
+nav h4 {
+	margin-left: 24px;
+}
 nav ul li a {
 	font-size: 20px;
 	font-weight: 400;
 	text-decoration: none;
 }
-	nav ul ul li a {
+	nav ul ul li a, nav ul.small li a {
 		font-size: 16px;
 	}
 footer {
