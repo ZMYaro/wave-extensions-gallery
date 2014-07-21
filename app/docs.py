@@ -17,8 +17,6 @@ class DocPage(webapp.RequestHandler):
 		
 		if not page:
 			page = ''
-		elif page == 'sidebar':
-			page = '404' # sidebar.html exists, but is not a doc
 		else:
 			page = page[1:] # Remove the initial slash
 
@@ -31,12 +29,10 @@ class DocPage(webapp.RequestHandler):
 			docPath = docPath[:-5] + '/index.html'
 			if not os.path.exists(os.path.join(os.path.dirname(__file__), docPath)):
 				# Still not found?  404.
-				docPath = 'templates/docs/404.html'
+				docPath = 'templates/404.html'
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
 		self.response.out.write(template.render(path, {'title':'Documentation'}))
-		path = os.path.join(os.path.dirname(__file__), 'templates/docs/sidebar.html')
-		self.response.out.write(template.render(path, {}))
 		path = os.path.join(os.path.dirname(__file__), docPath)
 		self.response.out.write(template.render(path, {'baseURL':self.request.host_url}))
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')
