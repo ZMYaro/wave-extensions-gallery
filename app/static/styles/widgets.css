@@ -27,6 +27,69 @@ aside[data-side="left"] {
 	}
 }
 
+/* ---- grid layout ---- */
+.grid {
+	text-align: center;
+	list-style-type: none;
+	margin: -24px;
+	padding: 8px;
+}
+	.grid .grid {
+		margin: -16px;
+	}
+	.grid > li {
+		display: inline-block;
+		overflow: hidden;
+		width: 47%;
+		/*height: 96px;*/
+		margin: 8px 1%;
+		vertical-align: top;
+		text-align: left;
+	}
+		.grid > li.big {
+			min-height: 192px;
+		}
+		.grid > li:not(.big) {
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+		.grid > li h1, .grid > li h2, .grid > li h3 {
+			margin: 0.5em 0em;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+	.grid.extList > li {
+		padding: 0;
+		overflow: visible;
+	}
+		.grid.extList > li > a {
+			display: block;
+			margin: 0;
+			width: 100%;
+			height: 100%;
+			text-decoration: none;
+			overflow: hidden;
+		}
+		.grid.extList > li > a:active {
+			background-color: #F0F0F0;;
+		}
+		.grid.extList > li h3 {
+			margin-top: 4px;
+		}
+		.grid.extList > li p {
+			overflow: hidden;
+			white-space: normal;
+			font-size: 12px;
+			max-height: 32px;
+		}
+@media (max-width: 1000px) {
+	ul.grid > li {
+		display:block;
+		width:95%;
+		margin: 16px auto;
+	}
+}
+
 /* ---- star buttons ---- */
 .star {
 	background-color:transparent;

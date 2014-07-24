@@ -35,12 +35,8 @@ button, *[role="button"] {
 }
 	button:enabled:hover, *[role="button"]:hover {
 		background-color: #FFFFFF;
-		
-		-webkit-box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.23), 0 4px 15px 0 rgba(0, 0, 0, 0.175);
-		   -moz-box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.23), 0 4px 15px 0 rgba(0, 0, 0, 0.175);
-				box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.23), 0 4px 15px 0 rgba(0, 0, 0, 0.175);
 	}
-	button:enabled:active, *[role="button"]:active {
+	button:enabled:active, *[role="button"]:active, .extList > li > a:active {
 		background-color: #F0F0F0;
 	}
 	button:disabled, select:not([size]):disabled, .button:disabled {

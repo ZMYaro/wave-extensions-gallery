@@ -17,7 +17,7 @@ class MainPage(webapp.RequestHandler):
 		extlist = searchFor('',limit=4,sortBy=SORT_TOP_RATING)
 		
 		path = os.path.join(os.path.dirname(__file__), 'templates/head.html')
-		self.response.out.write(template.render(path, {'stylesheet':'landing'}))
+		self.response.out.write(template.render(path, {}))
 		path = os.path.join(os.path.dirname(__file__), 'templates/landing.html')
 		self.response.out.write(template.render(path, {'extlist':extlist}))
 		path = os.path.join(os.path.dirname(__file__), 'templates/foot.html')

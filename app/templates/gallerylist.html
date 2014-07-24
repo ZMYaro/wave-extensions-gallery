@@ -1,77 +1,69 @@
-<section id="leftSide" style="padding-left: 16px;">
-	<h3><a href="/gallery">Gallery</a></h3>
-	<ul style="line-height: 150%;">
-		<li>
-			<a href="/gallery/gadgets">Gadgets</a>
-		</li>
-		<li>
-			<a href="/gallery/robots">Robots</a>
-		</li>
-	</ul>
-	<h3>Categories</h3>
-	<ul style="line-height: 150%;">
-		<li>
-			<a href="/gallery/category/game">Game</a>
-		</li>
-		<li>
-			<a href="/gallery/category/image">Image</a>
-		</li>
-		<li>
-			<a href="/gallery/category/map">Map</a>
-		</li>
-		<li>
-			<a href="/gallery/category/music">Music</a>
-		</li>
-		<li>
-			<a href="/gallery/category/productivity">Productivity</a>
-		</li>
-		<li>
-			<a href="/gallery/category/search">Search</a>
-		</li>
-		<li>
-			<a href="/gallery/category/team">Team</a>
-		</li>
-		<li>
-			<a href="/gallery/category/time">Time</a>
-		</li>
-		<li>
-			<a href="/gallery/category/travel">Travel</a>
-		</li>
-		<li>
-			<a href="/gallery/category/utility">Utility</a>
-		</li>
-		<li>
-			<a href="/gallery/category/video">Video</a>
-		</li>
-		<li>
-			<a href="/gallery/category/voice">Voice</a>
-		</li>
-		<li>
-			<a href="/gallery/category/voting">Voting</a>
-		</li>
-		<li>
-			<a href="/gallery/category/other">Other</a>
-		</li>
-	</ul>
-</section>
-<section id="middle">
-	<h1>{% if query %}{{ query }}{% else %}List Of Extensions{% endif %}</h1>
-	<table>
+<!--
+<h3>Categories</h3>
+<ul style="line-height: 150%;">
+	<li>
+		<a href="/gallery/category/game">Game</a>
+	</li>
+	<li>
+		<a href="/gallery/category/image">Image</a>
+	</li>
+	<li>
+		<a href="/gallery/category/map">Map</a>
+	</li>
+	<li>
+		<a href="/gallery/category/music">Music</a>
+	</li>
+	<li>
+		<a href="/gallery/category/productivity">Productivity</a>
+	</li>
+	<li>
+		<a href="/gallery/category/search">Search</a>
+	</li>
+	<li>
+		<a href="/gallery/category/team">Team</a>
+	</li>
+	<li>
+		<a href="/gallery/category/time">Time</a>
+	</li>
+	<li>
+		<a href="/gallery/category/travel">Travel</a>
+	</li>
+	<li>
+		<a href="/gallery/category/utility">Utility</a>
+	</li>
+	<li>
+		<a href="/gallery/category/video">Video</a>
+	</li>
+	<li>
+		<a href="/gallery/category/voice">Voice</a>
+	</li>
+	<li>
+		<a href="/gallery/category/voting">Voting</a>
+	</li>
+	<li>
+		<a href="/gallery/category/other">Other</a>
+	</li>
+</ul>
+-->
+<h1 style="margin-bottom: 16px;">{% if query %}{{ query }}{% else %}List Of Extensions{% endif %}</h1>
+<ol class="grid extList">
 	{% for ext in extlist %}
-		<tr>
-			<td><a href="/gallery/info/{{ ext.extID }}"><img src="{% if ext.icon %}/gallery/icon/{{ ext.extID}}.png{% else %}/static/images/gadget_icon_128x128.png{% endif %}" style="width: 64px; height: 64px;" /></a></td>
-			<td><a href="/gallery/info/{{ ext.extID }}"><h3>{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</h3></a></td>
-			<td>{% if ext.type %}{{ ext.type }}{% endif %}</td>
-			<td style="text-align: center;">
-				<div class="rating">
-					<div class="dislikes"{% if ext.downvotePercentage %}style="width: {{ ext.downvotePercentage }}%;"{% endif %}></div>
-					<div class="likes"{% if ext.upvotePercentage %}style="width: {{ ext.upvotePercentage }}%;"{% endif %}></div>
+		<li>
+			<a href="/gallery/info/{{ ext.extID }}" class="card">
+				<img src="{% if ext.icon %}/gallery/icon/{{ ext.extID}}.png{% else %}/static/images/gadget_icon_128x128.png{% endif %}" style="width: 72px; height: 72px; float: left; margin-right: 8px;" />
+				<p style="text-transform: capitalize; float: right; font-size: smaller;">{% if ext.type %}{{ ext.type }}{% endif %}</p>
+				<h3>{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</h3>
+				<div style="float: right; text-align: center; margin-top: -8px; margin-left: 8px;">
+					<div class="rating">
+						<div class="dislikes"{% if ext.downvotePercentage %}style="width: {{ ext.downvotePercentage }}%;"{% endif %}></div>
+						<div class="likes"{% if ext.upvotePercentage %}style="width: {{ ext.upvotePercentage }}%;"{% endif %}></div>
+					</div>
+					<div class="ratingCount">{% if ext.ratingCount %}{{ ext.ratingCount }}{% else %}0{% endif %} rating{% if ext.ratingCount != 1 %}s{% endif %}</div>
 				</div>
-				<div class="ratingCount">{% if ext.ratingCount %}{{ ext.ratingCount }}{% else %}0{% endif %} rating{% if ext.ratingCount != 1 %}s{% endif %}</div>
-			</td>
-		</tr>
+				<p>{% if ext.description %}{{ ext.htmlDescription|striptags }}{% endif %}</p>
+			</a>
+		</li>
 	{% empty %}
-		No results :(
+		<h3 style="text-align: center;">No results :(</h3>
 	{% endfor %}
-	</table>
-</section>
+</ol>
