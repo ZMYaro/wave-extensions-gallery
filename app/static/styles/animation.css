@@ -4,12 +4,12 @@
 
 @charset "UTF-8";
 
- body, header, header *, nav, .card {
-	-webkit-transition-duration: 0.2s;
-	   -moz-transition-duration: 0.2s;
-	    -ms-transition-duration: 0.2s;
-	     -o-transition-duration: 0.2s;
-	        transition-duration: 0.2s;
+ body, #header, #header *, #nav, .card {
+	-webkit-transition-duration: 0.1s;
+	   -moz-transition-duration: 0.1s;
+	    -ms-transition-duration: 0.1s;
+	     -o-transition-duration: 0.1s;
+	        transition-duration: 0.1s;
 	-webkit-transition-timing-function: linear;
 	   -moz-transition-timing-function: linear;
 	    -ms-transition-timing-function: linear;
@@ -23,21 +23,21 @@ body {
 	     -o-transition-property: padding;
 	        transition-property: padding;
 }
-header {
+#header {
 	-webkit-transition-property: font-size, padding, height;
 	   -moz-transition-property: font-size, padding, height;
 	    -ms-transition-property: font-size, padding, height;
 	     -o-transition-property: font-size, padding, height;
 	        transition-property: font-size, padding, height;
 }
-header * {
+#header * {
 	-webkit-transition-property: font-size, margin;
 	   -moz-transition-property: font-size, margin;
 	    -ms-transition-property: font-size, margin;
 	     -o-transition-property: font-size, margin;
 	        transition-property: font-size, margin;
 }
-nav {
+#nav {
 	-webkit-transition-property: left, top;
 	   -moz-transition-property: left, top;
 	    -ms-transition-property: left, top;
