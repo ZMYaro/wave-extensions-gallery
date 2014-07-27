@@ -1,6 +1,6 @@
 <section class="middle card z1">
 	<h1>Developer Dashboard</h1>
-	<a href="/dev/new" style="text-decoration:none;"><button>New extension</button></a>
+	<a href="/dev/new" role="button">New extension</a>
 	<br />
 	<br />
 	<table cellpadding="4">
@@ -28,13 +28,13 @@
 		{% empty %}
 			<tr>
 				<td colspan="3" style="text-align:center;">
-					You have no extensions.  <a href="/dev/new">Click here</a> to add one.
+					You have no extensions.  Would you like to <a href="/dev/new">add one</a>?
 				</td>
 			</tr>
 		{% endfor %}
 	</table>
 	<br />
-	<a href="/dev/new" style="text-decoration:none;"><button>New extension</button></a>
+	<a href="/dev/new" role="button">New extension</a>
 	<br /><br />
 	<p>
 		New to wave extension development?  Read <a href="http://www.waveprotocol.org/wave-apis/extensions" target="_blank">an overview</a> of extensions and an introduction to <a href="http://www.waveprotocol.org/wave-apis/google-wave-gadgets-api" target="_blank">gadgets</a> or <a href="http://www.waveprotocol.org/wave-apis/google-wave-robots-api-overview" target="_blank">robots</a>.
