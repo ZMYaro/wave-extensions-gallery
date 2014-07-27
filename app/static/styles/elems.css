@@ -104,6 +104,24 @@ section ol, section ul {
 	padding-left: 20px;
 }
 
+.middle table {
+	width: 100%;
+	margin: 0 -1px;
+	
+	border-spacing: 0;
+	border-collapse: collapse;
+	border: 0 none transparent;
+}
+	.middle table th, .middle table td {
+		padding: 3px 4px;
+	}
+	.middle table th {
+		border: 1px solid #909090;
+	}
+	.middle table td {
+		border: 1px solid #b8b8b8;
+	}
+
 .card {
 	background-color: white;
 	-webkit-border-radius: 2px;
