@@ -22,13 +22,24 @@
 		</script>
 	</head>
 	<body>
-		<header>
+		<!--[if !IE]>-->
+		<header id="header">
+		<!--<![endif]-->
+		<!--[if lt IE 9]>
+		<div id="header">
+		<![endif]--> 
 			<form action="/gallery/search" method="GET" style="float: right;">
 				<input type="search" placeholder="Search the gallery" name="q" accesskey="/" /><button type="submit" class="searchButton"><img src="/static/images/search.png" /></button>
 			</form>
-			<h1>Wave Extensions Gallery</h1></a>
+			<h1>Wave Extensions Gallery</h1>
+		<!--[if !IE]>-->
 		</header>
-		<nav>
+		<nav id="nav">
+		<!--<![endif]-->
+		<!--[if lt IE 9]>
+		</div>
+		<div id="nav">
+		<![endif]--> 
 			<h4>Home</h4>
 			<ul>
 				<li>
@@ -65,7 +76,12 @@
 					<a href="/docs/api">API documentation</a>
 				</li>
 			</ul>
+		<!--[if !IE]>-->
 		</nav>
+		<!--<![endif]-->
+		<!--[if lt IE 9]>
+		</div>
+		<![endif]-->
 		{% if message %}
 			<div id="message" class="card z2">
 				<button class="closeButton" onclick="hideMessage();">&times;</button>

@@ -49,11 +49,11 @@
 <ol class="grid extList">
 	{% for ext in extlist %}
 		<li>
-			<a href="/gallery/info/{{ ext.extID }}" class="card">
-				<img src="{% if ext.icon %}/gallery/icon/{{ ext.extID}}.png{% else %}/static/images/gadget_icon_128x128.png{% endif %}" style="width: 72px; height: 72px; float: left; margin-right: 8px;" />
-				<p style="text-transform: capitalize; float: right; font-size: smaller;">{% if ext.type %}{{ ext.type }}{% endif %}</p>
+			<a href="/gallery/info/{{ ext.extID }}" class="card small">
+				<img src="{% if ext.icon %}/gallery/icon/{{ ext.extID}}.png{% else %}/static/images/gadget_icon_128x128.png{% endif %}" style="width: 72px; height: 72px; float: left; margin: -4px 8px -4px -4px;" />
+				<p style="text-transform: capitalize; float: right; font-size: smaller; margin-top: 0;">{% if ext.type %}{{ ext.type }}{% endif %}</p>
 				<h3>{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</h3>
-				<div style="float: right; text-align: center; margin-top: -8px; margin-left: 8px;">
+				<div style="float: right; text-align: center; margin-left: 8px;">
 					<div class="rating">
 						<div class="dislikes"{% if ext.downvotePercentage %}style="width: {{ ext.downvotePercentage }}%;"{% endif %}></div>
 						<div class="likes"{% if ext.upvotePercentage %}style="width: {{ ext.upvotePercentage }}%;"{% endif %}></div>

@@ -2,17 +2,19 @@
 
 @charset "UTF-8";
 
-.card.z1, header, button, *[role="button"], .extList > li > a {
+.card.z1, #header, button, *[role="button"], a.card {
 	-webkit-box-shadow: rgba(0, 0, 0, 0.26) 0 2px 5px 0, rgba(0, 0, 0, 0.16) 0 2px 10px 0;
 	   -moz-box-shadow: rgba(0, 0, 0, 0.26) 0 2px 5px 0, rgba(0, 0, 0, 0.16) 0 2px 10px 0;
 	        box-shadow: rgba(0, 0, 0, 0.26) 0 2px 5px 0, rgba(0, 0, 0, 0.16) 0 2px 10px 0;
+	    filter:  progid:DXImageTransform.Microsoft.Glow(Color=#b8b8b8,Strength=5);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Glow(Color=#b8b8b8,Strength=5)";
 }
-button:enabled:hover, *[role="button"]:hover, .extList > li > a:hover {
+button:enabled:hover, *[role="button"]:hover, a.card:hover {
 	-webkit-box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.23), 0 4px 15px 0 rgba(0, 0, 0, 0.175);
 	   -moz-box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.23), 0 4px 15px 0 rgba(0, 0, 0, 0.175);
 	        box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.23), 0 4px 15px 0 rgba(0, 0, 0, 0.175);
 }
-.card.z2, nav, button:enabled:active, *[role="button"]:active, .extList > li > a:active {
+.card.z2, #nav, button:enabled:active, *[role="button"]:active, a.card:active {
 	-webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 8px 17px 0, rgba(0, 0, 0, 0.19) 0 6px 20px 0;
 	   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 8px 17px 0, rgba(0, 0, 0, 0.19) 0 6px 20px 0;
 	        box-shadow: rgba(0, 0, 0, 0.2) 0 8px 17px 0, rgba(0, 0, 0, 0.19) 0 6px 20px 0;
@@ -31,4 +33,15 @@ button:enabled:hover, *[role="button"]:hover, .extList > li > a:hover {
 	-webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 27px 24px 0, rgba(0, 0, 0, 0.22) 0 40px 77px 0;
 	   -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 27px 24px 0, rgba(0, 0, 0, 0.22) 0 40px 77px 0;
 	        box-shadow: rgba(0, 0, 0, 0.2) 0 27px 24px 0, rgba(0, 0, 0, 0.22) 0 40px 77px 0;
+}
+ 
+/* For IE < 9 */
+div#header, div#nav {
+	    filter:  progid:DXImageTransform.Microsoft.Glow(Color=#b0b0b0,Strength=10);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Glow(Color=#b0b0b0,Strength=10)";
+	margin: -10px;
+}
+div#message {
+	    filter:  progid:DXImageTransform.Microsoft.Glow(Color=#a8a8a8,Strength=15);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Glow(Color=#a8a8a8,Strength=15)";
 }

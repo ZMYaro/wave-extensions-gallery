@@ -33,10 +33,10 @@ button, *[role="button"] {
 	   -moz-user-select:none;
 	        user-select:none;
 }
-	button:enabled:hover, *[role="button"]:hover {
+	button:enabled:hover, *[role="button"]:hover, a.card:hover {
 		background-color: #FFFFFF;
 	}
-	button:enabled:active, *[role="button"]:active, .extList > li > a:active {
+	button:enabled:active, *[role="button"]:active, .extList > li > a:active, a.card:active {
 		background-color: #F0F0F0;
 	}
 	button:disabled, select:not([size]):disabled, .button:disabled {
@@ -44,7 +44,7 @@ button, *[role="button"] {
 			 opacity:0.6;
 		cursor:default;
 	}
-	header button, #message button {
+	#header button, #message button {
 		background-color: transparent;
 		width: 32px;
 		height: 32px;
@@ -55,16 +55,16 @@ button, *[role="button"] {
 		        border-radius: 50%;
 		vertical-align: bottom;
 	}
-		header button, header button:enabled:hover, header button:enabled:active,
+		#header button, #header button:enabled:hover, #header button:enabled:active,
 		#message button, #message button:enabled:hover, #message button:enabled:active {
 			-webkit-box-shadow: none;
 			   -moz-box-shadow: none;
 			        box-shadow: none;
 		}
-		header button:enabled:hover, #message button:enabled:hover {
+		#header button:enabled:hover, #message button:enabled:hover {
 			background-color: rgba(0, 0, 0, 0.075);
 		}
-		header button:enabled:active, #message button:enabled:active {
+		#header button:enabled:active, #message button:enabled:active {
 			background-color: rgba(0, 0, 0, 0.15);
 		}
 
@@ -96,7 +96,7 @@ hr {
 	border-style: solid none none;
 	border-color:#E5E5E5;
 }
-nav hr {
+#nav hr {
 	border-color: #C0C0C0;
 }
 section ol, section ul {
@@ -116,6 +116,40 @@ section ol, section ul {
 	padding: 16px;
 	margin: -8px;
 }
+	.card h1, .card h2, .card h3 {
+		margin: 0;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.card.big {
+		min-height: 192px;
+	}
+	.card.small {
+		min-height: 96px;
+	}
+		.card.small p {
+			margin-bottom: 0;
+			max-height: 38px;
+			overflow: hidden;
+		}
+	.card.tiny {
+		height: 72px;
+		padding: 4px;
+	}
+		.card.tiny h3 {
+			margin-top: 4px;
+		}
+		.card.tiny p {
+			max-height: 32px;
+			overflow: hidden;
+		}
+	li > a.card {
+		display: block;
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
 #message {
 	background-color:#FEFDD5;
 	text-align: center;

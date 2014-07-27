@@ -44,17 +44,28 @@ h4 {
 p {
 	margin: 0.5em 0;
 }
-nav h4 {
+#nav h4 {
 	margin-left: 24px;
 }
-nav ul li a {
+#nav ul li a {
 	font-size: 20px;
 	font-weight: 400;
 	text-decoration: none;
 }
-	nav ul ul li a, nav ul.small li a {
+	#nav ul ul li a, #nav ul.small li a {
 		font-size: 16px;
 	}
-footer {
+#footer {
 	font-size: 12px;
 }
+
+.card.tiny > p {
+	font-size: 12px;
+}
+a.card {
+	color: inherit;
+	text-decoration: none;
+}
+	a.card p {
+		opacity: 0.75;
+	}

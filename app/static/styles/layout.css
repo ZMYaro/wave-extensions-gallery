@@ -23,7 +23,7 @@ body {
 	
 	background-color: #EEEEEE;
 }
-header {
+#header {
 	position: fixed;
 	display: block;
 	top: 0;
@@ -39,15 +39,15 @@ header {
 	/* Keep the header on top of other fixed elements */
 	z-index: 2;
 }
-	header h1 {
+	#header h1 {
 		display: inline-block;
 		margin: 16px;
 	}
-	header form {
+	#header form {
 		margin: 14px;
 		vertical-align: baseline;
 	}
-nav {
+#nav {
 	position: fixed;
 	left: 0;
 	top: 64px;
@@ -58,28 +58,28 @@ nav {
 	
 	background-color:#E4F0FD;
 }
-	nav h4 {
+	#nav h4 {
 		margin-left: 24px;
 	}
-	nav ul {
+	#nav ul {
 		list-style-type: none;
 		padding: 0;
 		margin-top: 0;
 	}
-		nav ul li a {
+		#nav ul li a {
 			display: block;
 			padding: 8px 24px;
 			text-decoration: none;
 			
 		}
-			nav ul li a:hover {
+			#nav ul li a:hover {
 				background-color: rgba(0, 0, 0, 0.075);
 			}
-			nav ul li a:active {
+			#nav ul li a:active {
 				background-color: rgba(0, 0, 0, 0.15);
 			}
 
-footer {
+#footer {
 	position: absolute;
 	display: block;
 	left: 0;
@@ -95,13 +95,13 @@ footer {
 	text-align: center;
 	color: #C3C3C3;
 }
-	footer a, footer a:visited {
+	#footer a, #footer a:visited {
 		color: #C3C3C3;
 	}
-	footer a:hover {
+	#footer a:hover {
 		color: #D4D4D4;
 	}
-	footer a:active {
+	#footer a:active {
 		color: #CACACA;
 	}
 .middle {
@@ -132,19 +132,19 @@ footer {
 		padding-bottom: 104px;
 		padding-left: 216px; /* 200px left bar + 16px padding */
 	}
-	header {
+	#header {
 		height: 56px;
 	}
-		header h1 {
+		#header h1 {
 			margin: 12px;
 		}
-	nav {
+	#nav {
 		top: 56px;
 	}
-		nav h4 {
+		#nav h4 {
 			margin-left: 16px;
 		}
-		nav ul li a {
+		#nav ul li a {
 			padding-left: 16px;
 			padding-right: 16px;
 		}
