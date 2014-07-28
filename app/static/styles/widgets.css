@@ -27,50 +27,108 @@ aside[data-side="left"] {
 	}
 }
 
-/* ---- grid layout ---- */
-.grid {
-	text-align: center;
-	list-style-type: none;
-	margin: -24px;
-	padding: 8px;
+/* ---- Cards ---- */
+
+.card {
+	background-color: white;
+	-webkit-border-radius: 2px;
+	   -moz-border-radius: 2px;
+	        border-radius: 2px;
+	
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+	
+	display: inline-block;
+	margin: 8px;
+	padding: 16px;
+	width: 100%;
+	width: calc(100% - 16px);
+	vertical-align: top;
 }
-	.grid .grid {
-		margin: -16px;
+	.card h1, .card h2, .card h3 {
+		margin: 0;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
-	.grid > li {
-		display: inline-block;
-		margin: 8px 7px;
-		width: 45%;
-		width: calc(50% - 17px);
-		
-		vertical-align: top;
-		text-align: left;
+	.card.big {
+		min-height: 192px;
 	}
-@media (max-width: 1000px) {
-	.grid > li {
+	.card.small {
+		min-height: 96px;
+	}
+		.card.small p {
+			margin-bottom: 0;
+			max-height: 38px;
+			overflow: hidden;
+		}
+	.card.tiny {
+		height: 72px;
+		padding: 4px;
+	}
+		.card.tiny h3 {
+			margin-top: 4px;
+		}
+		.card.tiny p {
+			max-height: 32px;
+			overflow: hidden;
+		}
+	li > a.card {
 		display: block;
-		margin: 16px auto;
-		width: 95%;
-		width: calc(100% - 7px);
+		margin: 0;
+		width: 100%;
+		height: 100%;
 	}
-	.grid .grid > li {
-		display: inline-block;
-		margin: 8px 7px;
+
+
+.halfWidth, .thirdWidth, .quarterWidth {
+	display: inline-block;
+	margin: 8px 7px;
+}
+.halfWidth {
+	width: 45%;
+	width: calc(50% - 16px);
+}
+.thirdWidth {
+	width: 31%;
+	width: calc(33.233% - 16px);
+}
+.quarterWidth {
+	width: 21%;
+	width: calc(25% - 17px);
+}
+@media (max-width: 1000px) {
+	.halfWidth {
+		width: 100%;
+		width: calc(100% - 16px);
+	}
+		.halfWidth .halfWidth {
+			width: 45%;
+			width: calc(50% - 16px);
+		}
+	.thirdWidth, .quarterWidth {
 		width: 45%;
-		width: calc(50% - 17px);
+		width: calc(50% - 16px);
 	}
 }
 @media (max-width: 600px) {
-	.grid {
-		margin: -16px;
-	}
-	.grid .grid > li {
-		display:block;
-		margin: 16px auto;
-		width: 95%;
-		width: calc(100% - 7px);
+	.halfWidth .halfWidth, .thirdWidth, .quarterWidth {
+		width: 100%;
+		width: calc(100% - 16px);
 	}
 }
+
+.grid {
+	list-style-type: none;
+	margin: -8px;
+	padding: 0;
+	text-align: center;
+}
+	.grid > li {
+		text-align: left;
+		vertical-align: top;
+	}
 
 /* ---- star buttons ---- */
 .star {

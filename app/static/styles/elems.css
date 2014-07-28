@@ -11,7 +11,7 @@ a img {
 }
 
 button, *[role="button"] {
-	background-color: #FAFAFA;
+	background-color: #fafafa;
 	
 	-webkit-border-radius:3px;
 	   -moz-border-radius:3px;
@@ -33,13 +33,14 @@ button, *[role="button"] {
 	   -moz-user-select:none;
 	        user-select:none;
 }
-	button:enabled:hover, *[role="button"]:not(.disabled):hover, a.card:hover {
-		background-color: #FFFFFF;
+	button:hover, *[role="button"]:hover, a.card:hover {
+		background-color: #ffffff;
 	}
-	button:enabled:active, *[role="button"]:not(.disabled):active, .extList > li > a:active, a.card:active {
-		background-color: #F0F0F0;
+	button:active, *[role="button"]:active, a.card:active {
+		background-color: #f0f0f0;
 	}
-	button:disabled, select:not([size]):disabled, .button:disabled, *.disabled {
+	button:disabled, select:disabled, *[role="button"].disabled {
+		background-color: #fafafa;
 		-moz-opacity: 0.6;
 			 opacity: 0.6;
 		cursor: default;
@@ -122,52 +123,6 @@ section ol, section ul {
 		border: 1px solid #b8b8b8;
 	}
 
-.card {
-	background-color: white;
-	-webkit-border-radius: 2px;
-	   -moz-border-radius: 2px;
-	        border-radius: 2px;
-	
-	-webkit-box-sizing: border-box;
-	   -moz-box-sizing: border-box;
-	        box-sizing: border-box;
-	padding: 16px;
-	margin: -8px;
-}
-	.card h1, .card h2, .card h3 {
-		margin: 0;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-	.card.big {
-		min-height: 192px;
-	}
-	.card.small {
-		min-height: 96px;
-	}
-		.card.small p {
-			margin-bottom: 0;
-			max-height: 38px;
-			overflow: hidden;
-		}
-	.card.tiny {
-		height: 72px;
-		padding: 4px;
-	}
-		.card.tiny h3 {
-			margin-top: 4px;
-		}
-		.card.tiny p {
-			max-height: 32px;
-			overflow: hidden;
-		}
-	li > a.card {
-		display: block;
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
 #message {
 	background-color:#FEFDD5;
 	text-align: center;

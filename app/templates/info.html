@@ -30,7 +30,7 @@
 		</p>
 		{% endif %}
 	</header>
-	<br /><br />
+	<br />
 	
 	<!-- Screenshots -->
 	{% if ext.screenshots|length > 0 %}
@@ -42,7 +42,6 @@
 			{% endfor %}
 			</div>
 		</section>
-	<br />
 	{% endif %}
 
 	<!-- Description -->
@@ -50,40 +49,39 @@
 		<h2>Description</h2>
 		<div id="description">{{ ext.htmlDescription|safe }}</div>
 	</section>
-	<br />
-	<ul class="grid">
-		<li class="card z1">
-			<h2>Rate</h2>
-			<div style="text-align: center;">
-				<a href="/gallery/downvote/{{ ext.extID }}" role="button" class="ratingButton{% if userRating == -1 %} disabled{% endif %}" title="Downvote" style="color: #A01008 !important;"><img src="/static/images/downvote.png" alt="&#8722;1" /></a>
-				<a href="/gallery/nullvote/{{ ext.extID }}" role="button" class="ratingButton{% if userRating == 0 %} disabled{% endif %}" title="No vote"><img src="/static/images/nullvote.png" alt="&#177;0" /></a>
-				<a href="/gallery/upvote/{{ ext.extID }}"   role="button" class="ratingButton{% if userRating == 1 %} disabled{% endif %}" title="Upvote" style="color: #008000 !important;"><img src="/static/images/upvote.png" alt="+1" /></a>
-				<div class="rating">
-					<div class="dislikes"{% if ext.downvotePercentage %}style="width:{{ ext.downvotePercentage }}%;"{% endif %}></div>
-					<div class="likes"{% if ext.upvotePercentage %}style="width:{{ ext.upvotePercentage }}%;"{% endif %}></div>
-				</div>
-				<div class="ratingCount">{% if ext.ratingCount %}{{ ext.ratingCount }}{% else %}0{% endif %} rating{% if ext.ratingCount != 1 %}s{% endif %}</div>
+	
+	<!-- Ratings -->
+	<section class="card thirdWidth z1">
+		<h2>Rate</h2>
+		<div style="text-align: center;">
+			<a href="/gallery/downvote/{{ ext.extID }}" role="button" class="ratingButton{% if userRating == -1 %} disabled{% endif %}" title="Downvote" style="color: #A01008 !important;"><img src="/static/images/downvote.png" alt="&#8722;1" /></a>
+			<a href="/gallery/nullvote/{{ ext.extID }}" role="button" class="ratingButton{% if userRating == 0 %} disabled{% endif %}" title="No vote"><img src="/static/images/nullvote.png" alt="&#177;0" /></a>
+			<a href="/gallery/upvote/{{ ext.extID }}"   role="button" class="ratingButton{% if userRating == 1 %} disabled{% endif %}" title="Upvote" style="color: #008000 !important;"><img src="/static/images/upvote.png" alt="+1" /></a>
+			<div class="rating">
+				<div class="dislikes"{% if ext.downvotePercentage %}style="width:{{ ext.downvotePercentage }}%;"{% endif %}></div>
+				<div class="likes"{% if ext.upvotePercentage %}style="width:{{ ext.upvotePercentage }}%;"{% endif %}></div>
 			</div>
-		</li>
+			<div class="ratingCount">{% if ext.ratingCount %}{{ ext.ratingCount }}{% else %}0{% endif %} rating{% if ext.ratingCount != 1 %}s{% endif %}</div>
+		</div>
+	</section>
 		
-		<!-- Share -->
-		<li class="card z1">
-			<h2>Share</h2>
-			<!-- +1 button -->
-			<div class="g-plusone" data-size="medium"></div>
-			<br />
-			<!-- Like button -->
-			<div class="fb-like" data-send="false" data-layout="button_count" data-width="160" data-show-faces="false"></div>
-			<br />
-			<!-- Tweet button -->
-			<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-		</li>
-		
-		<!-- Category -->
-		<li class="card z1">
-			Category: <a href="/gallery/category/{{ ext.category }}">{{ ext.category }}</a>
-		</li>
-	</ul>
+	<!-- Share -->
+	<div class="card thirdWidth z1">
+		<h2>Share</h2>
+		<!-- +1 button -->
+		<div class="g-plusone" data-size="medium"></div>
+		<br />
+		<!-- Like button -->
+		<div class="fb-like" data-send="false" data-layout="button_count" data-width="160" data-show-faces="false"></div>
+		<br />
+		<!-- Tweet button -->
+		<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+	</div>
+	
+	<!-- Category -->
+	<section class="card thirdWidth z1">
+		Category: <a href="/gallery/category/{{ ext.category }}">{{ ext.category }}</a>
+	</section>
 </div>
 
 <!-- Scripts for social media buttons -->

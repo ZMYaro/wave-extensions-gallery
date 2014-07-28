@@ -1,75 +1,66 @@
-<ul class="grid">
-	<li>
-		<a href="/gallery" class="card big">
-			<img src="/static/images/gadget_icon_128x128.png" alt="icon" style="float: left;margin: -8px 8px -8px -8px;" />
-			<h1>Welcome</h1>
-			<p style="font-size:larger;">Welcome to the Wave Extensions Gallery.  The gadgets you find here should work with any wave service that supports gadgets.  If you are new to the world of wave, select &ldquo;About&rdquo; from the sidebar to learn more.</p>
+<!-- Welcome -->
+<a href="/gallery" class="card halfWidth big">
+	<img src="/static/images/gadget_icon_128x128.png" alt="icon" style="float: left;margin: -8px 8px -8px -8px;" />
+	<h1>Welcome</h1>
+	<p style="font-size:larger;">Welcome to the Wave Extensions Gallery.  The gadgets you find here should work with any wave service that supports gadgets.  If you are new to the world of wave, select &ldquo;About&rdquo; from the sidebar to learn more.</p>
+</a>
+
+<!-- Top extensions -->
+<section class="halfWidth" style="display: inline-block;">
+	<h2 style="margin-top: 8px">Top Extensions</h2>
+	{% for ext in extlist %}
+		<a href="/gallery/info/{{ ext.extID }}" class="card halfWidth tiny">
+			<img src="/gallery/icon/{{ ext.extID}}.png" style="width: 64px; height: 64px; float: left; margin-right: 4px;" />
+			<h3>{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</h3>
+			<p>{% if ext.description %}{{ ext.htmlDescription|striptags }}{% endif %}</p>
 		</a>
-	</li>
-	<li style="overflow: visible;">
-		<h2 style="margin: 8px 0;">Top Extensions</h2>
-		<ol class="grid">
-		{% for ext in extlist %}
-			<li>
-				<a href="/gallery/info/{{ ext.extID }}" class="card tiny">
-					<img src="/gallery/icon/{{ ext.extID}}.png" style="width: 64px; height: 64px; float: left; margin-right: 4px;" />
-					<h3>{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</h3>
-					<p>{% if ext.description %}{{ ext.htmlDescription|striptags }}{% endif %}</p>
-				</a>
-			</li>
-		{% endfor %}
-		</ol>
-	</li>
-	<li>
-		<a href="/about" class="card small">
-			<img src="/static/images/wave_logo_simple_128x96.png" alt="wave logo" style="float: left; margin: -16px 16px -16px -4px;" />
-			<h3 onclick="event.preventDefault(); window.open('/about#aboutwave', '_self');">What is wave?</h3>
-			<h3 style="margin-top: 2px;" onclick="event.preventDefault(); window.open('/about#aboutext', '_self');">What are wave extensions?</h3>
-			<h3 style="margin-top: 2px;" onclick="event.preventDefault(); window.open('about#aboutgallery', '_self');">What is the gallery?</h3>
-		</a>
-	</li>
-	<li>
-		<ul class="grid">
-			<li>
-				<a href="/docs/api" class="card small">
-					<h3>Gallery APIs</h3>
-					<p>Use the gallery to enhance your wave client</p>
-				</a>
-			</li>
-			<li>
-				<a href="/dev" class="card small">
-					<h3>Developer dashboard</h3>
-					<p>Add your own extensions to the gallery</p>
-				</a>
-			</li>
-		</ul>
-	</li>
-	<li>
-		<a href="/docs/help" class="card small">
-			<img src="/static/images/question_mark.png" alt="?" style="float: left; margin: -16px 16px -16px 0; font-size: 96px; font-weight: bold;" />
-			<h1 style="margin: 0;">Need assistance?</h1>
-			<p>Click here for help using extensions and the gallery</p>
-		</a>
-	</li>
-	<li>
-		<a href="https://chrome.google.com/webstore/detail/mlojdiioofflgaofeccckonhekefgopa" target="_blank" class="card small">
-			<img src="/static/images/chrome_icon_64x64.png" alt="Chrome" style="float: left; margin-right: 16px;" />
-			<h1 style="margin: 0px;">More Gadgets For Rizzoma</h1>
-			<p>Install the Extensions Gallery Chrome Extension</p>
-		</a>
-	</li>
-	<li>
-		<a href="https://plus.google.com/111054500428067493902" rel="publisher" target="_blank" style="text-decoration:none;" class="card small">
-			<img src="//ssl.gstatic.com/images/icons/gplus-64.png" alt="Google+" style="float: left;margin-right: 16px;" />
-			<h1 style="margin: 0;">Circle Wave Extensions Gallery</h1>
-			<p>On Google+</p>
-		</a>
-	</li>
-	<li>
-		<a href="https://facebook.com/waveextensions" target="_blank" class="card small">
-			<img src="/static/images/fb_icon_64x64.png" alt="Facebook" style="float: left;margin-right: 16px;" />
-			<h1 style="margin: 0;">Like Wave Extensions Gallery</h1>
-			<p>On Facebook</p>
-		</a>
-	</li>
-</ul>
+	{% endfor %}
+</section>
+
+<!-- What is wave? -->
+<a href="/about" class="card halfWidth small">
+	<img src="/static/images/wave_logo_simple_128x96.png" alt="wave logo" style="float: left; margin: -16px 16px -16px -4px;" />
+	<h3 onclick="event.preventDefault(); window.open('/about#aboutwave', '_self');">What is wave?</h3>
+	<h3 style="margin-top: 2px;" onclick="event.preventDefault(); window.open('/about#aboutext', '_self');">What are wave extensions?</h3>
+	<h3 style="margin-top: 2px;" onclick="event.preventDefault(); window.open('about#aboutgallery', '_self');">What is the gallery?</h3>
+</a>
+
+<!-- Gallery API -->
+<a href="/docs/api" class="card quarterWidth small">
+	<h3>Gallery APIs</h3>
+	<p>Use the gallery to enhance your wave client</p>
+</a>
+
+<!-- Developer dashboard -->
+<a href="/dev" class="card quarterWidth small">
+	<h3>Developer dashboard</h3>
+	<p>Add your own extensions to the gallery</p>
+</a>
+
+<!-- Help -->
+<a href="/docs/help" class="card halfWidth small">
+	<img src="/static/images/question_mark.png" alt="?" style="float: left; margin: -16px 16px -16px 0; font-size: 96px; font-weight: bold;" />
+	<h1 style="margin: 0;">Need assistance?</h1>
+	<p>Click here for help using extensions and the gallery</p>
+</a>
+
+<!-- WEG Loader for Rizzoma -->
+<a href="https://chrome.google.com/webstore/detail/mlojdiioofflgaofeccckonhekefgopa" target="_blank" class="card halfWidth small">
+	<img src="/static/images/chrome_icon_64x64.png" alt="Chrome" style="float: left; margin-right: 16px;" />
+	<h1 style="margin: 0px;">More Gadgets For Rizzoma</h1>
+	<p>Install the Extensions Gallery Chrome Extension</p>
+</a>
+
+<!-- Google+ -->
+<a href="https://plus.google.com/111054500428067493902" rel="publisher" target="_blank" class="card halfWidth small">
+	<img src="//ssl.gstatic.com/images/icons/gplus-64.png" alt="Google+" style="float: left; margin-right: 16px;" />
+	<h1 style="margin: 0;">Circle Wave Extensions Gallery</h1>
+	<p>On Google+</p>
+</a>
+
+<!-- Facebook -->
+<a href="https://facebook.com/waveextensions" target="_blank" class="card halfWidth small">
+	<img src="/static/images/fb_icon_64x64.png" alt="Facebook" style="float: left; margin-right: 16px;" />
+	<h1 style="margin: 0;">Like Wave Extensions Gallery</h1>
+	<p>On Facebook</p>
+</a>
