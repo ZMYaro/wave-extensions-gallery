@@ -24,8 +24,8 @@ body {
 	background-color: #EEEEEE;
 }
 #header {
-	position: fixed;
 	display: block;
+	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
@@ -48,6 +48,7 @@ body {
 		vertical-align: baseline;
 	}
 #nav {
+	display: block;
 	position: fixed;
 	left: 0;
 	top: 64px;
@@ -80,8 +81,8 @@ body {
 			}
 
 #footer {
-	position: absolute;
 	display: block;
+	position: absolute;
 	left: 0;
 	right: 0;
 	bottom: 0;
