@@ -61,6 +61,9 @@ aside[data-side="left"] {
 	}
 }
 @media (max-width: 600px) {
+	.grid {
+		margin: -16px;
+	}
 	.grid .grid > li {
 		display:block;
 		margin: 16px auto;

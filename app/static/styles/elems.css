@@ -33,16 +33,16 @@ button, *[role="button"] {
 	   -moz-user-select:none;
 	        user-select:none;
 }
-	button:enabled:hover, *[role="button"]:hover, a.card:hover {
+	button:enabled:hover, *[role="button"]:not(.disabled):hover, a.card:hover {
 		background-color: #FFFFFF;
 	}
-	button:enabled:active, *[role="button"]:active, .extList > li > a:active, a.card:active {
+	button:enabled:active, *[role="button"]:not(.disabled):active, .extList > li > a:active, a.card:active {
 		background-color: #F0F0F0;
 	}
-	button:disabled, select:not([size]):disabled, .button:disabled {
-		-moz-opacity:0.6;
-			 opacity:0.6;
-		cursor:default;
+	button:disabled, select:not([size]):disabled, .button:disabled, *.disabled {
+		-moz-opacity: 0.6;
+			 opacity: 0.6;
+		cursor: default;
 	}
 	#header button, #message button {
 		background-color: transparent;

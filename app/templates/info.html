@@ -1,78 +1,92 @@
-<section id="leftSide">
-	<img src="{% if ext.icon %}/gallery/icon/{{ ext.extID }}.png{% else %}/static/images/gadget_icon_128x128.png{% endif %}" alt="icon" class="extIcon" />
-	<br />
-	<table>
-		<tr>
-			<td>
-				<a href="/account/{% if starred %}un{% endif %}star/{{ ext.extID }}" class="star{% if starred %} checked{% endif %}"></a>
-			</td>
-			<td>
-				Add this extension to your favorites for easy access
-			</td>
-		</tr>
-	</table>
-	<hr />
-	<div style="text-align: center;">
-		<a href="/gallery/downvote/{{ ext.extID }}" class="button ratingButton{% if userRating == -1 %} active{% endif %}" title="Downvote" style="color: #A01008 !important;"><img src="/static/images/downvote.png" alt="&#8722;1" /></a>
-		<a href="/gallery/nullvote/{{ ext.extID }}" class="button ratingButton{% if userRating == 0 %} active{% endif %}" title="No vote"><img src="/static/images/nullvote.png" alt="&#177;0" /></a>
-		<a href="/gallery/upvote/{{ ext.extID }}"   class="button ratingButton{% if userRating == 1 %} active{% endif %}" title="Upvote" style="color: #008000 !important;"><img src="/static/images/upvote.png" alt="+1" /></a>
-		<div class="rating">
-			<div class="dislikes"{% if ext.downvotePercentage %}style="width:{{ ext.downvotePercentage }}%;"{% endif %}></div>
-			<div class="likes"{% if ext.upvotePercentage %}style="width:{{ ext.upvotePercentage }}%;"{% endif %}></div>
-		</div>
-		<div class="ratingCount">{% if ext.ratingCount %}{{ ext.ratingCount }}{% else %}0{% endif %} rating{% if ext.ratingCount != 1 %}s{% endif %}</div>
-	</div>
-	<hr />
-	<div style="margin-left: 32px;">
-		<!-- +1 button -->
-		<div class="g-plusone" data-size="medium"></div>
-		<br />
-		<!-- Like button -->
-		<div class="fb-like" data-send="false" data-layout="button_count" data-width="160" data-show-faces="false"></div>
-		<br />
-		<!-- Tweet button -->
-		<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-	</div>
-	<hr />
-	<div style="text-align: center;">
-		Category: <a href="/gallery/category/{{ ext.category }}">{{ ext.category }}</a>
-	</div>
-	{% if userIsDev %}
-		<div style="text-align: center;">
-			<hr />
-			<!-- Edit button (shown if the extension is owned by the user) -->
-			<a href="/dev/edit/{{ ext.extID }}" class="button" style="margin: auto;">Edit extension</a>
-		</div>
-	{% endif %}
-</section>
-<section id="middle">
-	<h2>{{ ext.title }}</h2>
-	{% if devname %}<small>By <a href="/gallery/search?q=developer%3A{{ devname }}">{{ devname }}</a></small>{% endif %}
-	<div id="description">{{ ext.htmlDescription|safe }}</div>
-	<hr />
-	{% if ext.type == 'gadget' and ext.gadgetURL %}
-	<p>
-		Gadget URL: <b>{{ ext.gadgetURL }}</b>
-		<br />
-		<a href="/docs/help/addgadget?gadgetURL={{ ext.gadgetURL }}" target="_blank" style="font-size: smaller;">What should I do with this link?</a>
-	</p>
-	{% endif %}
-	{% if ext.type = 'robot' and ext.robotAddress %}
-	<p>
-		Robot address: <b>{{ ext.robotAddress }}</b>
-	</p>
-	{% endif %}
+<div class="middle">
+	<header class="card z2" style="margin-top: -24px;">
+		<!-- Extension icon -->
+		<img src="{% if ext.icon %}/gallery/icon/{{ ext.extID }}.png{% else %}/static/images/gadget_icon_128x128.png{% endif %}" alt="icon" style="float: left; margin: -8px 8px -8px -8px;" />
+		
+		<!-- Add To Favorites button -->
+		<a href="/account/{% if starred %}un{% endif %}star/{{ ext.extID }}" class="star{% if starred %} checked{% endif %}" style="float: right;"></a>
+		
+		<!-- Edit button (shown if the extension is owned by the user) -->
+		{% if userIsDev %}
+			<a href="/dev/edit/{{ ext.extID }}" role="button" style="float: right; margin: -4px 4px;">Edit extension</a>
+		{% endif %}
+		<!-- Extension title -->
+		<h1>{{ ext.title }}</h1>
+		<!-- Developer's name -->
+		{% if devname %}<p>By <a href="/gallery/search?q=developer%3A{{ devname }}">{{ devname }}</a></p>{% endif %}
+		
+		
+		<!-- Gadget URL or robot address -->
+		{% if ext.type == 'gadget' and ext.gadgetURL %}
+		<p>
+			Gadget URL: <b>{{ ext.gadgetURL }}</b>
+			<br />
+			<a href="/docs/help/addgadget?gadgetURL={{ ext.gadgetURL }}" target="_blank" style="font-size: smaller;">What should I do with this link?</a>
+		</p>
+		{% endif %}
+		{% if ext.type = 'robot' and ext.robotAddress %}
+		<p>
+			Robot address: <b>{{ ext.robotAddress }}</b>
+		</p>
+		{% endif %}
+	</header>
+	<br /><br />
+	
+	<!-- Screenshots -->
 	{% if ext.screenshots|length > 0 %}
-		<hr />
-		<div id="screenshots">
-		{% for screenshot in ext.screenshots %}
-			<img src="/gallery/screenshot/{{ ext.extID }}_{{ forloop.counter0 }}.png" alt="screenshot {{ forloop.counter }}" />
-		{% endfor %}
-		</div>
+		<section class="card z1">
+			<h2>Screenshots</h2>
+			<div id="screenshots">
+			{% for screenshot in ext.screenshots %}
+				<img src="/gallery/screenshot/{{ ext.extID }}_{{ forloop.counter0 }}.png" alt="screenshot {{ forloop.counter }}" />
+			{% endfor %}
+			</div>
+		</section>
+	<br />
 	{% endif %}
-</section>
 
+	<!-- Description -->
+	<section class="card z1">
+		<h2>Description</h2>
+		<div id="description">{{ ext.htmlDescription|safe }}</div>
+	</section>
+	<br />
+	<ul class="grid">
+		<li class="card z1">
+			<h2>Rate</h2>
+			<div style="text-align: center;">
+				<a href="/gallery/downvote/{{ ext.extID }}" role="button" class="ratingButton{% if userRating == -1 %} disabled{% endif %}" title="Downvote" style="color: #A01008 !important;"><img src="/static/images/downvote.png" alt="&#8722;1" /></a>
+				<a href="/gallery/nullvote/{{ ext.extID }}" role="button" class="ratingButton{% if userRating == 0 %} disabled{% endif %}" title="No vote"><img src="/static/images/nullvote.png" alt="&#177;0" /></a>
+				<a href="/gallery/upvote/{{ ext.extID }}"   role="button" class="ratingButton{% if userRating == 1 %} disabled{% endif %}" title="Upvote" style="color: #008000 !important;"><img src="/static/images/upvote.png" alt="+1" /></a>
+				<div class="rating">
+					<div class="dislikes"{% if ext.downvotePercentage %}style="width:{{ ext.downvotePercentage }}%;"{% endif %}></div>
+					<div class="likes"{% if ext.upvotePercentage %}style="width:{{ ext.upvotePercentage }}%;"{% endif %}></div>
+				</div>
+				<div class="ratingCount">{% if ext.ratingCount %}{{ ext.ratingCount }}{% else %}0{% endif %} rating{% if ext.ratingCount != 1 %}s{% endif %}</div>
+			</div>
+		</li>
+		
+		<!-- Share -->
+		<li class="card z1">
+			<h2>Share</h2>
+			<!-- +1 button -->
+			<div class="g-plusone" data-size="medium"></div>
+			<br />
+			<!-- Like button -->
+			<div class="fb-like" data-send="false" data-layout="button_count" data-width="160" data-show-faces="false"></div>
+			<br />
+			<!-- Tweet button -->
+			<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+		</li>
+		
+		<!-- Category -->
+		<li class="card z1">
+			Category: <a href="/gallery/category/{{ ext.category }}">{{ ext.category }}</a>
+		</li>
+	</ul>
+</div>
 
+<!-- Scripts for social media buttons -->
 <script type="text/javascript">
 	// G+
 	(function() {
