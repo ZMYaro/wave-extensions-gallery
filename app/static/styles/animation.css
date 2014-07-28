@@ -4,7 +4,7 @@
 
 @charset "UTF-8";
 
- body, #header, #header *, #nav, .card {
+ body, #header, #header *, #nav, .card, button, *[role="button"] {
 	-webkit-transition-duration: 0.1s;
 	   -moz-transition-duration: 0.1s;
 	    -ms-transition-duration: 0.1s;
@@ -44,7 +44,7 @@ body {
 	     -o-transition-property: left, top;
 	        transition-property: left, top;
 }
-.card {
+.card, button, *[role="button"] {
 	-webkit-transition-property: box-shadow, width, height, margin, padding;
 	   -moz-transition-property: box-shadow, width, height, margin, padding;
 	    -ms-transition-property: box-shadow, width, height, margin, padding;
