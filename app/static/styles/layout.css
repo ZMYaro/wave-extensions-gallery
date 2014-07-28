@@ -109,19 +109,20 @@ body {
 	max-width: 800px;
 }
 
-.formtable {
+table.formtable {
 	display: block;
 	width: 100%;
 }
-	.formtable td {
+	table.formtable td {
 		/*vertical-align:top;*/
+		border: 0 none;
 		padding-top: 8px;
 	}
-		.formtable td:first-child {
+		table.formtable td:first-child {
 			text-align: right;
 			width: 22%;
 		}
-	.formtable input[type="text"], .formtable input[type="email"], .formtable input[type="url"], .formtable textarea {
+	table.formtable input[type="text"], table.formtable input[type="email"], table.formtable input[type="url"], table.formtable textarea {
 		width: 100%;
 	}
 
