@@ -62,7 +62,7 @@ p {
 .card.tiny > p {
 	font-size: 12px;
 }
-a.card {
+a.card, a.card:visited {
 	color: inherit;
 	text-decoration: none;
 }
