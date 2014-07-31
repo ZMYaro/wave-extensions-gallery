@@ -122,6 +122,9 @@ section ol, section ul {
 	.middle table td {
 		border: 1px solid #b8b8b8;
 	}
+table.borderless th, table.borderless td {
+	border: 0 none;
+}
 
 #message {
 	background-color:#FEFDD5;

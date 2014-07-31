@@ -1,10 +1,10 @@
-<section id="main">
+<section class="middle card z1">
 	<h1 style="margin:0em;">Account - {{ usernickname }}</h1>
 	{{ useremail }} - <a href="{{ signouturl }}">Sign out</a>
 	<br />
 	<br />
 	<h3>Your Starred Extensions</h3>
-	<table cellpadding="4">
+	<table class="borderless">
 		<tr>
 			<th><!-- Icon --></th>
 			<th>Title</th>
@@ -13,9 +13,9 @@
 		</tr>
 		{% for ext in extlist %}
 			<tr>
-				<td>{% if ext.icon %}<a href="/gallery/info/{{ ext.extID }}"><img src="/gallery/icon/{{ ext.extID}}.png" style="width:24px;height:24px;" /></a>{% endif %}</td>
+				<td><a href="/gallery/info/{{ ext.extID }}"><img src="/gallery/icon/{{ ext.extID}}.png" style="width:24px;height:24px;" /></a></td>
 				<td><a href="/gallery/info/{{ ext.extID }}">{% if ext.title %}{{ ext.title }}{% else %}[untitled]{% endif %}</a></td>
-				<td>{% if ext.type %}{{ ext.type }}{% endif %}</td>
+				<td style="text-transform: capitalize;">{% if ext.type %}{{ ext.type }}{% endif %}</td>
 				<td>
 					{% if ext.type == 'gadget' %}{{ ext.gadgetURL }}{% endif %}
 					{% if ext.type == 'robot' %}{{ ext.robotAddress }}{% endif %}
@@ -29,6 +29,4 @@
 			</tr>
 		{% endfor %}
 	</table>
-	<h3>Geek stuff</h3>
-	<a href="/dev">Go to your developer dashboard</a>
 </section>
