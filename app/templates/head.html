@@ -20,6 +20,7 @@
 				document.getElementById("message").style.display = "none";
 			}
 		</script>
+		<script type="text/javascript" src="/static/scripts/navcontrol.js"></script>
 		<!--[if lt IE 9]>
 			<script type="text/javascript">
 				document.createElement('header');
@@ -40,6 +41,9 @@
 			<form action="/gallery/search" method="GET" style="float: right;">
 				<input type="search" placeholder="Search the gallery" name="q" accesskey="/" /><button type="submit" class="searchButton"><img src="/static/images/search.png" /></button>
 			</form>
+			<button id="navButton">
+				<div style="margin-top: -4px;">&equiv;</div>
+			</button>
 			<h1>Wave Extensions Gallery</h1>
 		<!--[if !IE]>-->
 		</header>

@@ -17,7 +17,7 @@ button, *[role="button"] {
 	   -moz-border-radius:3px;
 	        border-radius:3px;
 	
-	color: #666666 !important;
+	color: #666666;
 	text-decoration: none;
 	text-align: center;
 	cursor:pointer;
@@ -47,10 +47,10 @@ button, *[role="button"] {
 	}
 	#header button, #message button {
 		background-color: transparent;
-		width: 32px;
-		height: 32px;
-		padding: 0px;
-		margin: -2px;
+		width: 36px;
+		height: 36px;
+		padding: 4px;
+		margin: -4px;
 		-webkit-border-radius: 50%;
 		   -moz-border-radius: 50%;
 		        border-radius: 50%;
