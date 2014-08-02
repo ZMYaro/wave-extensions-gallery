@@ -19,7 +19,7 @@ body {
 	padding: 24px;
 	padding-top: 88px; /* 64px action bar + 24px padding */
 	padding-bottom: 104px;
-	padding-left: 224px; /* 200px left bar + 24px padding */
+	padding-left: 232px; /* 208px left bar + 24px padding */
 	
 	background-color: #EEEEEE;
 }
@@ -52,7 +52,7 @@ body {
 	position: fixed;
 	left: 0;
 	top: 64px;
-	width: 200px;
+	width: 208px;
 	bottom: 0;
 	padding-bottom: 104px;
 	overflow: auto;
