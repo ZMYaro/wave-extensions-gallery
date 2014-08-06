@@ -71,12 +71,13 @@ body {
 			display: block;
 			padding: 8px 24px;
 			text-decoration: none;
-			
 		}
 			#nav ul li a:hover {
+				color: #267AD9;
 				background-color: rgba(0, 0, 0, 0.075);
 			}
 			#nav ul li a:active {
+				color: #267AD9;
 				background-color: rgba(0, 0, 0, 0.15);
 			}
 
