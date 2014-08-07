@@ -30,21 +30,21 @@ body {
 	left: 0;
 	right: 0;
 	height: 64px;
-	padding: 0 24px;
+	padding: 16px 24px;
 	
 	white-space: nowrap;
 	
 	background-color: #C1D9F4;
 	
 	/* Keep the header on top of other fixed elements */
-	z-index: 2;
+	z-index: 3;
 }
 	#header h1 {
 		display: inline-block;
-		margin: 16px;
+		margin: 0 16px;
 	}
 	#header form {
-		margin: 14px;
+		margin: -2px 14px;
 		vertical-align: baseline;
 	}
 #nav {
@@ -58,6 +58,8 @@ body {
 	overflow: auto;
 	
 	background-color:#E4F0FD;
+	
+	z-index: 2;
 }
 	#nav h4 {
 		margin-left: 24px;
@@ -108,7 +110,7 @@ body {
 	}
 .middle {
 	display: block;
-	margin: 0 auto;
+	margin: inherit auto;
 	max-width: 800px;
 }
 
@@ -131,20 +133,25 @@ table.formtable {
 
 @media (max-width: 600px) {
 	body {
-		padding: 16px;
-		padding-top: 72px; /* 56px action bar + 16px padding */
+		padding: 8px;
+		padding-top: 64px; /* 56px action bar + 8px padding */
 		padding-bottom: 104px;
-		padding-left: 216px; /* 200px left bar + 16px padding */
 	}
 	#header {
 		height: 56px;
+		padding: 12px 16px;
 	}
 		#header h1 {
 			margin: 12px;
+			display: none;
 		}
 	#nav {
+		left: -240px; /* This puts the nav thoroughly off screen. */
 		top: 56px;
 	}
+		.showNav #nav {
+			left: 0;
+		}
 		#nav h4 {
 			margin-left: 16px;
 		}
@@ -152,7 +159,4 @@ table.formtable {
 			padding-left: 16px;
 			padding-right: 16px;
 		}
-	.middle {
-		margin: -8px;
-	}
 }

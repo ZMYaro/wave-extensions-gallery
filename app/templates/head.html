@@ -3,6 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+		<meta name="viewport" content="initial-scale=1" />
 		<meta name="description" content="An index of wave gadgets, robots, and other extensions for use with Google Wave, Wave-In-A-Box, Walkaround, Rizzoma, Co-Meeting, and other wave systems." />
 		<title>{% if title %}{{ title }} - {% endif %}Wave Extension Gallery</title>
 		<link rel="shortcut icon" type="image/x-icon" href="/static/images/gadget_icon.ico" />
@@ -20,6 +21,7 @@
 				document.getElementById("message").style.display = "none";
 			}
 		</script>
+		<script type="text/javascript" src="/static/scripts/navcontrol.js"></script>
 		<!--[if lt IE 9]>
 			<script type="text/javascript">
 				document.createElement('header');
@@ -40,6 +42,9 @@
 			<form action="/gallery/search" method="GET" style="float: right;">
 				<input type="search" placeholder="Search the gallery" name="q" accesskey="/" /><button type="submit" class="searchButton"><img src="/static/images/search.png" /></button>
 			</form>
+			<button id="navButton">
+				<div style="margin-top: -2px;">&equiv;</div>
+			</button>
 			<h1>Wave Extensions Gallery</h1>
 		<!--[if !IE]>-->
 		</header>
