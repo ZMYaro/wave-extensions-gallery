@@ -136,7 +136,7 @@ aside[data-side="left"] {
 	
 	float: left;
 	margin-left: -56px;
-	margin-top: 0;
+	margin-top: -2px;
 	padding: 0;
 }
 @media (max-width: 600px) {
