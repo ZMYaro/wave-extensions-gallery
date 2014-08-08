@@ -33,7 +33,8 @@ button, *[role="button"], *[role="button"]:visited {
 	   -moz-user-select:none;
 	        user-select:none;
 }
-	button:hover, *[role="button"]:hover, a.card:hover {
+	button:hover, *[role="button"]:hover, a.card:hover,
+	button:focus, *[role="button"]:focus, a.card:focus {
 		color: inherit;
 		background-color: #ffffff;
 	}
@@ -58,13 +59,14 @@ button, *[role="button"], *[role="button"]:visited {
 		        border-radius: 50%;
 		vertical-align: bottom;
 	}
-		#header button, #header button:enabled:hover, #header button:enabled:active,
-		#message button, #message button:enabled:hover, #message button:enabled:active {
+		#header button, #header button:enabled:hover, #header button:focus, #header button:enabled:active,
+		#message button, #message button:enabled:hover, #message button:focus, #message button:enabled:active {
 			-webkit-box-shadow: none;
 			   -moz-box-shadow: none;
 			        box-shadow: none;
 		}
-		#header button:enabled:hover, #message button:enabled:hover {
+		#header button:enabled:hover, #message button:enabled:hover,
+		#header button:focus, #message button:focus {
 			background-color: rgba(0, 0, 0, 0.075);
 		}
 		#header button:enabled:active, #message button:enabled:active {

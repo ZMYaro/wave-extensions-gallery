@@ -9,7 +9,8 @@
 	    filter:  progid:DXImageTransform.Microsoft.Glow(Color=#b8b8b8,Strength=5);
 	-ms-filter: "progid:DXImageTransform.Microsoft.Glow(Color=#b8b8b8,Strength=5)";
 }
-button:hover, *[role="button"]:hover, a.card:hover {
+button:hover, *[role="button"]:hover, a.card:hover,
+button:focus, *[role="button"]:focus, a.card:focus {
 	-webkit-box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.23), 0 4px 15px 0 rgba(0, 0, 0, 0.175);
 	   -moz-box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.23), 0 4px 15px 0 rgba(0, 0, 0, 0.175);
 	        box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.23), 0 4px 15px 0 rgba(0, 0, 0, 0.175);

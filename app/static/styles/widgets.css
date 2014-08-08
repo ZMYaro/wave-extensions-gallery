@@ -134,6 +134,7 @@ aside[data-side="left"] {
 	color: black;
 	font-size: 30px;
 	
+	display: none;
 	float: left;
 	margin-left: -56px;
 	margin-top: -2px;
@@ -141,6 +142,7 @@ aside[data-side="left"] {
 }
 @media (max-width: 600px) {
 	#header #navButton {
+		display: inline-bolck;
 		margin-left: 0;
 	}
 }
@@ -150,13 +152,15 @@ aside[data-side="left"] {
 	background-color:transparent;
 	background-image:url("/static/images/star.png");
 	background-position:0px 0px;
-	border:0px none transparent;
+	border: 0;
+	outline: 0;
 	display:inline-block;
 	width:24px;
 	height:24px;
 	cursor:pointer;
 }
-.star:hover {
+.star:hover,
+.star:focus {
 	background-position:-24px 0px;
 }
 .star:active {
@@ -165,7 +169,8 @@ aside[data-side="left"] {
 .star.checked {
 	background-position:0px -24px;
 }
-.star.checked:hover {
+.star.checked:hover,
+.star.checked:focus {
 	background-position:-24px -24px;
 }
 .star.checked:active {
@@ -174,7 +179,8 @@ aside[data-side="left"] {
 .star.error {
 	background-position:0px -48px;
 }
-.star.error:hover {
+.star.error:hover,
+.star.error:focus {
 	background-position:-24px -48px;
 }
 .star.error:active {
