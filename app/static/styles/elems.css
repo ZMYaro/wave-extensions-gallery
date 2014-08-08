@@ -10,7 +10,7 @@ a img {
 	border: 0 none transparent;
 }
 
-button, *[role="button"] {
+button, *[role="button"], *[role="button"]:visited {
 	background-color: #fafafa;
 	
 	-webkit-border-radius:3px;
@@ -34,9 +34,11 @@ button, *[role="button"] {
 	        user-select:none;
 }
 	button:hover, *[role="button"]:hover, a.card:hover {
+		color: inherit;
 		background-color: #ffffff;
 	}
 	button:active, *[role="button"]:active, a.card:active {
+		color: inherit;
 		background-color: #f0f0f0;
 	}
 	button:disabled, select:disabled, *[role="button"].disabled {
