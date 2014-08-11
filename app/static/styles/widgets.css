@@ -142,7 +142,7 @@ aside[data-side="left"] {
 }
 @media (max-width: 600px) {
 	#header #navButton {
-		display: inline-bolck;
+		display: inline-block;
 		margin-left: 0;
 	}
 }
